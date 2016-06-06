@@ -1,0 +1,40 @@
+{
+    "name": "MineSweeper_SVG_React_Redux",
+    "version": "0.0.2",
+    "dependencies": {
+        "body-parser": "latest",
+        "coffee-script": "latest",
+        "coffee-loader": "latest",
+        "express": "latest",
+        "gl-matrix": "2.3.2",
+        "immutable": "latest",
+        "keymirror": "latest",
+        "lodash": "latest",
+        "primus": "latest",
+        "superagent": "latest",
+        "shortid": "latest",
+        "node-uuid": "latest",
+        "normalizr": "latest",
+        "less": "^2.5.3",
+        "less-loader": "^2.2.1",
+        "react-fontawesome": "latest",
+        "react": "15.1.0",
+        "react-addons-pure-render-mixin": "latest",
+        "react-dom": "15.1.0",
+        "react-redux": "latest",
+        "react-router": "latest",
+        "react-router-redux": "next",
+        "redux": "latest",
+        "redux-immutable": "latest",
+        "redux-logger": "latest",
+        "redux-promise": "latest",
+        "redux-saga": "latest",
+        "redux-thunk": "latest",
+        "source-map-loader": "latest",
+        "style-loader": "^0.13.0",
+        "ws": "latest"
+    },
+    "devDependencies": {
+        "chai": "latest"
+    }
+}
