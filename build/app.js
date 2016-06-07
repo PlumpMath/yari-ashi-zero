@@ -69,18 +69,18 @@
 
 	Route = React.createFactory(_Route);
 
-	set_bounding_rect = __webpack_require__(304).set_bounding_rect;
+	set_bounding_rect = __webpack_require__(284).set_bounding_rect;
 
 	window.onload = (function(_this) {
 	  return function() {
-	    var debounce, height, history, home, index, initial_state, ref2, set_boundingRect, store, width;
+	    var about, debounce, height, history, home, index, initial_state, ref2, set_boundingRect, store, width;
 	    ref2 = root.getBoundingClientRect(), width = ref2.width, height = ref2.height;
 	    initial_state = Immutable.Map({
 	      routing: '/',
 	      viewport_width: width,
 	      viewport_height: height
 	    });
-	    store = __webpack_require__(284)(initial_state);
+	    store = __webpack_require__(287)(initial_state);
 	    debounce = function(func, wait, immediate) {
 	      var timeout;
 	      timeout = 'scoped here';
@@ -117,7 +117,8 @@
 	        return state.get('routing');
 	      }
 	    });
-	    home = React.createFactory(__webpack_require__(303));
+	    home = React.createFactory(__webpack_require__(306));
+	    about = React.createFactory(__webpack_require__(311));
 	    index = rr({
 	      render: function() {
 	        return Provider({
@@ -127,6 +128,9 @@
 	        }, Route({
 	          path: '/',
 	          component: home
+	        }), Route({
+	          path: '/about',
+	          component: about
 	        })));
 	      }
 	    });
@@ -57645,29 +57649,124 @@
 /* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var SET_BOUNDING_RECT, set_bounding_rect;
+
+	SET_BOUNDING_RECT = __webpack_require__(285).SET_BOUNDING_RECT;
+
+	set_bounding_rect = function(arg) {
+	  var viewport_height, viewport_width;
+	  viewport_width = arg.viewport_width, viewport_height = arg.viewport_height;
+	  return {
+	    type: SET_BOUNDING_RECT,
+	    viewport_width: viewport_width,
+	    viewport_height: viewport_height
+	  };
+	};
+
+	module.exports = {
+	  set_bounding_rect: set_bounding_rect
+	};
+
+
+/***/ },
+/* 285 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var action_types, keymirror;
+
+	keymirror = __webpack_require__(286);
+
+	module.exports = action_types = keymirror({
+	  SET_BOUNDING_RECT: null
+	});
+
+
+/***/ },
+/* 286 */
+/***/ function(module, exports) {
+
+	/**
+	 * Copyright 2013-2014 Facebook, Inc.
+	 *
+	 * Licensed under the Apache License, Version 2.0 (the "License");
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 *
+	 * http://www.apache.org/licenses/LICENSE-2.0
+	 *
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an "AS IS" BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 *
+	 */
+
+	"use strict";
+
+	/**
+	 * Constructs an enumeration with keys equal to their value.
+	 *
+	 * For example:
+	 *
+	 *   var COLORS = keyMirror({blue: null, red: null});
+	 *   var myColor = COLORS.blue;
+	 *   var isColorValid = !!COLORS[myColor];
+	 *
+	 * The last line could not be performed if the values of the generated enum were
+	 * not equal to their keys.
+	 *
+	 *   Input:  {key1: val1, key2: val2}
+	 *   Output: {key1: key1, key2: key2}
+	 *
+	 * @param {object} obj
+	 * @return {object}
+	 */
+	var keyMirror = function(obj) {
+	  var ret = {};
+	  var key;
+	  if (!(obj instanceof Object && !Array.isArray(obj))) {
+	    throw new Error('keyMirror(...): Argument must be an object.');
+	  }
+	  for (key in obj) {
+	    if (!obj.hasOwnProperty(key)) {
+	      continue;
+	    }
+	    ret[key] = key;
+	  }
+	  return ret;
+	};
+
+	module.exports = keyMirror;
+
+
+/***/ },
+/* 287 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var _, applyMiddleware, c, configure_store, createLogger, createStore, logger, promise, ref, ref1, thunk;
 
 	ref = __webpack_require__(2), c = ref.c, _ = ref._;
 
 	ref1 = __webpack_require__(204), createStore = ref1.createStore, applyMiddleware = ref1.applyMiddleware;
 
-	thunk = __webpack_require__(285)["default"];
+	thunk = __webpack_require__(288)["default"];
 
-	promise = __webpack_require__(286);
+	promise = __webpack_require__(289);
 
-	createLogger = __webpack_require__(293);
+	createLogger = __webpack_require__(296);
 
 	logger = createLogger();
 
 	configure_store = module.exports = function(initial_state) {
 	  var root_reducer;
-	  root_reducer = __webpack_require__(294)(initial_state);
+	  root_reducer = __webpack_require__(297)(initial_state);
 	  return createStore(root_reducer, initial_state, applyMiddleware(thunk, promise, logger));
 	};
 
 
 /***/ },
-/* 285 */
+/* 288 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -57695,7 +57794,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 286 */
+/* 289 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57706,7 +57805,7 @@
 
 	exports['default'] = promiseMiddleware;
 
-	var _fluxStandardAction = __webpack_require__(287);
+	var _fluxStandardAction = __webpack_require__(290);
 
 	function isPromise(val) {
 	  return val && typeof val.then === 'function';
@@ -57733,7 +57832,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 287 */
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57744,7 +57843,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _lodashIsplainobject = __webpack_require__(288);
+	var _lodashIsplainobject = __webpack_require__(291);
 
 	var _lodashIsplainobject2 = _interopRequireDefault(_lodashIsplainobject);
 
@@ -57763,7 +57862,7 @@
 	}
 
 /***/ },
-/* 288 */
+/* 291 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -57774,9 +57873,9 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var baseFor = __webpack_require__(289),
-	    isArguments = __webpack_require__(290),
-	    keysIn = __webpack_require__(291);
+	var baseFor = __webpack_require__(292),
+	    isArguments = __webpack_require__(293),
+	    keysIn = __webpack_require__(294);
 
 	/** `Object#toString` result references. */
 	var objectTag = '[object Object]';
@@ -57872,7 +57971,7 @@
 
 
 /***/ },
-/* 289 */
+/* 292 */
 /***/ function(module, exports) {
 
 	/**
@@ -57926,7 +58025,7 @@
 
 
 /***/ },
-/* 290 */
+/* 293 */
 /***/ function(module, exports) {
 
 	/**
@@ -58175,7 +58274,7 @@
 
 
 /***/ },
-/* 291 */
+/* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -58186,8 +58285,8 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var isArguments = __webpack_require__(290),
-	    isArray = __webpack_require__(292);
+	var isArguments = __webpack_require__(293),
+	    isArray = __webpack_require__(295);
 
 	/** Used to detect unsigned integer values. */
 	var reIsUint = /^\d+$/;
@@ -58313,7 +58412,7 @@
 
 
 /***/ },
-/* 292 */
+/* 295 */
 /***/ function(module, exports) {
 
 	/**
@@ -58499,7 +58598,7 @@
 
 
 /***/ },
-/* 293 */
+/* 296 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -58732,19 +58831,19 @@
 	module.exports = createLogger;
 
 /***/ },
-/* 294 */
+/* 297 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var _, c, combineReducers, ref;
 
 	ref = __webpack_require__(2), _ = ref._, c = ref.c;
 
-	combineReducers = __webpack_require__(295).combineReducers;
+	combineReducers = __webpack_require__(298).combineReducers;
 
 	module.exports = function(initial_state) {
 	  var ref1, routeReducer, viewport_height, viewport_width, viewport_x, viewport_y;
-	  routeReducer = __webpack_require__(301);
-	  ref1 = __webpack_require__(302), viewport_x = ref1.viewport_x, viewport_y = ref1.viewport_y, viewport_height = ref1.viewport_height, viewport_width = ref1.viewport_width;
+	  routeReducer = __webpack_require__(304);
+	  ref1 = __webpack_require__(305), viewport_x = ref1.viewport_x, viewport_y = ref1.viewport_y, viewport_height = ref1.viewport_height, viewport_width = ref1.viewport_width;
 	  return combineReducers({
 	    viewport_width: viewport_width,
 	    viewport_height: viewport_height,
@@ -58754,7 +58853,7 @@
 
 
 /***/ },
-/* 295 */
+/* 298 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58764,7 +58863,7 @@
 	});
 	exports.combineReducers = undefined;
 
-	var _combineReducers = __webpack_require__(296);
+	var _combineReducers = __webpack_require__(299);
 
 	var _combineReducers2 = _interopRequireDefault(_combineReducers);
 
@@ -58775,7 +58874,7 @@
 
 
 /***/ },
-/* 296 */
+/* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -58784,7 +58883,7 @@
 	    value: true
 	});
 
-	var _utilities = __webpack_require__(297);
+	var _utilities = __webpack_require__(300);
 
 	var _immutable = __webpack_require__(219);
 
@@ -58844,7 +58943,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 297 */
+/* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58855,15 +58954,15 @@
 	});
 	exports.validateNextState = exports.getUnexpectedInvocationParameterMessage = exports.getStateName = undefined;
 
-	var _getStateName2 = __webpack_require__(298);
+	var _getStateName2 = __webpack_require__(301);
 
 	var _getStateName3 = _interopRequireDefault(_getStateName2);
 
-	var _getUnexpectedInvocationParameterMessage2 = __webpack_require__(299);
+	var _getUnexpectedInvocationParameterMessage2 = __webpack_require__(302);
 
 	var _getUnexpectedInvocationParameterMessage3 = _interopRequireDefault(_getUnexpectedInvocationParameterMessage2);
 
-	var _validateNextState2 = __webpack_require__(300);
+	var _validateNextState2 = __webpack_require__(303);
 
 	var _validateNextState3 = _interopRequireDefault(_validateNextState2);
 
@@ -58876,7 +58975,7 @@
 
 
 /***/ },
-/* 298 */
+/* 301 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -58894,7 +58993,7 @@
 
 
 /***/ },
-/* 299 */
+/* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58907,7 +59006,7 @@
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
-	var _getStateName = __webpack_require__(298);
+	var _getStateName = __webpack_require__(301);
 
 	var _getStateName2 = _interopRequireDefault(_getStateName);
 
@@ -58944,7 +59043,7 @@
 
 
 /***/ },
-/* 300 */
+/* 303 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -58966,7 +59065,7 @@
 
 
 /***/ },
-/* 301 */
+/* 304 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var LOCATION_CHANGE, c, routeReducer;
@@ -58994,7 +59093,7 @@
 
 
 /***/ },
-/* 302 */
+/* 305 */
 /***/ function(module, exports) {
 
 	var viewport_height, viewport_width, viewport_x, viewport_y;
@@ -59052,19 +59151,40 @@
 
 
 /***/ },
-/* 303 */
+/* 306 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var _, c, connect, home, home_container, map_dispatch_to_props_000, map_state_to_props_000, ref;
+	var _, c, connect, gl_mat, home, home_container, map_dispatch_to_props_000, map_state_to_props_000, mat3, ref;
 
-	ref = __webpack_require__(2), _ = ref._, c = ref.c;
+	ref = __webpack_require__(2), _ = ref._, c = ref.c, gl_mat = ref.gl_mat, mat3 = ref.mat3;
 
 	connect = __webpack_require__(197).connect;
 
 	home = __webpack_require__(307);
 
 	map_state_to_props_000 = function(state, own_props) {
-	  return {};
+	  var arq, height, larger, orientation, smaller, transform_matrix, width;
+	  width = state.get('viewport_width');
+	  height = state.get('viewport_height');
+	  if (width < height) {
+	    orientation = 'VERTICAL';
+	    smaller = width;
+	    larger = height;
+	  } else {
+	    orientation = 'HORIZONTAL';
+	    smaller = height;
+	    larger = width;
+	  }
+	  transform_matrix = [width, 0, 0, 0, height, 0, 1 / width, 1 / height, 1];
+	  arq = {
+	    orientation: orientation,
+	    larger: larger,
+	    smaller: smaller,
+	    width: width,
+	    height: height,
+	    t_mat: transform_matrix
+	  };
+	  return arq;
 	};
 
 	map_dispatch_to_props_000 = function(dispatch, own_props) {
@@ -59072,101 +59192,6 @@
 	};
 
 	module.exports = home_container = connect(map_state_to_props_000, map_dispatch_to_props_000)(home);
-
-
-/***/ },
-/* 304 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var SET_BOUNDING_RECT, set_bounding_rect;
-
-	SET_BOUNDING_RECT = __webpack_require__(305).SET_BOUNDING_RECT;
-
-	set_bounding_rect = function(arg) {
-	  var viewport_height, viewport_width;
-	  viewport_width = arg.viewport_width, viewport_height = arg.viewport_height;
-	  return {
-	    type: SET_BOUNDING_RECT,
-	    viewport_width: viewport_width,
-	    viewport_height: viewport_height
-	  };
-	};
-
-	module.exports = {
-	  set_bounding_rect: set_bounding_rect
-	};
-
-
-/***/ },
-/* 305 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var action_types, keymirror;
-
-	keymirror = __webpack_require__(306);
-
-	module.exports = action_types = keymirror({
-	  SET_BOUNDING_RECT: null
-	});
-
-
-/***/ },
-/* 306 */
-/***/ function(module, exports) {
-
-	/**
-	 * Copyright 2013-2014 Facebook, Inc.
-	 *
-	 * Licensed under the Apache License, Version 2.0 (the "License");
-	 * you may not use this file except in compliance with the License.
-	 * You may obtain a copy of the License at
-	 *
-	 * http://www.apache.org/licenses/LICENSE-2.0
-	 *
-	 * Unless required by applicable law or agreed to in writing, software
-	 * distributed under the License is distributed on an "AS IS" BASIS,
-	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-	 * See the License for the specific language governing permissions and
-	 * limitations under the License.
-	 *
-	 */
-
-	"use strict";
-
-	/**
-	 * Constructs an enumeration with keys equal to their value.
-	 *
-	 * For example:
-	 *
-	 *   var COLORS = keyMirror({blue: null, red: null});
-	 *   var myColor = COLORS.blue;
-	 *   var isColorValid = !!COLORS[myColor];
-	 *
-	 * The last line could not be performed if the values of the generated enum were
-	 * not equal to their keys.
-	 *
-	 *   Input:  {key1: val1, key2: val2}
-	 *   Output: {key1: key1, key2: key2}
-	 *
-	 * @param {object} obj
-	 * @return {object}
-	 */
-	var keyMirror = function(obj) {
-	  var ret = {};
-	  var key;
-	  if (!(obj instanceof Object && !Array.isArray(obj))) {
-	    throw new Error('keyMirror(...): Argument must be an object.');
-	  }
-	  for (key in obj) {
-	    if (!obj.hasOwnProperty(key)) {
-	      continue;
-	    }
-	    ret[key] = key;
-	  }
-	  return ret;
-	};
-
-	module.exports = keyMirror;
 
 
 /***/ },
@@ -59548,14 +59573,69 @@
 	      fill: 'yellow',
 	      opacity: .5,
 	      cursor: 'pointer'
-	    }), text({
-	      x: '84%',
-	      y: '8%',
-	      'font-family': 'Sans',
-	      fontSize: '100%',
-	      fill: 'white',
-	      cursor: 'pointer'
-	    }, "MineSweeper"));
+	    }));
+	  }
+	});
+
+
+/***/ },
+/* 311 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var _, about, about_container, c, connect, mapDispatchToProps, mapStateToProps, ref;
+
+	ref = __webpack_require__(2), _ = ref._, c = ref.c;
+
+	connect = __webpack_require__(197).connect;
+
+	about = __webpack_require__(312);
+
+	mapStateToProps = function(state, ownProps) {
+	  return {};
+	};
+
+	mapDispatchToProps = function(dispatch, ownProps) {
+	  return {};
+	};
+
+	module.exports = about_container = connect(mapStateToProps, mapDispatchToProps)(about);
+
+
+/***/ },
+/* 312 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React, React_DOM, _, a, about, assign, body, c, circle, clipPath, code, d, defs, div, ellipse, feBlend, feGaussianBlur, feImage, feMerge, feMergeNode, feOffset, filter, font_awesome, foreignObject, g, gl_mat, h1, h2, h3, h4, h5, h6, image, input, keys, li, line, linearGradient, mat3, ol, p, path, pattern, polygon, polyline, radialGradient, rect, ref, ref1, rr, shortid, span, stop, svg, text, textArea, top_nav, ul, vec2, vec3;
+
+	ref = __webpack_require__(2), _ = ref._, gl_mat = ref.gl_mat, React = ref.React, React_DOM = ref.React_DOM, rr = ref.rr, c = ref.c, shortid = ref.shortid, assign = ref.assign, keys = ref.keys, mat3 = ref.mat3, vec3 = ref.vec3, vec2 = ref.vec2;
+
+	ref1 = React.DOM, p = ref1.p, div = ref1.div, h1 = ref1.h1, h2 = ref1.h2, h3 = ref1.h3, h4 = ref1.h4, h5 = ref1.h5, h6 = ref1.h6, span = ref1.span, svg = ref1.svg, circle = ref1.circle, rect = ref1.rect, ul = ref1.ul, line = ref1.line, li = ref1.li, ol = ref1.ol, code = ref1.code, a = ref1.a, input = ref1.input, defs = ref1.defs, clipPath = ref1.clipPath, body = ref1.body, linearGradient = ref1.linearGradient, stop = ref1.stop, g = ref1.g, path = ref1.path, d = ref1.d, polygon = ref1.polygon, image = ref1.image, pattern = ref1.pattern, filter = ref1.filter, feBlend = ref1.feBlend, feOffset = ref1.feOffset, polyline = ref1.polyline, feGaussianBlur = ref1.feGaussianBlur, feMergeNode = ref1.feMergeNode, feMerge = ref1.feMerge, radialGradient = ref1.radialGradient, foreignObject = ref1.foreignObject, text = ref1.text, textArea = ref1.textArea, ellipse = ref1.ellipse, pattern = ref1.pattern;
+
+	textArea = React.createFactory('textArea');
+
+	filter = React.createFactory('filter');
+
+	foreignObject = React.createFactory('foreignObject');
+
+	feGaussianBlur = React.createFactory('feGaussianBlur');
+
+	feImage = React.createFactory('feImage');
+
+	font_awesome = __webpack_require__(308);
+
+	top_nav = React.createFactory(__webpack_require__(309));
+
+	module.exports = about = rr({
+	  render: function() {
+	    return svg({
+	      width: '100%',
+	      height: '100%'
+	    }, top_nav(), text({
+	      x: '50%',
+	      y: '50%',
+	      fontSize: 40,
+	      fill: 'white'
+	    }, "About page"));
 	  }
 	});
 

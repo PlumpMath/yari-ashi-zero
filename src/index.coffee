@@ -63,7 +63,7 @@ window.onload = =>
 
     # minesweeper = React.createFactory require('./containers/minesweeper_000_.coffee')
     home = React.createFactory require('./containers/home_000_.coffee')
-
+    about = React.createFactory require('./containers/about_000_.coffee')
     index = rr
         render: ->
             Provider
@@ -76,6 +76,9 @@ window.onload = =>
                         path: '/'
                         component: home
                         ,
+                    Route
+                        path: '/about'
+                        component: about
 
 
     React_DOM.render index(), root

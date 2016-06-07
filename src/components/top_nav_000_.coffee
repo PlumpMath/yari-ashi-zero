@@ -81,16 +81,16 @@ module.exports = nav_bar_top = rr
                 # onClick: @props.router_on_zelda_click
                 # onClick:-> browserHistory.push '/zelda'
                 ,
-            text
-                x: '84%'
-                y: '8%'
-                'font-family': 'Sans'
-                fontSize: '100%'
-                fill: 'white'
-                cursor: 'pointer'
-                # onClick:-> browserHistory.push '/zelda'
-                ,
-                "MineSweeper"
+            # text
+            #     x: '84%'
+            #     y: '8%'
+            #     'font-family': 'Sans'
+            #     fontSize: '100%'
+            #     fill: 'white'
+            #     cursor: 'pointer'
+            #     # onClick:-> browserHistory.push '/zelda'
+            #     ,
+            #     "MineSweeper"
             # foreignObject
             #     x: 0
             #     y: 0

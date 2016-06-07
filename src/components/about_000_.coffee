@@ -10,7 +10,7 @@ feImage = React.createFactory 'feImage'
 
 font_awesome = require 'react-fontawesome'
 
-top_nav = React.createFactory require('../containers/top_nav.coffee')
+top_nav = React.createFactory require('../containers/top_nav_000_.coffee')
 
 module.exports = about = rr
 
