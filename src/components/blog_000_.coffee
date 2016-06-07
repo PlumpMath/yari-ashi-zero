@@ -26,7 +26,7 @@ module.exports = about = rr
                 fontSize: .06 * @props.height
                 fill: 'darkgrey'
                 ,
-                "Wylie - Уаилий - וואיליא"
+                "bloggish"
             foreignObject
                 x: '20%'
                 y: '40%'
@@ -39,6 +39,6 @@ module.exports = about = rr
                         color: 'grey'
                     ,
                     "
-A simple web programmer, onetime poetic noise rampager.  Living in Southwest Asia, alternating between the shores of the Mediterranean and the mountains of Jerusalem.
+I'm going to a meetup on streams in a bit.  Will post more here shortly.
 
                     "

@@ -1,6 +1,4 @@
 c = -> console.log.apply console, arguments
-
-
 _ = require 'lodash'
 express = require 'express'
 app = express()
@@ -15,12 +13,10 @@ else
 
 app.get '/', (req, res) ->
     res.sendFile(path.join(public_dir, index))
-
-# app.use '/', (req, res) ->
-#     res.sendFile(path.join(public_dir, "/index.html"))
-
-# c 'env', _.keys process.env
-
+app.get '/about', (req, res) ->
+    res.sendFile(path.join(public_dir, index))
+app.get '/blog', (req, res) ->
+    res.sendFile(path.join(public_dir, index))
 app.use(body_parser.json())
 
 app.use(express.static(public_dir))

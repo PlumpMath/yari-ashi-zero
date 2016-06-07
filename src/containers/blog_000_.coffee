@@ -1,13 +1,13 @@
 
-
-{_, c} = require('../boilerplate.coffee')
+{_, c, gl_mat, mat3} = require('../boilerplate.coffee')
 
 { connect } = require 'react-redux'
 
-# proto_comp = require '../components/proto_comp_000_.coffee'
-about = require '../components/about_000_.coffee'
+blog = require '../components/blog_000_.coffee'
 
-mapStateToProps = (state, ownProps) ->
+# { nav_home, nav_about } = require '../actions/proto_001_.coffee'
+
+map_state_to_props_000 = (state, own_props) ->
     width = state.get 'viewport_width'
     height = state.get 'viewport_height'
 
@@ -36,9 +36,7 @@ mapStateToProps = (state, ownProps) ->
 
     return arq
 
-mapDispatchToProps = (dispatch, ownProps) ->
-    return {
+map_dispatch_to_props_000 = (dispatch, own_props) ->
+    return {}
 
-    }
-
-module.exports = about_container = connect(mapStateToProps, mapDispatchToProps)(about)
+module.exports = blog_container = connect(map_state_to_props_000, map_dispatch_to_props_000)(blog)

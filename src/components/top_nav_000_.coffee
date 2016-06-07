@@ -13,6 +13,8 @@ awesome = React.createFactory(font_awesome)
 module.exports = nav_bar_top = rr
 
     render: ->
+        tMat = @props.tMat
+        height = @props.height
         svg
             width: '100%'
             height: '100%'
@@ -22,16 +24,18 @@ module.exports = nav_bar_top = rr
                 y: '0%'
                 width: '20%'
                 height: '10%'
-                fill: 'yellow'
-                opacity: .5
+                fill: 'white'
+                opacity: .2
+                cursor: 'pointer'
                 onClick:-> browserHistory.push '/'
                 # onClick: @props.on_home_click
                 ,
             text
-                x: '4%'
-                y: '8%'
+                x: '2%'
+                y: '7%'
                 'font-family': 'Sans'
-                fontSize: '100%'
+                fontSize: @props.height * .05
+                textLength: @props.width * .14
                 fill: 'black'
                 cursor: 'pointer'
                 onClick:-> browserHistory.push '/'
@@ -43,15 +47,17 @@ module.exports = nav_bar_top = rr
                 width: '20%'
                 height: '10%'
                 fill: 'white'
-                opacity: .5
+                opacity: .2
+                cursor: 'pointer'
                 onClick:-> browserHistory.push '/about'
                 # onClick: @props.on_about_click
             text
-                x: '24%'
-                y: '8%'
+                x: '22%'
+                y: '7%'
                 'font-family': 'Sans'
-                fontSize: '100%'
-                fill: 'black'
+                fontSize: @props.height * .05
+                textLength: @props.width * .14
+                fill: 'grey'
                 cursor: 'pointer'
                 onClick:-> browserHistory.push '/about'
                 ,
@@ -61,8 +67,21 @@ module.exports = nav_bar_top = rr
                 y: '0%'
                 width: '20%'
                 height: '10%'
-                fill: 'yellow'
-                opacity: .5
+                fill: 'white'
+                opacity: .2
+                cursor: 'pointer'
+                onClick:-> browserHistory.push '/blog'
+            text
+                x: '42%'
+                y: '7%'
+                'font-family': 'Sans'
+                fontSize: @props.height * .05
+                textLength: @props.width * .14
+                fill: 'grey'
+                cursor: 'pointer'
+                onClick:-> browserHistory.push '/blog'
+                ,
+                "BLOG"
             rect
                 x: '60%'
                 y: '0%'
@@ -75,7 +94,7 @@ module.exports = nav_bar_top = rr
                 y: '0%'
                 width: '20%'
                 height: '10%'
-                fill: 'yellow'
+                fill: 'white'
                 opacity: .5
                 cursor: 'pointer'
                 # onClick: @props.router_on_zelda_click

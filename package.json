@@ -1,6 +1,6 @@
 {
-    "name": "MineSweeper_SVG_React_Redux",
-    "version": "0.0.2",
+    "name": "yari-ashi-zero",
+    "version": "0.0.1",
     "dependencies": {
         "body-parser": "latest",
         "coffee-script": "latest",
