@@ -1,8 +1,6 @@
-### Уаилий י Woodcock
 
 
-
-Personal site bifurcating to professional coding but also other interests, music, culture, science, engineering, philosophy, politics, etc.
+### personal website
 
 
 ###### ttd
