@@ -2,6 +2,7 @@
 
 ### personal website
 
+Visit the site at: https://yari-ashi-zero.herokuapp.com/
 
 ###### ttd
 

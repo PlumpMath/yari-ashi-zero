@@ -14,6 +14,9 @@ top_nav = React.createFactory require('../containers/top_nav_000_.coffee')
 
 module.exports = about = rr
 
+    getInitialState: ->
+        portrait: "images/2016-06-07-153816.jpg"
+
     render: ->
         svg
             width: '100%'
@@ -27,6 +30,29 @@ module.exports = about = rr
                 fill: 'darkgrey'
                 ,
                 "Wylie - Уаилий - וואיליא"
+            a
+                xlinkHref: 'https://github.com/kulicuu'
+                xlinkShow: 'new'
+                ,
+                text
+                    x: '12%'
+                    y: '30%'
+                    fontSize: .03 * @props.height
+                    fill: 'lightblue'
+                    ,
+                    'GitHub'
+            a
+                xlinkHref: 'https://twitter.com/yari_ashi_zero'
+                xlinkShow: 'new'
+                ,
+                text
+                    x: '18%'
+                    y: '30%'
+                    fontSize: .03 * @props.height
+                    fill: 'lightblue'
+                    ,
+                    'Twitter'
+
             foreignObject
                 x: '20%'
                 y: '40%'
@@ -42,3 +68,10 @@ module.exports = about = rr
 A simple web programmer, onetime poetic noise rampager.  Living in Southwest Asia, alternating between the shores of the Mediterranean and the mountains of Jerusalem.
 
                     "
+            # image
+            #     opacity: .4
+            #     x: .768 * @props.width
+            #     y: .234 * @props.height
+            #     width: .2 * @props.width
+            #     height: .2 * @props.height
+            #     xlinkHref:@state.portrait
