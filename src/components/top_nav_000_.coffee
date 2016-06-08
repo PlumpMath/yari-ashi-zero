@@ -7,13 +7,16 @@ foreignObject = React.createFactory 'foreignObject'
 feGaussianBlur = React.createFactory 'feGaussianBlur'
 feImage = React.createFactory 'feImage'
 
-font_awesome = require 'react-fontawesome'
-awesome = React.createFactory(font_awesome)
-
+button_000 = require './nav_buttons/button_000_.coffee'
+dropdown_000 = require './nav_buttons/dropdown_000_.coffee'
 module.exports = nav_bar_top = rr
 
+    getInitialState: ->
+        show_dropdown_0: false
+
     render: ->
-        tMat = @props.tMat
+        tMat = @props.t_mat
+
         height = @props.height
         svg
             width: '100%'
@@ -25,7 +28,7 @@ module.exports = nav_bar_top = rr
                 width: '20%'
                 height: '10%'
                 fill: 'white'
-                opacity: .2
+                opacity: if @props.location is '/' then .7 else .2
                 cursor: 'pointer'
                 onClick:-> browserHistory.push '/'
                 # onClick: @props.on_home_click
@@ -47,7 +50,7 @@ module.exports = nav_bar_top = rr
                 width: '20%'
                 height: '10%'
                 fill: 'white'
-                opacity: .2
+                opacity: if @props.location is '/about' then .7 else .2
                 cursor: 'pointer'
                 onClick:-> browserHistory.push '/about'
                 # onClick: @props.on_about_click
@@ -68,7 +71,7 @@ module.exports = nav_bar_top = rr
                 width: '20%'
                 height: '10%'
                 fill: 'white'
-                opacity: .2
+                opacity: if @props.location is '/blog' then .7 else .2
                 cursor: 'pointer'
                 onClick:-> browserHistory.push '/blog'
             text
@@ -82,13 +85,13 @@ module.exports = nav_bar_top = rr
                 onClick:-> browserHistory.push '/blog'
                 ,
                 "BLOG"
-            rect
-                x: '60%'
-                y: '0%'
-                width: '20%'
-                height: '10%'
-                fill: 'white'
-                opacity: .5
+            # rect
+            #     x: '60%'
+            #     y: '0%'
+            #     width: '20%'
+            #     height: '10%'
+            #     fill: 'white'
+            #     opacity: .5
             rect
                 x: '80%'
                 y: '0%'
@@ -100,26 +103,22 @@ module.exports = nav_bar_top = rr
                 # onClick: @props.router_on_zelda_click
                 # onClick:-> browserHistory.push '/zelda'
                 ,
-            # text
-            #     x: '84%'
-            #     y: '8%'
-            #     'font-family': 'Sans'
-            #     fontSize: '100%'
-            #     fill: 'white'
-            #     cursor: 'pointer'
-            #     # onClick:-> browserHistory.push '/zelda'
-            #     ,
-            #     "MineSweeper"
-            # foreignObject
-            #     x: 0
-            #     y: 0
-            #     width: '20%'
-            #     height: '20%'
-            #     ,
-                    # awesome
-                    #     # className:'super-crazy-colors'
-                    #     name:'rocket'
-                    #     size:'2x'
-                    #     spin: true
-                    #     style:
-                    #         textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)'
+            j_Mat = [
+                .2, 0, 0,
+                0, .1, 0,
+                .6 * @props.width, 0, 1
+            ]
+            kMat = mat3.multiply mat3.create(), j_Mat, @props.t_mat
+            button_000
+                tMat: kMat
+                show_dropdown: => @setState {show_dropdown_0: true}
+                hide_dropdown: => @setState {show_dropdown_0: false}
+            j_Mat_0 = [
+                .2, 0, 0,
+                0, .1, 0,
+                .6 * @props.width, .1 * @props.height, 1
+            ]
+            if @state.show_dropdown_0
+                kMat_0 = mat3.multiply mat3.create(), j_Mat_0, @props.t_mat
+                dropdown_000
+                    tMat: kMat_0

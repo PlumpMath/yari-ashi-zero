@@ -8,7 +8,8 @@ foreignObject = React.createFactory 'foreignObject'
 feGaussianBlur = React.createFactory 'feGaussianBlur'
 feImage = React.createFactory 'feImage'
 
-module.exports = button = rr
+module.exports = dropdown = rr
+
     rect_t : (s_rect) ->
         tMat = @props.tMat
         { width, height, x, y } = s_rect
@@ -23,8 +24,8 @@ module.exports = button = rr
         { x, y, width, height } = @rect_t
             x: 0
             y: 0
-            width: 2
-            height: 1
+            width: 1
+            height: 2
         svg
             width: '100%'
             height: '100%'
@@ -34,10 +35,8 @@ module.exports = button = rr
                 height: height
                 x: x
                 y: y
-                fill: 'black'
+                fill: 'red'
                 opacity: .3
-                onMouseOver: @props.show_dropdown
-                onMouseOut: @props.hide_dropdown
             # a
             #     xlinkHref: 'https://twitter.com/yari_ashi_zero'
             #     xlinkShow: 'new'
@@ -48,5 +47,3 @@ module.exports = button = rr
             #         width: .6 * @props.tMat[4]
             #         height: .6 * @props.tMat[4]
             #         xlinkHref: 'svgs/twitter.svg'
-            #         onMouseOver: @props.show_dropdown
-            #         onMouseOut: @props.hide_dropdown

@@ -65,6 +65,8 @@ window.onload = =>
     home = React.createFactory require('./containers/home_000_.coffee')
     about = React.createFactory require('./containers/about_000_.coffee')
     blog = React.createFactory require('./containers/blog_000_.coffee')
+    terraforming = React.createFactory require('./containers/blog/terraforming_000_.coffee')
+    ai_coltrane = React.createFactory require('./containers/blog/AI_Coltrane_.coffee')
     index = rr
         render: ->
             Provider
@@ -76,13 +78,18 @@ window.onload = =>
                     Route
                         path: '/'
                         component: home
-                        ,
                     Route
                         path: '/about'
                         component: about
                     Route
                         path: '/blog'
                         component: blog
+                    Route
+                        path: '/blog/terraforming'
+                        component: terraforming
+                    Route
+                        path: '/blog/ai_coltrane'
+                        component: ai_coltrane
 
 
     React_DOM.render index(), root

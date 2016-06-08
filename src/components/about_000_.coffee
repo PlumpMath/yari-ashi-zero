@@ -45,13 +45,6 @@ module.exports = about = rr
                 xlinkHref: 'https://twitter.com/yari_ashi_zero'
                 xlinkShow: 'new'
                 ,
-                # text
-                #     x: '18%'
-                #     y: '30%'
-                #     fontSize: .03 * @props.height
-                #     fill: 'lightblue'
-                #     ,
-                #     # 'Twitter'
                 image
                     x: '16%'
                     y: '28%'

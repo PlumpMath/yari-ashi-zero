@@ -1,9 +1,11 @@
 
-{_, c} = require('../boilerplate.coffee')
+{_, c, gl_mat, mat3} = require('../../boilerplate.coffee')
 
 { connect } = require 'react-redux'
 
-top_nav = require '../components/top_nav_000_.coffee'
+ai_coltrane = require '../../components/blog/AI_Coltrane_.coffee'
+
+# { nav_home, nav_about } = require '../actions/proto_001_.coffee'
 
 map_state_to_props_000 = (state, own_props) ->
     width = state.get 'viewport_width'
@@ -18,28 +20,23 @@ map_state_to_props_000 = (state, own_props) ->
         smaller = height
         larger = width
 
-    transform_matrix_0 = [
+    transform_matrix = [
         width, 0, 0,
         0, height, 0,
         1 / width, 1 / height, 1
     ]
 
     arq =
-        location: state.get('routing').locationBeforeTransitions.pathname
         orientation: orientation
         larger: larger
         smaller: smaller
         width: width
         height: height
-        t_mat: transform_matrix_0
+        t_mat: transform_matrix
 
     return arq
 
 map_dispatch_to_props_000 = (dispatch, own_props) ->
+    return {}
 
-
-
-    return {
-    }
-
-module.exports = top_nav_container = connect(map_state_to_props_000, map_dispatch_to_props_000)(top_nav)
+module.exports = blog_container = connect(map_state_to_props_000, map_dispatch_to_props_000)(ai_coltrane)

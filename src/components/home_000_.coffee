@@ -28,19 +28,14 @@ module.exports = home = rr
         , 300
 
     componentDidMount: ->
-        c "React.version", React.version
-
         @greeting_keep()
         @keeper_interval_2 = setInterval @greeting_keep, (60 * 1000 * 30)
-
-        # set focus to text_area by id
 
     componentWillReceiveProps: (next_props)->
         @setState
             M: next_props.M
 
     greeting_keep: ->
-
         if (@state.time_hours < 12) and (@state.greeting isnt "Good Morning")
             @setState
                 greeting: "Good morning,"
@@ -50,7 +45,6 @@ module.exports = home = rr
         if (@state.time_hours > 17) and (@state.greeting isnt "Good Evening")
             @setState
                 greeting: "Good evening,"
-
 
     timekeep: ->
         now = new Date()
@@ -90,12 +84,11 @@ module.exports = home = rr
         thoughts: ""
 
     render: ->
-
         svg
             width: '100%'
             height: '100%'
         ,
-            top_nav()
+
             # rect
             #     x: 10
             #     y: 10
@@ -136,6 +129,7 @@ module.exports = home = rr
                         fontFamily: 'Sans'
                     ,
                     "#{@state.greeting} what would you like to accomplish today ?\n #{@state.thoughts}"
+            top_nav()
                 # textArea
                 #     id: 'text_entry'
                 #     style:

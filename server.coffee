@@ -17,6 +17,13 @@ app.get '/about', (req, res) ->
     res.sendFile(path.join(public_dir, index))
 app.get '/blog', (req, res) ->
     res.sendFile(path.join(public_dir, index))
+app.get '/blog/terraforming', (req, res) ->
+    res.sendFile(path.join(public_dir, index))
+app.use(body_parser.json())
+
+
+
+
 app.use(body_parser.json())
 
 app.use(express.static(public_dir))
