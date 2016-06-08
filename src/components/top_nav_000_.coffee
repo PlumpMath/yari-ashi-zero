@@ -116,10 +116,10 @@ module.exports = nav_bar_top = rr
             #     width: '20%'
             #     height: '20%'
             #     ,
-            #         awesome
-            #             # className:'super-crazy-colors'
-            #             name:'rocket'
-            #             size:'2x'
-            #             spin: true
-            #             style:
-            #                 textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)'
+                    # awesome
+                    #     # className:'super-crazy-colors'
+                    #     name:'rocket'
+                    #     size:'2x'
+                    #     spin: true
+                    #     style:
+                    #         textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)'

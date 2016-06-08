@@ -7,8 +7,9 @@ filter = React.createFactory 'filter'
 foreignObject = React.createFactory 'foreignObject'
 feGaussianBlur = React.createFactory 'feGaussianBlur'
 feImage = React.createFactory 'feImage'
-
 font_awesome = require 'react-fontawesome'
+awesome = React.createFactory(font_awesome)
+
 
 top_nav = React.createFactory require('../containers/top_nav_000_.coffee')
 
@@ -26,7 +27,7 @@ module.exports = about = rr
             text
                 x: '6%'
                 y: '24%'
-                fontSize: .06 * @props.height
+                fontSize: .03 * @props.height
                 fill: 'darkgrey'
                 ,
                 "Wylie - Уаилий - וואיליא"
@@ -34,24 +35,41 @@ module.exports = about = rr
                 xlinkHref: 'https://github.com/kulicuu'
                 xlinkShow: 'new'
                 ,
-                text
-                    x: '12%'
-                    y: '30%'
-                    fontSize: .03 * @props.height
-                    fill: 'lightblue'
-                    ,
-                    'GitHub'
+                image
+                    x: '8%'
+                    y: '28%'
+                    width: .05 * @props.height
+                    height: .05 * @props.height
+                    xlinkHref: 'svgs/github.svg'
             a
                 xlinkHref: 'https://twitter.com/yari_ashi_zero'
                 xlinkShow: 'new'
                 ,
-                text
-                    x: '18%'
-                    y: '30%'
-                    fontSize: .03 * @props.height
-                    fill: 'lightblue'
-                    ,
-                    'Twitter'
+                # text
+                #     x: '18%'
+                #     y: '30%'
+                #     fontSize: .03 * @props.height
+                #     fill: 'lightblue'
+                #     ,
+                #     # 'Twitter'
+                image
+                    x: '16%'
+                    y: '28%'
+                    width: .05 * @props.height
+                    height: .05 * @props.height
+                    xlinkHref: 'svgs/twitter.svg'
+
+            a
+                xlinkHref: 'https://yadi.sk/i/9kZfPzhAsKdQk'
+                xlinkShow: 'new'
+                ,
+                image
+                    x: '24%'
+                    y: '28%'
+                    width: .05 * @props.height
+                    height: .05 * @props.height
+                    xlinkHref: 'svgs/file-pdf-o.svg'
+
 
             foreignObject
                 x: '20%'
@@ -65,7 +83,7 @@ module.exports = about = rr
                         color: 'grey'
                     ,
                     "
-A simple web programmer, onetime poetic noise rampager.  Living in Southwest Asia, alternating between the shores of the Mediterranean and the mountains of Jerusalem.
+...
 
                     "
             # image
