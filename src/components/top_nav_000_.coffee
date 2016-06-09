@@ -9,7 +9,7 @@ module.exports = nav_bar_top = rr
 
     render: ->
         tMat = @props.t_mat
-        nav_bar_height = @props.height * .043
+        nav_bar_height = @props.height * .05
         font_size = nav_bar_height * .38
         text_y = (nav_bar_height * .5) + (.5 * font_size)
         height = @props.height
