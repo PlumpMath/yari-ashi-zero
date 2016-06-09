@@ -9,7 +9,9 @@ module.exports = nav_bar_top = rr
 
     render: ->
         tMat = @props.t_mat
-
+        nav_bar_height = @props.height * .043
+        font_size = nav_bar_height * .38
+        text_y = (nav_bar_height * .5) + (.5 * font_size)
         height = @props.height
         svg
             width: '100%'
@@ -19,21 +21,21 @@ module.exports = nav_bar_top = rr
                 x: '0%'
                 y: '0%'
                 width: '25%'
-                height: '10%'
+                height: nav_bar_height
                 fill: 'white'
-                stroke: 'black'
+                # stroke: 'black'
                 opacity: if @props.location is '/' then .7 else .2
                 cursor: 'pointer'
                 onClick:-> browserHistory.push '/'
                 # onClick: @props.on_home_click
                 ,
             text
-                x: '2%'
-                y: '7%'
+                x: @props.width * .095
+                y: text_y
                 'font-family': 'Sans'
-                fontSize: @props.height * .05
-                textLength: @props.width * .14
-                fill: 'black'
+                fontSize: font_size
+                textLength: @props.width * .06
+                fill: 'grey'
                 cursor: 'pointer'
                 onClick:-> browserHistory.push '/'
                 ,
@@ -42,19 +44,19 @@ module.exports = nav_bar_top = rr
                 x: '25%'
                 y: '0%'
                 width: '25%'
-                height: '10%'
+                height: nav_bar_height
                 fill: 'white'
-                stroke: 'black'
+                # stroke: 'black'
                 opacity: if @props.location is '/about' then .7 else .2
                 cursor: 'pointer'
                 onClick:-> browserHistory.push '/about'
                 # onClick: @props.on_about_click
             text
-                x: '27%'
-                y: '7%'
+                x: @props.width * .25 + @props.width * .095
+                y: text_y
                 'font-family': 'Sans'
-                fontSize: @props.height * .05
-                textLength: @props.width * .14
+                fontSize: font_size
+                textLength: @props.width * .06
                 fill: 'grey'
                 cursor: 'pointer'
                 onClick:-> browserHistory.push '/about'
@@ -64,35 +66,28 @@ module.exports = nav_bar_top = rr
                 x: '50%'
                 y: '0%'
                 width: '25%'
-                height: '10%'
+                height: nav_bar_height
                 fill: 'white'
-                stroke: 'black'
+                # stroke: 'black'
                 opacity: if @props.location is '/professional' then .7 else .2
                 cursor: 'pointer'
                 onClick:-> browserHistory.push '/professional'
             text
-                x: '52%'
-                y: '7%'
+                x: @props.width * .5 + @props.width * .045
+                y: text_y
                 'font-family': 'Sans'
-                fontSize: @props.height * .05
-                textLength: @props.width * .23
+                fontSize: font_size
+                textLength: @props.width * .16
                 fill: 'grey'
                 cursor: 'pointer'
                 onClick:-> browserHistory.push '/professional'
                 ,
                 "PROFESSIONAL"
-            # rect
-            #     x: '60%'
-            #     y: '0%'
-            #     width: '20%'
-            #     height: '10%'
-            #     fill: 'white'
-            #     opacity: .5
             rect
                 x: '75%'
                 y: '0%'
                 width: '25%'
-                height: '10%'
+                height: nav_bar_height
                 fill: 'white'
                 stroke: 'black'
                 cursor: 'pointer'
@@ -100,11 +95,11 @@ module.exports = nav_bar_top = rr
                 onClick:-> browserHistory.push '/amateur'
                 ,
             text
-                x: '77%'
-                y: '7%'
+                x: @props.width * .75 + @props.width * .075
+                y: text_y
                 'font-family': 'Sans'
-                fontSize: @props.height * .05
-                textLength: @props.width * .23
+                fontSize: font_size
+                textLength: @props.width * .1
                 fill: 'grey'
                 cursor: 'pointer'
                 onClick:-> browserHistory.push '/amateur'
