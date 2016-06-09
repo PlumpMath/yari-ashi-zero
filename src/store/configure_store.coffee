@@ -1,4 +1,4 @@
-{c, _} = require('../boilerplate.coffee')
+
 { createStore, applyMiddleware } = require 'redux'
 
 thunk = require('redux-thunk').default

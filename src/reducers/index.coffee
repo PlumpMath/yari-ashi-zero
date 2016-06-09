@@ -1,5 +1,5 @@
 
-{_, c} = require('../boilerplate.coffee')
+
 { combineReducers } = require 'redux-immutable'
 
 
