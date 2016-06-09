@@ -57,12 +57,5 @@ window.onload = =>
             return state.get('routing')
     )
 
-    # minesweeper = React.createFactory require('./containers/minesweeper_000_.coffee')
-
-
-
     routes= require('./routes.coffee')({store, history})
-
-
-
     React_DOM.render routes(), root
