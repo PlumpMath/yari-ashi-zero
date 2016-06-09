@@ -13,7 +13,7 @@ module.exports = config =
     cache: true
     debug: true
     entry:
-        app: ['./src/index.coffee']
+        app: ['./src/app.coffee']
     stats:
         colors: on
         reasons: on

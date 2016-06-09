@@ -1,3 +1,5 @@
+home_mid_nav_000_container = rc_generic(require('./home/home_mid_nav_000_.coffee'))
+
 module.exports = home = rr
     # TODO
     # move the timekeep stuff and similar out to index, and
@@ -110,6 +112,7 @@ module.exports = home = rr
                     ,
                     "#{@state.greeting} what would you like to accomplish today ?\n #{@state.thoughts}"
             top_nav_000_container()
+            # home_mid_nav_000_container()
                 # textArea
                 #     id: 'text_entry'
                 #     style:

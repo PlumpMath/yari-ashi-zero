@@ -33,8 +33,6 @@ map_state_to_props_000 = (state, own_props) ->
 
 map_dispatch_to_props_000 = (dispatch, own_props) ->
 
-
-
     return {
     }
 

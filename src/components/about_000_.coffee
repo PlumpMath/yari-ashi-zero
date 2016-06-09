@@ -1,3 +1,4 @@
+mid_nav_000_container = rc_generic(require('./about/mid_nav_000_.coffee'))
 module.exports = about = rr
     render: ->
         svg
@@ -5,6 +6,7 @@ module.exports = about = rr
             height: '100%'
         ,
             top_nav_000_container()
+            mid_nav_000_container()
             text
                 x: '6%'
                 y: '24%'

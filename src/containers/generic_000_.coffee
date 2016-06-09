@@ -1,4 +1,3 @@
-about = require '../components/about_000_.coffee'
 
 mapStateToProps = (state, ownProps) ->
     width = state.get 'viewport_width'
@@ -19,19 +18,16 @@ mapStateToProps = (state, ownProps) ->
         1 / width, 1 / height, 1
     ]
 
-    arq =
-        orientation: orientation
-        larger: larger
-        smaller: smaller
-        width: width
-        height: height
-        t_mat: transform_matrix
-
-    return arq
+    #return
+    location: state.get('routing').locationBeforeTransitions.pathname
+    orientation: orientation
+    larger: larger
+    smaller: smaller
+    width: width
+    height: height
+    t_mat: transform_matrix
 
 mapDispatchToProps = (dispatch, ownProps) ->
-    return {
+    return {}
 
-    }
-
-module.exports = about_container = connect(mapStateToProps, mapDispatchToProps)(about)
+module.exports = (component) -> connect(mapStateToProps, mapDispatchToProps)(component)

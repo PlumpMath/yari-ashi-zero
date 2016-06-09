@@ -1,12 +1,5 @@
-# button_000 = require './nav_buttons/button_000_.coffee'
-# dropdown_000 = require './nav_buttons/dropdown_000_.coffee'
 module.exports = nav_bar_top = rr
-
-    getInitialState: ->
-        show_dropdown_0: false
-
     render: ->
-
         tMat = @props.t_mat
         nav_bar_height = @props.height * .05
         font_size = nav_bar_height * .38
@@ -18,7 +11,7 @@ module.exports = nav_bar_top = rr
         ,
             rect
                 x: '0%'
-                y: '0%'
+                y: nav_bar_height
                 width: '25%'
                 height: nav_bar_height
                 fill: 'white'
@@ -30,7 +23,7 @@ module.exports = nav_bar_top = rr
                 ,
             text
                 x: @props.width * .095
-                y: text_y
+                y: nav_bar_height + text_y
                 'font-family': 'Sans'
                 fontSize: font_size
                 textLength: @props.width * .06
@@ -41,7 +34,7 @@ module.exports = nav_bar_top = rr
                 "HOME"
             rect
                 x: '25%'
-                y: '0%'
+                y: nav_bar_height
                 width: '25%'
                 height: nav_bar_height
                 fill: 'white'
@@ -52,7 +45,7 @@ module.exports = nav_bar_top = rr
                 # onClick: @props.on_about_click
             text
                 x: @props.width * .25 + @props.width * .095
-                y: text_y
+                y: nav_bar_height + text_y
                 'font-family': 'Sans'
                 fontSize: font_size
                 textLength: @props.width * .06
@@ -63,7 +56,7 @@ module.exports = nav_bar_top = rr
                 "ABOUT"
             rect
                 x: '50%'
-                y: '0%'
+                y: nav_bar_height
                 width: '25%'
                 height: nav_bar_height
                 fill: 'white'
@@ -73,7 +66,7 @@ module.exports = nav_bar_top = rr
                 onClick:-> browserHistory.push '/professional'
             text
                 x: @props.width * .5 + @props.width * .045
-                y: text_y
+                y: nav_bar_height + text_y
                 'font-family': 'Sans'
                 fontSize: font_size
                 textLength: @props.width * .16
@@ -84,7 +77,7 @@ module.exports = nav_bar_top = rr
                 "PROFESSIONAL"
             rect
                 x: '75%'
-                y: '0%'
+                y: nav_bar_height
                 width: '25%'
                 height: nav_bar_height
                 fill: 'white'
@@ -95,7 +88,7 @@ module.exports = nav_bar_top = rr
                 ,
             text
                 x: @props.width * .75 + @props.width * .075
-                y: text_y
+                y: nav_bar_height + text_y
                 'font-family': 'Sans'
                 fontSize: font_size
                 textLength: @props.width * .1
