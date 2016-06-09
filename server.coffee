@@ -16,12 +16,17 @@ app.get '/', (req, res) ->
     res.sendFile(path.join(public_dir, index))
 app.get '/about', (req, res) ->
     res.sendFile(path.join(public_dir, index))
-app.get '/blog', (req, res) ->
+app.get '/professional', (req, res) ->
     res.sendFile(path.join(public_dir, index))
-app.get '/blog/terraforming', (req, res) ->
+app.get '/amateur', (req, res) ->
     res.sendFile(path.join(public_dir, index))
-app.get '/blog/ai_coltrane', (req, res) ->
+app.get '/amateur/blog/ai_coltrane', (req, res) ->
     res.sendFile(path.join(public_dir, index))
+app.get '/amateur/blog/terraforming', (req, res) ->
+    res.sendFile(path.join(public_dir, index))
+
+
+
 
 
 

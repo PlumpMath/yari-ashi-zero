@@ -1,5 +1,4 @@
 
-{_, c, gl_mat, mat3} = require('../boilerplate.coffee')
 
 { connect } = require 'react-redux'
 

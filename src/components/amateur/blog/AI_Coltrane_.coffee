@@ -1,19 +1,4 @@
-{_, gl_mat, React, React_DOM, rr, c, shortid, assign, keys, mat3, vec3, vec2} = require('../../boilerplate.coffee')
-
-{p, div, h1, h2, h3, h4, h5, h6, span, svg, circle, rect, ul, line, li, ol, code, a, input, defs, clipPath, body, linearGradient, stop, g, path, d, polygon, image, pattern, filter, feBlend, feOffset, polyline, feGaussianBlur, feMergeNode, feMerge, radialGradient, foreignObject, text, textArea, ellipse, pattern, em} = React.DOM
-{browserHistory} = require 'react-router'
-textArea = React.createFactory 'textArea'
-filter = React.createFactory 'filter'
-foreignObject = React.createFactory 'foreignObject'
-feGaussianBlur = React.createFactory 'feGaussianBlur'
-feImage = React.createFactory 'feImage'
-
-font_awesome = require 'react-fontawesome'
-
-top_nav = React.createFactory require('../../containers/top_nav_000_.coffee')
-
 module.exports = AI_Coltrane = rr
-
     render: ->
         main1 =
             style:
@@ -22,7 +7,7 @@ module.exports = AI_Coltrane = rr
             width: '100%'
             height: '100%'
         ,
-            top_nav()
+            top_nav_000_container()
             # text
             #     x: '6%'
             #     y: '24%'
@@ -31,11 +16,13 @@ module.exports = AI_Coltrane = rr
             #     ,
             #     "bloggish"
             foreignObject
-                x: '6%'
+                x: '0%'
                 y: '14%'
-                width: '80%'
+                width: '100%'
                 height: '80%'
-                # style:
+                overflow: 'auto'
+                style:
+                    overflow: 'auto'
                 #     background: 'blue'
                 ,
                 div
@@ -88,11 +75,11 @@ module.exports = AI_Coltrane = rr
                             "
     Of these three, only the 2nd is an unsolved problem. Component 1 is a 'solved problem' in the military and space exploration domain, only remaining tasks are minuaturisation and optimisation for the specific application. Many channels, both active and passive, can be exploited.  It may be that the specifics of particular applications provide opportunities for distinct solutions.  Component 3 also is of course solved trivially, but project success is contingent and dependent on leveraging the latent human capacity for great acuity and sensitivity, facilities blighted in the general population by the clamor and tumult of our societies and (mental) environments; therefore we'll want to work with very high quality signal processing equipment to secure audiophile grade signal transmission.
                             "
-                    li null,
-                    "Strength of AI required:  It is asserted that the highest 'Strong' AI is not required to implement this proposal."
+                        li null,
+                        "Strength of AI required:  It is asserted that the highest 'Strong' AI is not required to implement this proposal."
 
-
-                    em main1,
-                        "
-    (In ~April 2001, living in Tempe AZ, this idea occured to me.  In ~2008-2009 while at UMass Boston I was able to do an independent study to flesh out the idea a little bit. I wasn't able to do much with it.)
-                        "
+                    p main1,
+                        em null,
+                            "
+            (In ~April 2001, living in Tempe AZ, this idea occured to me.  In ~2008-2009 while at UMass Boston I was able to do an independent study to flesh out the idea a little bit. I wasn't able to do much with it.)
+                            "

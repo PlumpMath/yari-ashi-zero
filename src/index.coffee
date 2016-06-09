@@ -1,6 +1,16 @@
+boilerplate = { _, gl_mat, React, React_DOM, rr, c, shortid, assign, keys, mat3, vec3, vec2 } = require './boilerplate.coffee'
+for k, v of boilerplate
+    window[k] = v
 
+dom_stuff = {p, div, h1, h2, h3, h4, h5, h6, span, svg, circle, rect, ul, line, li, ol, code, a, input, defs, clipPath, body, linearGradient, stop, g, path, d, polygon, image, pattern, filter, feBlend, feOffset, polyline, feGaussianBlur, feMergeNode, feMerge, radialGradient, foreignObject, text, textArea, ellipse, pattern} = React.DOM
+for k, v of dom_stuff
+    window[k] = v
 
-{_, React, React_DOM, rr, c} = require('./boilerplate.coffee')
+for item in ['textArea', 'filter', 'foreignObject', 'feGaussianBlur', 'feImage']
+    window[item] = React.createFactory item
+
+{ connect } = require 'react-redux' ; window.connect = connect
+{ browserHistory } = require 'react-router' ; window.browserHistory = browserHistory
 
 root = document.getElementById 'root'
 
@@ -62,11 +72,31 @@ window.onload = =>
     )
 
     # minesweeper = React.createFactory require('./containers/minesweeper_000_.coffee')
+
+    window.svg1 = ->
+        svg
+            width: '100%'
+            height: '100%'
+            ,
+            arguments
+
+    window.top_nav_000_container = React.createFactory require('./containers/top_nav_000_.coffee')
+
+
     home = React.createFactory require('./containers/home_000_.coffee')
     about = React.createFactory require('./containers/about_000_.coffee')
-    blog = React.createFactory require('./containers/blog_000_.coffee')
-    terraforming = React.createFactory require('./containers/blog/terraforming_000_.coffee')
-    ai_coltrane = React.createFactory require('./containers/blog/AI_Coltrane_.coffee')
+
+
+    window.portfolio = require './components/professional/portfolio_000_.coffee'
+    professional = React.createFactory require('./containers/professional_000_.coffee')
+    amateur = React.createFactory require('./containers/amateur_000_.coffee')
+
+    # blog = React.createFactory require('./containers/blog_000_.coffee')
+    window.terraforming = require './components/amateur/blog/terraforming_000_.coffee'
+    terraforming_container = React.createFactory require('./containers/amateur/blog/terraforming_000_.coffee')
+
+    window.ai_coltrane = require './components/amateur/blog/AI_Coltrane_.coffee'
+    ai_coltrane_container = React.createFactory require('./containers/amateur/blog/AI_Coltrane_.coffee')
     index = rr
         render: ->
             Provider
@@ -78,18 +108,33 @@ window.onload = =>
                     Route
                         path: '/'
                         component: home
+
+
                     Route
                         path: '/about'
                         component: about
+
+
+
                     Route
-                        path: '/blog'
-                        component: blog
+                        path: '/professional'
+                        component: professional
                     Route
-                        path: '/blog/terraforming'
-                        component: terraforming
+                        path: 'professional/portfolio'
+
+
+
+
                     Route
-                        path: '/blog/ai_coltrane'
-                        component: ai_coltrane
+                        path: '/amateur'
+                        component: amateur
+                    Route
+                        path: 'amateur/blog/terraforming'
+                        component: terraforming_container
+                    Route
+                        path: 'amateur/blog/ai_coltrane'
+                        component: ai_coltrane_container
+
 
 
     React_DOM.render index(), root

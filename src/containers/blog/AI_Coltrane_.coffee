@@ -1,11 +1,7 @@
 
-{_, c, gl_mat, mat3} = require('../../boilerplate.coffee')
 
-{ connect } = require 'react-redux'
+ai_coltrane = require '../../../components/amateur/blog/AI_Coltrane_.coffee'
 
-ai_coltrane = require '../../components/blog/AI_Coltrane_.coffee'
-
-# { nav_home, nav_about } = require '../actions/proto_001_.coffee'
 
 map_state_to_props_000 = (state, own_props) ->
     width = state.get 'viewport_width'

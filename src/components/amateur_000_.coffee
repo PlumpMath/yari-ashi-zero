@@ -1,8 +1,9 @@
 
-top_nav = React.createFactory require('../containers/top_nav_000_.coffee')
 
-module.exports = about = rr
+module.exports = amateur = rr
 
+    # getInitialState: ->
+        # return {}
     render: ->
         main1 =
             style:
@@ -11,14 +12,14 @@ module.exports = about = rr
             width: '100%'
             height: '100%'
         ,
-            top_nav()
+            top_nav_000_container()
             # text
             #     x: '6%'
             #     y: '24%'
-            #     fontSize: .06 * @props.height
+            #     fontSize: .03 * @props.height
             #     fill: 'darkgrey'
             #     ,
-            #     "bloggish"
+            #     "Amateur"
             foreignObject
                 x: '6%'
                 y: '14%'
@@ -42,13 +43,13 @@ Ideas page.  Idea for algorithmic music improvisation AI taking 'inspiration' in
                     li
                         style:
                             cursor: 'pointer'
-                        onClick: -> browserHistory.push '/blog/terraforming'
+                        onClick: -> browserHistory.push 'amateur/blog/terraforming'
                         ,
                         "Terraforming ideas"
                     li
                         style:
                             cursor: 'pointer'
-                        onClick: -> browserHistory.push '/blog/ai_coltrane'
+                        onClick: -> browserHistory.push '/amateur/blog/ai_coltrane'
                     ,
                     "Algorithmic composition"
                 p

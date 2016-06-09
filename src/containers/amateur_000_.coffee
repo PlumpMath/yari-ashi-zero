@@ -1,13 +1,11 @@
 
-{_, c, gl_mat, mat3} = require('../../boilerplate.coffee')
 
 { connect } = require 'react-redux'
 
-terraforming = require '../../components/blog/terraforming_000_.coffee'
+# proto_comp = require '../components/proto_comp_000_.coffee'
+amateur = require '../components/amateur_000_.coffee'
 
-# { nav_home, nav_about } = require '../actions/proto_001_.coffee'
-
-map_state_to_props_000 = (state, own_props) ->
+mapStateToProps = (state, ownProps) ->
     width = state.get 'viewport_width'
     height = state.get 'viewport_height'
 
@@ -36,7 +34,9 @@ map_state_to_props_000 = (state, own_props) ->
 
     return arq
 
-map_dispatch_to_props_000 = (dispatch, own_props) ->
-    return {}
+mapDispatchToProps = (dispatch, ownProps) ->
+    return {
 
-module.exports = blog_container = connect(map_state_to_props_000, map_dispatch_to_props_000)(terraforming)
+    }
+
+module.exports = amateur_container = connect(mapStateToProps, mapDispatchToProps)(amateur)
