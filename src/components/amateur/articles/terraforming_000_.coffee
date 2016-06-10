@@ -1,7 +1,4 @@
-
-
-module.exports = boilerplate = rr
-
+module.exports = terraforming = rr
     render: ->
         main1 =
             style:
@@ -27,7 +24,11 @@ module.exports = boilerplate = rr
                 #     background: 'blue'
                 ,
 
-                h3 main1, "terraforming"
+                h3 main1, "terraforming earth"
+                p main1,
+                    "
+tags: 'Turning the Sahara desert into a golf course.', inhabiting Antarctica, applications of megascale electrical power capacity
+                    "
 
                 p main1,
 

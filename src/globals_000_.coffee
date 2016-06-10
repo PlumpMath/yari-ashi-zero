@@ -46,3 +46,7 @@ window.svg1 = ->
         height: '100%'
         ,
         arguments
+
+window.generic_container = require('./containers/generic_000_.coffee')
+window.rc = -> React.createFactory.apply(React, arguments)
+window.rc_generic = -> React.createFactory(generic_container.apply(generic_container, arguments))

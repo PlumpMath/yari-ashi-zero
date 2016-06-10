@@ -1,6 +1,6 @@
 module.exports = portfolio = rr
     getInitialState: ->
-        image_001: '/dev_assets/images/minesweeper_image_000.png'
+        image_001: '/images/minesweeper_image_000.png'
         # if env is 'development'
         #     minesweeper_images =
         #         image_001: '/dev_assets/images/minesweeper_image_000.png'

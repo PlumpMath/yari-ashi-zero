@@ -4,26 +4,27 @@ express = require 'express'
 app = express()
 body_parser = require 'body-parser'
 path = require 'path'
-public_dir = __dirname + '/build'
-app.use(body_parser.json())
+public_dir = __dirname + '/public'
+# app.use(body_parser.json())
 
 if process.env.NODE_ENV is 'production'
     index = '/prod_index.html'
 else
     index = '/dev_index.html'
 
-app.get '/', (req, res) ->
-    res.sendFile(path.join(public_dir, index))
-app.get '/about', (req, res) ->
-    res.sendFile(path.join(public_dir, index))
-app.get '/professional', (req, res) ->
-    res.sendFile(path.join(public_dir, index))
-app.get '/amateur', (req, res) ->
-    res.sendFile(path.join(public_dir, index))
-app.get '/amateur/blog/ai_coltrane', (req, res) ->
-    res.sendFile(path.join(public_dir, index))
-app.get '/amateur/blog/terraforming', (req, res) ->
-    res.sendFile(path.join(public_dir, index))
+
+# app.use '/js', path.join(public_dir, '/js')
+
+app.use '/js', express.static(path.join(public_dir, '/js'))
+
+app.use '/images', express.static(path.join(public_dir, '/images'))
+
+
+app.use '/svgs', express.static(path.join(public_dir, '/svgs'))
+
+app.all '/*', (req, res, next) ->
+    res.sendFile path.join(public_dir, index)
+
 
 
 

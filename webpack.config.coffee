@@ -37,7 +37,7 @@ module.exports = config =
         "react-dom": "ReactDOM"
     output:
         path: __dirname
-        filename: "build/app.js"
+        filename: "public/js/app.js"
 
     plugins: [
         new webpack.DefinePlugin
