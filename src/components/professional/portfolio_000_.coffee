@@ -26,13 +26,13 @@ module.exports = portfolio = rr
                 ,
                 image
                     x: .2 * @props.width
-                    y: .2 * @props.height
+                    y: .6 * @props.height
                     width: .2 * @props.width
                     height: .2 * @props.height
                     xlinkHref: @state.image_001
                 text
                     x: .2 * @props.width
-                    y: (.4 * @props.height)
+                    y: (.8 * @props.height)
                     fill: 'white'
                     ,
                     "MineSweeper"

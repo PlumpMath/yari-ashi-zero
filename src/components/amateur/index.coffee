@@ -75,11 +75,11 @@ etymology of the word 'amateur',
                         "
                     p null,
                         "
-cultural, philosophical, political, scientific, artistic commentary & work
+cultural, philosophical, political, scientific, artistic commentary & work, artwork, eventually recordings,
                         "
                     p null,
                         "
-initially sections could include 'articles', 'work'
+initially sections could include 'articles', 'literary-work', 'multi-media work', 'music'
                         "
 
                     h4 main1, "ttd: articles to write"

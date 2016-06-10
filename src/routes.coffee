@@ -9,7 +9,7 @@ Route = React.createFactory _Route
 window.top_nav_000_container = rc_generic(require('./components/top_nav_000_.coffee'))
 home = rc_generic(require('./components/home_000_.coffee'))
 about = rc_generic(require('./components/about_000_.coffee'))
-professional = rc_generic(require('./components/professional_000_.coffee'))
+professional = rc_generic(require('./components/professional/index.coffee'))
 amateur = rc_generic(require('./components/amateur/index.coffee'))
 
 terraforming = rc_generic(require('./components/amateur/articles/terraforming_000_.coffee'))
