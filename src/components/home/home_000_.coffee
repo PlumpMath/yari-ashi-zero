@@ -1,4 +1,5 @@
-home_mid_nav_000_container = rc_generic(require('./home/home_mid_nav_000_.coffee'))
+# home_mid_nav_000_container = rc_generic(require('./home_mid_nav_000_.coffee'))
+home_top_nav = rc_generic(require('./home_top_nav_001_.coffee'))
 
 module.exports = home = rr
     # TODO
@@ -111,7 +112,8 @@ module.exports = home = rr
                         fontFamily: 'Sans'
                     ,
                     "#{@state.greeting} what would you like to accomplish today ?\n #{@state.thoughts}"
-            top_nav_000_container()
+            home_top_nav()
+            # top_nav_000_container()
             # home_mid_nav_000_container()
                 # textArea
                 #     id: 'text_entry'

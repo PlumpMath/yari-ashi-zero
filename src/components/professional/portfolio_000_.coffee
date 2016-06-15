@@ -21,7 +21,7 @@ module.exports = portfolio = rr
                 fill: 'red'
                 opacity: .34
             a
-                xlinkHref: "https://github.com/kulicuu/MineSweeper"
+                xlinkHref: "http://minesweeper-svg.herokuapp.com/"
                 xlinkShow: 'new'
                 ,
                 image
@@ -35,16 +35,22 @@ module.exports = portfolio = rr
                     y: (.8 * @props.height)
                     fill: 'white'
                     ,
-                    "MineSweeper"
+                    "play MineSweeper"
+            a
+                xlinkHref: "https://github.com/kulicuu/MineSweeper"
+                xlinkShow: 'new'
+                ,
+                text
+                    x: .2 * @props.width
+                    y: .9 * @props.height
+                    fill: 'white'
+                    ,
+                    "source code at github"
 
 
-            rect
-                x: '20%'
-                y: '80%'
-                width: '10%'
-                height: '10%'
-                fill: 'blue'
-                opacity: .34
+
+
+
 
 
 

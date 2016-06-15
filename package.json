@@ -10,14 +10,9 @@
         "immutable": "latest",
         "keymirror": "latest",
         "lodash": "latest",
-        "primus": "latest",
-        "superagent": "latest",
         "shortid": "latest",
         "node-uuid": "latest",
         "normalizr": "latest",
-        "less": "^2.5.3",
-        "less-loader": "^2.2.1",
-        "react-fontawesome": "latest",
         "react": "15.1.0",
         "react-addons-pure-render-mixin": "latest",
         "react-dom": "15.1.0",
@@ -28,13 +23,12 @@
         "redux-immutable": "latest",
         "redux-logger": "latest",
         "redux-promise": "latest",
-        "redux-saga": "latest",
         "redux-thunk": "latest",
         "source-map-loader": "latest",
-        "style-loader": "^0.13.0",
-        "ws": "latest"
+        "superagent": "latest"
     },
     "devDependencies": {
-        "chai": "latest"
+        "chai": "latest",
+        "webpack": "latest"
     }
 }

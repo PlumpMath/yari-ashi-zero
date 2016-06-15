@@ -32,7 +32,7 @@ app.all '/*', (req, res, next) ->
 
 
 app.use(express.static(public_dir))
-port = process.env.PORT or 3000
+port = process.env.PORT or 3333
 
 app.listen port, ->
     c 'server listening on ', port
