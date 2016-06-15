@@ -1,3 +1,4 @@
+{ DEFAULT_THEME, LIGHT_THEME } = require '../../constants/theme_changes_.coffee'
 module.exports = nav_bar_top = rr
     render: ->
         tMat = @props.t_mat
@@ -5,114 +6,69 @@ module.exports = nav_bar_top = rr
         font_size = nav_bar_height * .38
         text_y = (nav_bar_height * .5) + (.5 * font_size)
         height = @props.height
-        svg
-            width: '100%'
-            height: '100%'
-        ,
-            rect
+        bars_glyph = switch @props.theme
+            when DEFAULT_THEME
+                'svgs/white/bars.svg'
+            when LIGHT_THEME
+                'svgs/black/bars.svg'
+        svg1(
+
+            image
                 x: '0%'
                 y: '0%'
-                width: '25%'
-                height: nav_bar_height
-                fill: 'white'
-                # stroke: 'black'
-                opacity: if @props.location is '/' then .7 else .2
-                cursor: 'pointer'
-                onClick:-> browserHistory.push '/'
-                # onClick: @props.on_home_click
-                ,
+                width: .05 * @props.height
+                height: .05 * @props.height
+                xlinkHref: bars_glyph
+
             text
-                x: @props.width * .095
-                y: '0%'
+                x: @props.width * .05
+                y: '4%'
                 'font-family': 'Sans'
                 fontSize: font_size
                 textLength: @props.width * .06
-                fill: 'grey'
+                fill: 'white'
                 cursor: 'pointer'
                 onClick:-> browserHistory.push '/'
                 ,
-                "HOME"
-            rect
-                x: '25%'
-                y: '0%'
-                width: '25%'
-                height: nav_bar_height
-                fill: 'white'
-                # stroke: 'black'
-                opacity: if @props.location is '/about' then .7 else .2
-                cursor: 'pointer'
-                onClick:-> browserHistory.push '/about'
-                # onClick: @props.on_about_click
+                "blog"
             text
-                x: @props.width * .25 + @props.width * .095
-                y: nav_bar_height + text_y
+                x: @props.width * .2
+                y: '4%'
                 'font-family': 'Sans'
                 fontSize: font_size
                 textLength: @props.width * .06
-                fill: 'grey'
-                cursor: 'pointer'
-                onClick:-> browserHistory.push '/about'
-                ,
-                "ABOUT"
-            rect
-                x: '50%'
-                y: nav_bar_height
-                width: '25%'
-                height: nav_bar_height
                 fill: 'white'
-                # stroke: 'black'
-                opacity: if @props.location is '/professional' then .7 else .2
                 cursor: 'pointer'
-                onClick:-> browserHistory.push '/professional'
+                onClick:-> browserHistory.push '/'
+                ,
+                "articles"
             text
-                x: @props.width * .5 + @props.width * .045
-                y: nav_bar_height + text_y
+                x: @props.width * .35
+                y: '4%'
                 'font-family': 'Sans'
                 fontSize: font_size
-                textLength: @props.width * .16
-                fill: 'grey'
-                cursor: 'pointer'
-                onClick:-> browserHistory.push '/professional'
-                ,
-                "PROFESSIONAL"
-            rect
-                x: '75%'
-                y: nav_bar_height
-                width: '25%'
-                height: nav_bar_height
+                textLength: @props.width * .06
                 fill: 'white'
-                # stroke: 'black'
                 cursor: 'pointer'
-                opacity: if @props.location is '/amateur' then .7 else .2
-                onClick:-> browserHistory.push '/amateur'
+                onClick:-> browserHistory.push '/'
                 ,
+                "portfolio"
             text
-                x: @props.width * .75 + @props.width * .075
-                y: nav_bar_height + text_y
+                x: @props.width * .55
+                y: '4%'
                 'font-family': 'Sans'
                 fontSize: font_size
-                textLength: @props.width * .1
-                fill: 'grey'
+                textLength: @props.width * .12
+                fill: 'white'
                 cursor: 'pointer'
-                onClick:-> browserHistory.push '/amateur'
+                onClick:-> browserHistory.push '/'
                 ,
-                "AMATEUR"
-            # j_Mat = [
-            #     .2, 0, 0,
-            #     0, .1, 0,
-            #     .6 * @props.width, 0, 1
-            # ]
-            # kMat = mat3.multiply mat3.create(), j_Mat, @props.t_mat
-            # button_000
-            #     tMat: kMat
-            #     show_dropdown: => @setState {show_dropdown_0: true}
-            #     hide_dropdown: => @setState {show_dropdown_0: false}
-            # j_Mat_0 = [
-            #     .2, 0, 0,
-            #     0, .1, 0,
-            #     .6 * @props.width, .1 * @props.height, 1
-            # ]
-            # if @state.show_dropdown_0
-            #     kMat_0 = mat3.multiply mat3.create(), j_Mat_0, @props.t_mat
-            #     dropdown_000
-            #         tMat: kMat_0
+                "home / about / profile"
+
+
+
+
+
+
+
+        )#-----------------------------------------------------------------------------------------------

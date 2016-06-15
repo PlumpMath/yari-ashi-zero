@@ -1,4 +1,4 @@
-module.exports = nav_bar_top = rr
+module.exports = nav_bar_mid = rr
     render: ->
         tMat = @props.t_mat
         nav_bar_height = @props.height * .05

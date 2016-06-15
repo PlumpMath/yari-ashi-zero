@@ -9,7 +9,7 @@ Immutable = require 'immutable'
 
 { syncHistoryWithStore } = require 'react-router-redux'
 
-
+{ DEFAULT_THEME } = require './constants/theme_changes_.coffee'
 
 { set_bounding_rect } = require './actions/bounding_client_rect_.coffee'
 
@@ -17,6 +17,7 @@ window.onload = =>
     { width, height } = root.getBoundingClientRect()
 
     initial_state = Immutable.Map
+        theme: DEFAULT_THEME
         routing: '/'
         # ui_state: HOME
         viewport_width: width

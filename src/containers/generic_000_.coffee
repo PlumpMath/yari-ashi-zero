@@ -1,4 +1,6 @@
 
+{ change_to_default_theme, change_to_light_theme } = require '../actions/theme_changes_000_.coffee'
+
 mapStateToProps = (state, ownProps) ->
     width = state.get 'viewport_width'
     height = state.get 'viewport_height'
@@ -19,6 +21,7 @@ mapStateToProps = (state, ownProps) ->
     ]
 
     #return
+    theme: state.get 'theme'
     location: state.get('routing').locationBeforeTransitions.pathname
     orientation: orientation
     larger: larger
@@ -28,6 +31,12 @@ mapStateToProps = (state, ownProps) ->
     t_mat: transform_matrix
 
 mapDispatchToProps = (dispatch, ownProps) ->
-    return {}
+    return {
+        change_to_default_theme: -> dispatch(change_to_default_theme())
+        change_to_light_theme: -> dispatch(change_to_light_theme())
+
+    }
+
+
 
 module.exports = (component) -> connect(mapStateToProps, mapDispatchToProps)(component)
