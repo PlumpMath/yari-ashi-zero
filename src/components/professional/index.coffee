@@ -1,6 +1,6 @@
 portfolio = require('./portfolio_000_.coffee')
 top_nav = rc_generic(require('./top_nav_001_.coffee'))
-bars_nav = rc_generic(require('./bars_nav_000_.coffee'))
+# bars_nav = rc_generic(require('./bars_nav_000_.coffee'))
 # lights_themes = rc_generic(require('../shared/lights_themes_000_.coffee'))
 module.exports = professional = rr
     getInitialState: ->
