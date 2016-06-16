@@ -11,6 +11,8 @@ home = rc_generic(require('./components/home/home_000_.coffee'))
 # home_001 = rc_generic(require('./components_home_001_.coffee'))
 about = rc_generic(require('./components/about_000_.coffee'))
 professional = rc_generic(require('./components/professional/index.coffee'))
+professional_blog = rc_generic(require('./components/professional/blog/index.coffee'))
+professional_portfolio = rc_generic(require('./components/professional/portfolio/index.coffee'))
 amateur = rc_generic(require('./components/amateur/index.coffee'))
 
 terraforming = rc_generic(require('./components/amateur/articles/terraforming_000_.coffee'))
@@ -40,6 +42,14 @@ module.exports = index = ({store, history})->
                     Route
                         path: '/professional'
                         component: professional
+
+                    Route
+                        path: '/professional/blog'
+                        component: professional_blog
+
+                    Route
+                        path: '/professional/portfolio'
+                        component: professional_portfolio
                     # Route
                     #     path: 'professional/portfolio'
 

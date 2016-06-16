@@ -12,7 +12,9 @@ module.exports = amateur = rr
             style:
                 cursor: 'pointer'
             onClick: -> browserHistory.push src
-        svg1(
+        svg
+            width: '100%'
+            height: '300%'
             defs
                 filter
                     id: filter_000
@@ -52,16 +54,24 @@ module.exports = amateur = rr
             #     fill: 'darkgrey'
             #     ,
             #     "Amateur"
+            rect
+                x: 0
+                y: 0
+                width: '100%'
+                height: '100%'
+                fill: 'black'
             foreignObject
                 x: '6%'
-                y: '14%'
+                y: '4%'
                 width: '80%'
-                height: '60%'
+                height: '300%'
+                style: overflow: 'auto'
                 # style:
                 #     background: 'blue'
                 ,
                 div
                     style:
+                        # overflow: 'auto'
                         color: 'grey'
                     ,
                     h4 main1, "amateur section home"
@@ -81,6 +91,10 @@ cultural, philosophical, political, scientific, artistic commentary & work, artw
                         "
 initially sections could include 'articles', 'literary-work', 'multi-media work', 'music'
                         "
+                    h4 main1, "drafts already"
+                    ol main1,
+                        li ln1('/amateur/articles/terraforming'), "Terraforming ideas"
+                        li ln1('/amateur/articles/ai_coltrane'), "Algorithmic composition"
 
                     h4 main1, "ttd: articles to write"
                     ul main1,
@@ -104,16 +118,13 @@ initially sections could include 'articles', 'literary-work', 'multi-media work'
                         li null, "modern russian culture, demographic characteristics, national security, eastern development"
                         li null, "learning about eastern orthodox christianity, making peace with my maternal family's evangelical protestantism, contemplating its admixture with prechristian (but very western) cultural dynamics"
                         li null, "nietzche, deleuze"
-                    h4 main1, "some drafts already"
-                    ul main1,
-                        li ln1('/amateur/articles/terraforming'), "Terraforming ideas"
-                        li ln1('/amateur/articles/ai_coltrane'), "Algorithmic composition"
+#                         p null, "
+# santhustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchut
+#
 
 
 
 
 
 
-
-
-        )
+                        # "

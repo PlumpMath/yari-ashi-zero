@@ -5,6 +5,7 @@ module.exports = bars_nav = rr
 
     getInitialState: ->
         tooltip_lights: false
+        tooltip_home: false
 
 
     render: ->
@@ -20,9 +21,15 @@ module.exports = bars_nav = rr
 
         sun_glyph = switch @props.theme
             when DEFAULT_THEME
-                'svgs/white/sun-o.svg'
+                '/svgs/white/sun-o.svg'
             when LIGHT_THEME
-                'svgs/black/sun-o.svg'
+                '/svgs/black/sun-o.svg'
+
+        home_glyph = switch @props.theme
+            when DEFAULT_THEME
+                '/svgs/white/home.svg'
+            when LIGHT_THEME
+                '/svgs/black/home.svg'
 
         setter = switch @props.theme
             when DEFAULT_THEME
@@ -38,6 +45,10 @@ module.exports = bars_nav = rr
         sun_place =
             x: 92
             y: 13
+
+        home_place =
+            x: 92
+            y: 23
 
         svg1(
 
@@ -67,6 +78,7 @@ module.exports = bars_nav = rr
                 height: .05 * @props.height
                 xlinkHref: sun_glyph
                 onClick: setter
+                style: cursor: 'pointer'
                 onMouseOver: => @setState tooltip_lights: true
                 onMouseOut: => @setState tooltip_lights: false
             if @state.tooltip_lights is true
@@ -86,10 +98,49 @@ module.exports = bars_nav = rr
                         fill: 'magenta'
                         ,
                         "themes"
-
-
                 )
 
+            image
+                x: "#{home_place.x}%"
+                y: "#{home_place.y}%"
+                width: .05 * @props.height
+                height: .05 * @props.height
+                xlinkHref: home_glyph
+                style: cursor: 'pointer'
+                onClick: -> browserHistory.push '/'
+                onMouseOver: => @setState tooltip_home: true
+                onMouseOut: => @setState tooltip_home: false
+            if @state.tooltip_home is true
+                svg1(
+                    rect
+                        x: "#{home_place.x}%"
+                        y: "#{home_place.y - 4}%"
+                        width: '6%'
+                        height: '4%'
+                        fill: 'yellow'
+                        opacity: '.7'
+                    text
+                        x: "#{home_place.x}%"
+                        y: "#{home_place.y - 2}%"
+                        textLength: '5%'
+                        fontSize: .8 * font_size
+                        fill: 'magenta'
+                        ,
+                        "site home"
+                )
+
+            text
+                x: '90.8%'
+                y: '36%'
+                textLength: '8.6%'
+                fill: text_color
+                cursor: 'pointer'
+
+                fontSize: font_size
+
+
+                ,
+                "site home"
 
             text
                 x: '90.8%'
