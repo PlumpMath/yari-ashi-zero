@@ -6,6 +6,7 @@ module.exports = bars_nav = rr
     getInitialState: ->
         tooltip_lights: false
         tooltip_home: false
+        about_site: false
 
 
     render: ->
@@ -141,19 +142,41 @@ module.exports = bars_nav = rr
 
                 ,
                 "site home"
-
-            text
-                x: '90.8%'
-                y: '40%'
-                textLength: '8.6%'
-                fill: text_color
+            rect
+                x: '90%'
+                y: '38%'
+                width: '10%'
+                height: '3.6%'
+                fill: 'red'
                 cursor: 'pointer'
-
-                fontSize: font_size
-
-
+                opacity: 0
+                onClick: => @setState about_site: true
+            text {x: '90.8%', y: '40%', textLength: '8.6%', fill: text_color, cursor: 'pointer', fontSize: font_size, onClick: => @setState({about_site: true})}
                 ,
                 "about site"
+            if @state.about_site is true
+                svg
+                    width: '100%'
+                    height: '100%'
+                    ,
+                    g
+                        onMouseLeave: => @setState about_site: false
+                        ,
+                        rect {x: '60%', y: '32%', width: '40%', height: '40%', fill: 'white'}
+                        text {x: '62%', y: '44%', fontSize: .027 * @props.height, fill: 'grey'},
+                            "Site is deployed to Heroku."
+
+                        a
+                            xlinkHref: 'https://github.com/kulicuu/yari-ashi-zero'
+                            xlinkShow: 'new'
+                            ,
+                            text { x: '62%', y: '48%', fontSize: .03 * @props.height, fill: 'grey'}
+                                ,
+                                'Site source code at github'
+
+
+
+
 
             text
                 x: '90.8%'

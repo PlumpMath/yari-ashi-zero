@@ -3,10 +3,13 @@ module.exports = AI_Coltrane = rr
         main1 =
             style:
                 color: 'grey'
-        svg
-            width: '100%'
-            height: '100%'
-        ,
+        svg1(
+            rect
+                x: 0
+                y: 0
+                width: '100%'
+                height: "#{Math.pow(window.devicePixelRatio, 1.4) * 99.4}%"
+                fill: 'black'
             top_nav_000_container()
             # text
             #     x: '6%'
@@ -21,14 +24,14 @@ module.exports = AI_Coltrane = rr
                 width: '100%'
                 height: '80%'
                 overflow: 'auto'
-                style:
-                    overflow: 'auto'
+                # style:
+                #     overflow: 'auto'
                 #     background: 'blue'
                 ,
                 div
                     style:
                         height: '100%'
-                        overflow: 'auto'
+                        # overflow: 'auto'
                     ,
 
                     h3 main1, "inducing synaesthesia with AI composition/improvisation tied to sensor data flows"
@@ -83,3 +86,9 @@ module.exports = AI_Coltrane = rr
                             "
             (In ~April 2001, living in Tempe AZ, this idea occured to me.  In ~2008-2009 while at UMass Boston I was able to do an independent study to flesh out the idea a little bit. I wasn't able to do much with it.)
                             "
+
+
+
+
+
+        )

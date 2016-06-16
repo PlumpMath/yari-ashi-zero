@@ -65,13 +65,20 @@ module.exports = amateur = rr
                 y: '4%'
                 width: '80%'
                 height: '300%'
-                style: overflow: 'auto'
+                # style: overflow: 'auto'
                 # style:
                 #     background: 'blue'
                 ,
                 div
                     style:
-                        # overflow: 'auto'
+                        # overflow: 'auto'-
+
+                        'scrollbar3dlightColor': 'gold'
+                        'scrollbarArrowColor': 'black'
+                        # scrollbar-base-color:;
+                        'scrollbarDarkshadowColor':'black'
+                        # scrollbar-face-color:;
+                        # scrollbar-highlight-color:;
                         color: 'grey'
                     ,
                     h4 main1, "amateur section home"
@@ -118,9 +125,7 @@ initially sections could include 'articles', 'literary-work', 'multi-media work'
                         li null, "modern russian culture, demographic characteristics, national security, eastern development"
                         li null, "learning about eastern orthodox christianity, making peace with my maternal family's evangelical protestantism, contemplating its admixture with prechristian (but very western) cultural dynamics"
                         li null, "nietzche, deleuze"
-#                         p null, "
-# santhustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchutsanthustnaheusntaoehu saotneuh asnoetuh aoesnuthasoez;qjwvkm,a.lrcpg eusanth4lpchut
-#
+
 
 
 

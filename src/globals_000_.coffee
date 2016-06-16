@@ -40,10 +40,15 @@ for item in ['textArea', 'filter', 'foreignObject', 'feGaussianBlur', 'feImage',
 { connect } = require 'react-redux' ; window.connect = connect
 { browserHistory } = require 'react-router' ; window.browserHistory = browserHistory
 
+
 window.svg1 = ->
     svg
         width: '100%'
-        height: '100%'
+        height: "#{Math.pow(window.devicePixelRatio, 1.5) * 99.4}%"
+        # style: fill: 'black'
+        # style:
+        #     overflow: 'hidden'
+        # overflow: 'hidden'
         ,
         arguments
 

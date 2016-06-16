@@ -14,7 +14,10 @@ Immutable = require 'immutable'
 { set_bounding_rect } = require './actions/bounding_client_rect_.coffee'
 
 window.onload = =>
-    { width, height } = root.getBoundingClientRect()
+    rectangle = root.getBoundingClientRect()
+    c 'rectangle', rectangle
+    c 'window.devicePixelRatio', window.devicePixelRatio
+    { width, height } = rectangle
 
     initial_state = Immutable.Map
         theme: DEFAULT_THEME
@@ -43,7 +46,10 @@ window.onload = =>
             if callNow then func.apply(context, args)
 
     set_boundingRect = ->
-        { width, height } = root.getBoundingClientRect()
+        rectangle = root.getBoundingClientRect()
+        c 'window.devicePixelRatio', window.devicePixelRatio
+        c 'rectangle', rectangle
+        { width, height } = rectangle
         arq =
             viewport_width: width
             viewport_height: height
