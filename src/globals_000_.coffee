@@ -50,3 +50,10 @@ window.svg1 = ->
 window.generic_container = require('./containers/generic_000_.coffee')
 window.rc = -> React.createFactory.apply(React, arguments)
 window.rc_generic = -> React.createFactory(generic_container.apply(generic_container, arguments))
+
+theme_constants = require './constants/theme_changes_.coffee'
+for k, v of theme_constants
+    window[k] = v
+
+
+window.theme_definitions = require './themes/themes_000_.coffee'

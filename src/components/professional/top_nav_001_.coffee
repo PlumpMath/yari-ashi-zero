@@ -1,6 +1,7 @@
 { DEFAULT_THEME, LIGHT_THEME } = require '../../constants/theme_changes_.coffee'
 module.exports = nav_bar_top = rr
     render: ->
+        theme = theme_definitions[@props.theme]
         tMat = @props.t_mat
         nav_bar_height = @props.height * .05
         font_size = nav_bar_height * .38
@@ -14,11 +15,12 @@ module.exports = nav_bar_top = rr
         svg1(
 
             image
-                x: '0%'
-                y: '0%'
+                x: '95%'
+                y: '2%'
                 width: .05 * @props.height
                 height: .05 * @props.height
                 xlinkHref: bars_glyph
+                onClick: @props.toggle_bars_nav
 
             text
                 x: @props.width * .05
@@ -26,7 +28,7 @@ module.exports = nav_bar_top = rr
                 'font-family': 'Sans'
                 fontSize: font_size
                 textLength: @props.width * .06
-                fill: 'white'
+                fill: theme.nav_text_color
                 cursor: 'pointer'
                 onClick:-> browserHistory.push '/'
                 ,
@@ -37,7 +39,7 @@ module.exports = nav_bar_top = rr
                 'font-family': 'Sans'
                 fontSize: font_size
                 textLength: @props.width * .06
-                fill: 'white'
+                fill: theme.nav_text_color
                 cursor: 'pointer'
                 onClick:-> browserHistory.push '/'
                 ,
@@ -48,7 +50,7 @@ module.exports = nav_bar_top = rr
                 'font-family': 'Sans'
                 fontSize: font_size
                 textLength: @props.width * .06
-                fill: 'white'
+                fill: theme.nav_text_color
                 cursor: 'pointer'
                 onClick:-> browserHistory.push '/'
                 ,
@@ -59,7 +61,7 @@ module.exports = nav_bar_top = rr
                 'font-family': 'Sans'
                 fontSize: font_size
                 textLength: @props.width * .12
-                fill: 'white'
+                fill: theme.nav_text_color
                 cursor: 'pointer'
                 onClick:-> browserHistory.push '/'
                 ,

@@ -31,6 +31,13 @@ mapStateToProps = (state, ownProps) ->
     t_mat: transform_matrix
 
 mapDispatchToProps = (dispatch, ownProps) ->
+    if ownProps.toggle_bars_nav?
+        return {
+            toggle_bars_nav: ownProps.toggle_bars_nav
+            change_to_default_theme: -> dispatch(change_to_default_theme())
+            change_to_light_theme: -> dispatch(change_to_light_theme())
+
+        }
     return {
         change_to_default_theme: -> dispatch(change_to_default_theme())
         change_to_light_theme: -> dispatch(change_to_light_theme())

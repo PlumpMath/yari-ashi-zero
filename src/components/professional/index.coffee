@@ -1,9 +1,13 @@
 portfolio = require('./portfolio_000_.coffee')
-top_nav = rc_generic(require('./professional_top_nav_001_.coffee'))
-lights_themes = rc_generic(require('../shared/lights_themes_000_.coffee'))
-theme_definitions = require '../../themes/themes_000_.coffee'
-{ DEFAULT_THEME, LIGHT_THEME } = require '../../constants/theme_changes_.coffee'
+top_nav = rc_generic(require('./top_nav_001_.coffee'))
+bars_nav = rc_generic(require('./bars_nav_000_.coffee'))
+# lights_themes = rc_generic(require('../shared/lights_themes_000_.coffee'))
 module.exports = professional = rr
+    getInitialState: ->
+        showing_bars_nav: false
+    toggle_bars_nav: ->
+        @setState
+            showing_bars_nav: not @state.showing_bars_nav
     render: ->
         theme = theme_definitions[@props.theme]
         grad_000 = shortid() ; filter_000 = shortid()
@@ -40,8 +44,10 @@ module.exports = professional = rr
             #         stop
             #             offset: '92%'
             #             stopColor: 'hsl(350, 90%, 80%)'
-            top_nav()
-            lights_themes()
+            top_nav
+                toggle_bars_nav: @toggle_bars_nav
+            # lights_themes()
+
 
             foreignObject
                 x: '10%'
@@ -76,5 +82,10 @@ module.exports = professional = rr
             #     ,
             #     "Professional"
             portfolio @props
+            if @state.showing_bars_nav
+                bars_nav
+                    height: @props.height
+                    theme: @props.theme
+                    toggle_bars_nav: @toggle_bars_nav
 
         )# --------------------------------------------------------------------------
