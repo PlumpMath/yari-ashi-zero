@@ -69,6 +69,8 @@ window.rc_generic = -> React.createFactory(generic_container.apply(generic_conta
 
 window.bars_nav = rc_generic(require('./components/shared/bars_nav_000_.coffee'))
 
+window.bars_nav_001 = rc_generic(require('./components/shared/bars_nav_001_.coffee'))
+
 theme_constants = require './constants/theme_changes_.coffee'
 for k, v of theme_constants
     window[k] = v

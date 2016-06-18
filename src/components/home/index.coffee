@@ -167,4 +167,6 @@ module.exports = home = rr
                 ,
                 " #{@state.time_hours}:#{@state.time_minutes}:#{@state.time_seconds}"
 
+            bars_nav_001()
+
         )
