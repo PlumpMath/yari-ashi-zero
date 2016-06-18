@@ -26,9 +26,6 @@ module.exports = home = rr
         , 20
 
 
-
-
-
     getInitialState: ->
         "luminosity:professional": 50
         "luminosity:amateur": 50
@@ -73,6 +70,8 @@ module.exports = home = rr
         , 50
 
     render: ->
+        space_0 = .0413
+
         text3 = (i, strang) =>
             text
                 x: "77%"
@@ -112,16 +111,16 @@ module.exports = home = rr
                 ,
                 rect
                     x: "13%"
-                    y: "31%"
+                    y: "28%"
                     width: .5 * @props.width
                     height: .1 * @props.height
                     fill: 'red'
                     opacity: 0
                     cursor: 'pointer'
                 text
-                    x: "18.323%"
-                    y: "37%"
-                    textLength: .433 * @props.width
+                    x: "15.323%"
+                    y: "34%"
+                    textLength: space_0 * 12 * @props.width
                     fontSize: .0323 * @props.height
                     fill: "url(##{grad_professional})"
                     cursor: 'pointer'
@@ -135,17 +134,17 @@ module.exports = home = rr
                 onClick:-> browserHistory.push '/amateur'
                 ,
                 rect
-                    x: "33%"
+                    x: "51%"
                     y: "47%"
-                    width: .5 * @props.width
+                    width: .3 * @props.width
                     height: .1 * @props.height
                     fill: 'red'
                     opacity: 0
                     cursor: 'pointer'
                 text
-                    x: "40%"
+                    x: "53%"
                     y: "53%"
-                    textLength: .4233 * @props.width
+                    textLength: space_0 * 7 * @props.width
                     fontSize: .0323 * @props.height
                     fill: "url(##{grad_amateur})"
                     cursor: 'pointer'

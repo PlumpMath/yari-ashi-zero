@@ -1,9 +1,17 @@
 lights_themes = rc_generic(require('../shared/lights_themes_000_.coffee'))
 theme_definitions = require '../../themes/themes_000_.coffee'
 tooltip = require './tooltip_000_.coffee'
+
 module.exports = bars_nav = rr
 
     vindaloos: {}
+
+    toggle_nav: ->
+        @setState
+            my_opacity: 1
+            nav_visible: not @state.nav_visible
+
+
 
     cancel_fade_me: ->
         clearInterval @int_2
@@ -17,9 +25,34 @@ module.exports = bars_nav = rr
                     my_opacity: @state.my_opacity - .05
             else
                 clearInterval @int_2
-                @props.toggle_bars_nav()
-        , 50
+                @toggle_nav()
+        , 20
 
+
+    onset_vindaloo_001: ({ name }) ->
+        clearInterval @vindaloos["fader_animation:#{name}"]
+        @setState
+            "visible:#{name}": true
+        @vindaloos["onset_animation:#{name}"] = setInterval =>
+            if @state["opacity:#{name}"] < 1
+                prev_state = @state["opacity:#{name}"] or 0
+                @setState
+                    "opacity:#{name}": prev_state + .05
+            else
+                clearInterval @vindaloos["onset_animation:#{name}"]
+        , 20
+
+    fader_vindaloo_001: ({ name }) ->
+        clearInterval @vindaloos["onset_animation:#{name}"]
+        @vindaloos["fader_animation:#{name}"] = setInterval =>
+            if @state["opacity:#{name}"] > 0
+                @setState
+                    "opacity:#{name}": @state["opacity:#{name}"] - .05
+            else
+                @setState
+                    "visible:#{name}": false
+                clearInterval @vindaloos["fader_animation:#{name}"]
+        , 20
 
     onset_vindaloo: ({ name }) ->
         clearInterval @vindaloos[name]
@@ -37,56 +70,50 @@ module.exports = bars_nav = rr
         , 50
 
     getInitialState: ->
+        nav_visible: false
         tooltip_lights: false
         tooltip_home: false
         about_site: false
         my_opacity: 1
+        "opacity:bars_nav": 0
+        "opacity:tooltip_lights": 0
 
 
     render: ->
-        bars_glyph = switch @props.theme
-            when DEFAULT_THEME
-                '/svgs/white/bars.svg'
-            when LIGHT_THEME
-                '/svgs/black/bars.svg'
+        sun_place =
+            x: 91
+            y: 23
 
-        c 'bars_glyph', bars_glyph
+
+
         theme = theme_definitions[@props.theme]
         font_size = .024 * @props.height
         switch @props.theme
             when DEFAULT_THEME
                 background_fill = 'white'
                 text_color = 'darkgrey'
+                home_glyph = '/svgs/white/home.svg'
+                sun_glyph =  '/svgs/black/sun-o.svg'
+
+                bars_glyph = '/svgs/white/bars.svg'
+                setter = @props.change_to_default_theme
+
             when LIGHT_THEME
                 background_fill = 'darkgrey'
                 text_color = 'white'
+                sun_glyph = '/svgs/white/sun-o.svg'
+                home_glyph = '/svgs/black/home.svg'
+                bars_glyph = '/svgs/black/bars.svg'
+                setter = @props.change_to_light_theme
 
-        sun_glyph = switch @props.theme
-            when DEFAULT_THEME
-                '/svgs/white/sun-o.svg'
-            when LIGHT_THEME
-                '/svgs/black/sun-o.svg'
 
-        home_glyph = switch @props.theme
-            when DEFAULT_THEME
-                '/svgs/white/home.svg'
-            when LIGHT_THEME
-                '/svgs/black/home.svg'
-
-        setter = switch @props.theme
-            when DEFAULT_THEME
-                @props.change_to_light_theme
-            when LIGHT_THEME
-                @props.change_to_default_theme
 
 
 
         tMat = @props.t_mat
         height = @props.height
 
-        sun_place =
-            x: 92
-            y: 13
+
 
         home_place =
             x: 92
@@ -100,16 +127,60 @@ module.exports = bars_nav = rr
                 width: .06 * @props.height
                 height: .06 * @props.height
                 xlinkHref: bars_glyph
+                # onClick: -> @onset_vindaloo_001 "bars_nav"
+                onMouseOver: => @onset_vindaloo_001 name: "bars_nav"
+                onMouseLeave: => @fader_vindaloo_001(name: "bars_nav")
 
-                # onClick: @props.toggle_bars_nav
 
-            image
-                x: '94%'
-                y: '13%'
-                style: cursor: 'pointer'
-                width: .06 * @props.height
-                height: .06 * @props.height
-                xlinkHref: sun_glyph
+
+
+            if @state["visible:bars_nav"]
+                g
+                    onMouseLeave: => @fader_vindaloo_001(name: "bars_nav")
+                    opacity: @state["opacity:bars_nav"]
+                    onMouseEnter: => @onset_vindaloo_001(name: "bars_nav")
+                    ,
+                    rect
+                        x: '90%'
+                        y: '10%'
+                        width: '10%'
+                        height: '80%'
+                        fill: background_fill
+                        opacity: .8
+                        cursor: 'pointer'
+
+
+                    image
+                        x: "#{sun_place.x}%"
+                        y: "#{sun_place.y}%"
+                        style: cursor: 'pointer'
+                        width: .03 * @props.height
+                        height: .03 * @props.height
+                        xlinkHref: sun_glyph
+                        onMouseOver: => @onset_vindaloo_001 name: "tooltip_lights"
+                        onMouseOut: => @fader_vindaloo_001 name: "tooltip_lights"
+                    if @state["visible:tooltip_lights"] is true
+
+                        # tooltip_000
+                        #     opacity: @state["opacity:tooltip_lights"]
+                        #     height: @props.height
+                        #     x: sun_place.x
+                        #     y: sun_place.y
+                        #     font_size: .014 * @props.height
+                        #     tip_string: 'CHANGE THEME'
+
+                        theme_chooser_000
+                            opacity: @state["opacity:tooltip_lights"]
+                            height: @props.height
+                            x: sun_place.x
+                            y: sun_place.y
+                            font_size: .014 * @props.height
+                            # tip_string: 'CHANGE THEME'
+                            mouse_over: => @onset_vindaloo_001 name: "tooltip_lights"
+                            mouse_out: => @fader_vindaloo_001 name: "tooltip_lights"
+
+                # onBlur: @props.toggle_bars_nav
+
 
 
         )
@@ -139,10 +210,10 @@ module.exports = bars_nav = rr
         #         xlinkHref: sun_glyph
         #         onClick: setter
         #         style: cursor: 'pointer'
-        #         onMouseOver: => @onset_vindaloo name: "tooltip_lights"
-        #         onMouseOut: => @fader_vindaloo name: "tooltip_lights"
-        #     if @state.tooltip_lights is true
-        #         tooltip {opacity: @state["opacitytooltip_lights"], x: sun_place.x, y: sun_place.y, font_size, tip_string: 'CHANGE THEME'}
+            #     onMouseOver: => @onset_vindaloo name: "tooltip_lights"
+            #     onMouseOut: => @fader_vindaloo name: "tooltip_lights"
+            # if @state.tooltip_lights is true
+            #     tooltip {opacity: @state["opacitytooltip_lights"], x: sun_place.x, y: sun_place.y, font_size, tip_string: 'CHANGE THEME'}
         #
         #     image
         #         x: "#{home_place.x}%"

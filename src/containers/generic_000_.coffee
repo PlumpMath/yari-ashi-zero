@@ -35,8 +35,11 @@ mapDispatchToProps = (dispatch, ownProps) ->
         change_to_default_theme: -> dispatch(change_to_default_theme())
         change_to_light_theme: -> dispatch(change_to_light_theme())
     }
-    if ownProps.toggle_bars_nav?
-        _.assign props, { toggle_bars_nav: ownProps.toggle_bars_nav }
+    # if ownProps.mouse_over?
+    #     _.assign props, {mouse_over: ownProps.mouse_over}
+    # if ownProps.toggle_bars_nav?
+    #     _.assign props, { toggle_bars_nav: ownProps.toggle_bars_nav }
+    _.assign props, ownProps
 
     return props
 
