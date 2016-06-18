@@ -86,9 +86,6 @@ module.exports = bars_nav = rr
             y: 23
 
         svg1
-
-
-
         g {onMouseLeave: @fade_me, opacity: @state.my_opacity, onMouseEnter: @cancel_fade_me},
             rect
                 x: '90%'

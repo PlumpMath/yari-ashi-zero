@@ -2,38 +2,44 @@
 home_top_nav = rc_generic(require('./home_top_nav_001_.coffee'))
 
 module.exports = home = rr
-    # TODO
-    # move the timekeep stuff and similar out to index, and
-    # then move it out again to factored out module
-    # then move it out from there into a webworker
-    componentWillUnmount: ->
-        clearInterval @keeper_interval
-        clearInterval @keeper_interval_2
+    vindaloos: {}
 
-    componentWillMount: ->
-        @timekeep()
-        @keeper_interval = setInterval =>
-            @timekeep()
-        , 300
+    onset_vindaloo_000: ({ name }) ->
+        # clearInterval @vindaloos["onset_animation:#{name}"]
+        clearInterval @vindaloos["fader_animation:#{name}"]
+        @vindaloos["onset_animation:#{name}"] = setInterval =>
+            if @state["luminosity:#{name}"] < 100
+                @setState
+                    "luminosity:#{name}": @state["luminosity:#{name}"] + 2
+            else
+                clearInterval @vindaloos["onset_animation:#{name}"]
+        , 20
 
-    componentDidMount: ->
-        @greeting_keep()
-        @keeper_interval_2 = setInterval @greeting_keep, (60 * 1000 * 30)
+    fader_vindaloo_000: ({ name }) ->
+        clearInterval @vindaloos["onset_animation:#{name}"]
+        @vindaloos["fader_animation:#{name}"] = setInterval =>
+            if @state["luminosity:#{name}"] > 50
+                @setState
+                    "luminosity:#{name}": @state["luminosity:#{name}"] - 2
+            else
+                clearInterval @vindaloos["fader_animation:#{name}"]
+        , 20
 
-    componentWillReceiveProps: (next_props)->
-        @setState
-            M: next_props.M
 
-    greeting_keep: ->
-        if (@state.time_hours < 12) and (@state.greeting isnt "Good Morning")
-            @setState
-                greeting: "Good morning,"
-        if (@state.time_hours > 11) and (@state.time_hours < 18) and (@state.greeting isnt "Good Afternoon")
-            @setState
-                greeting: "Good afternoon,"
-        if (@state.time_hours > 17) and (@state.greeting isnt "Good Evening")
-            @setState
-                greeting: "Good evening,"
+
+
+
+    getInitialState: ->
+        "luminosity:professional": 50
+        "luminosity:amateur": 50
+        # M: @props.M
+        # image_000: "images/stock_000.jpeg"
+        # image_001: "images/stock_001.jpeg"
+        time_hours: 0
+        time_minutes: 0
+        time_seconds: 0
+        # greeting: ""
+        # thoughts: ""
 
     timekeep: ->
         now = new Date()
@@ -58,73 +64,107 @@ module.exports = home = rr
             time_minutes: minutes
             time_seconds: seconds
 
-    thoughts_take: (e) ->
-        @setState
-            thoughts: e.currentTarget.value
+    componentWillUnmount: ->
+        clearInterval @keeper_interval
 
-    getInitialState: ->
-        M: @props.M
-        image_000: "images/stock_000.jpeg"
-        image_001: "images/stock_001.jpeg"
-        time_hours: 0
-        time_minutes: 0
-        time_seconds: 0
-        greeting: ""
-        thoughts: ""
+    componentWillMount: ->
+        @keeper_interval = setInterval =>
+            @timekeep()
+        , 50
 
     render: ->
-        svg
-            width: '100%'
-            height: '100%'
-        ,
-
-            image
-                x: 0
-                y: '10%'
-                width:"100%"
-                height:"100%"
-                xlinkHref:@state.image_000
-            image
-                x: '60%'
-                y: '18%'
-                width: 100
-                height: 100
-                xlinkHref:@state.image_001
+        text3 = (i, strang) =>
             text
-                x: '40%'
-                y: '20%'
-                fill: 'white'
+                x: "77%"
+                y: "#{93 + (i * .00323 * @props.height)}%"
+                fill: 'grey'
+                fontFamily: 'Sans'
+                textLength: .211 * @props.width
+                fontSize: .01213 * @props.height
+                fill: 'lightgrey'
+                ,
+                strang
+        svg1(
+            grad_professional = shortid(); grad_amateur = shortid()
+            defs
+                linearGradient
+                    id: grad_professional
+                    stop
+                        offset: '0%'
+                        stopColor: "hsl(230, 94%, #{@state["luminosity:professional"]}%)"
+                    stop
+                        offset: '92%'
+                        stopColor: "hsl(280, 96%, #{@state["luminosity:professional"]}%)"
+                linearGradient
+                    id: grad_amateur
+                    stop
+                        offset: '0%'
+                        stopColor: "hsl(280, 96%, #{@state["luminosity:amateur"]}%)"
+                    stop
+                        offset: '92%'
+                        stopColor: "hsl(280, 96%, #{@state["luminosity:amateur"]}%)"
+
+            g
+                onMouseOver: => @onset_vindaloo_000({name: "professional"})
+                onMouseOut: => @fader_vindaloo_000({name: "professional"})
+                onClick:-> browserHistory.push '/professional'
+
+                ,
+                rect
+                    x: "13%"
+                    y: "31%"
+                    width: .5 * @props.width
+                    height: .1 * @props.height
+                    fill: 'red'
+                    opacity: 0
+                    cursor: 'pointer'
+                text
+                    x: "18.323%"
+                    y: "37%"
+                    textLength: .433 * @props.width
+                    fontSize: .0323 * @props.height
+                    fill: "url(##{grad_professional})"
+                    cursor: 'pointer'
+                    ,
+                    "professional"
+
+
+            g
+                onMouseOver: => @onset_vindaloo_000({name: "amateur"})
+                onMouseOut: => @fader_vindaloo_000({name: "amateur"})
+                onClick:-> browserHistory.push '/amateur'
+                ,
+                rect
+                    x: "33%"
+                    y: "47%"
+                    width: .5 * @props.width
+                    height: .1 * @props.height
+                    fill: 'red'
+                    opacity: 0
+                    cursor: 'pointer'
+                text
+                    x: "40%"
+                    y: "53%"
+                    textLength: .4233 * @props.width
+                    fontSize: .0323 * @props.height
+                    fill: "url(##{grad_amateur})"
+                    cursor: 'pointer'
+                    ,
+                    "amateur"
+
+
+            text3(0, "уаилий איליאוו wylie")
+            text3(1, "кулик ןמוטרח woodcock")
+            text3(2, "иегошуа עשוהי joshua")
+            text
+                x: '4%'
+                y: '97%'
+                fill: 'grey'
                 # fontStyle: 'Verdana'
-                fontFamily: 'Arial'
-                fontSize: '20px'
+                fontFamily: 'Sans'
+                textLength: .245 * @props.width
+                fontSize: .01523 * @props.height
                 ,
                 " #{@state.time_hours}:#{@state.time_minutes}:#{@state.time_seconds}"
 
-            foreignObject
-                x: '30%'
-                y: '70%'
-                width: '50%'
-                height: '40%'
-                ,
-                p
-                    style:
-                        color: 'white'
-                        fontFamily: 'Sans'
-                    ,
-                    "#{@state.greeting} what would you like to accomplish today ?\n #{@state.thoughts}"
-            home_top_nav()
-            # top_nav_000_container()
-            # home_mid_nav_000_container()
-                # textArea
-                #     id: 'text_entry'
-                #     style:
-                #         height: '100%'
-                #         width: '100%'
-                #         fontSize: '70%'
-                #         opacity: .3
-                #     onChange: @thoughts_take
-                # p
-                #     style:
-                #         color: 'white'
-                #     ,
-                #     @state.thoughts
+        )

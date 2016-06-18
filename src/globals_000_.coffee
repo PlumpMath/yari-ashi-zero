@@ -52,6 +52,17 @@ window.svg1 = ->
         ,
         arguments
 
+window.svg2 = ->
+    svg
+        width: '100%'
+        height: "#{99.4}%"
+        # style: fill: 'black'
+        # style:
+        #     overflow: 'hidden'
+        # overflow: 'hidden'
+        ,
+        arguments
+
 window.generic_container = require('./containers/generic_000_.coffee')
 window.rc = -> React.createFactory.apply(React, arguments)
 window.rc_generic = -> React.createFactory(generic_container.apply(generic_container, arguments))
