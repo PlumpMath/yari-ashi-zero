@@ -2,10 +2,9 @@
 home_top_nav = rc_generic(require('./home_top_nav_001_.coffee'))
 
 module.exports = home = rr
-    vindaloos: {}
+    vindaloos: {}  # TODO: should rename to something descriptive like intervals
 
     onset_vindaloo_000: ({ name }) ->
-        # clearInterval @vindaloos["onset_animation:#{name}"]
         clearInterval @vindaloos["fader_animation:#{name}"]
         @vindaloos["onset_animation:#{name}"] = setInterval =>
             if @state["luminosity:#{name}"] < 100
@@ -29,14 +28,10 @@ module.exports = home = rr
     getInitialState: ->
         "luminosity:professional": 50
         "luminosity:amateur": 50
-        # M: @props.M
-        # image_000: "images/stock_000.jpeg"
-        # image_001: "images/stock_001.jpeg"
         time_hours: 0
         time_minutes: 0
         time_seconds: 0
-        # greeting: ""
-        # thoughts: ""
+
 
     timekeep: ->
         now = new Date()
@@ -72,17 +67,6 @@ module.exports = home = rr
     render: ->
         space_0 = .0413
 
-        text3 = (i, strang) =>
-            text
-                x: "77%"
-                y: "#{93 + (i * .00323 * @props.height)}%"
-                fill: 'grey'
-                fontFamily: 'Sans'
-                textLength: .211 * @props.width
-                fontSize: .01213 * @props.height
-                fill: 'lightgrey'
-                ,
-                strang
         svg1(
             grad_professional = shortid(); grad_amateur = shortid()
             defs
@@ -151,10 +135,6 @@ module.exports = home = rr
                     ,
                     "amateur"
 
-
-            text3(0, "уаилий איליאוו wylie")
-            text3(1, "кулик ןמוטרח woodcock")
-            text3(2, "иегошуа עשוהי joshua")
             text
                 x: '4%'
                 y: '97%'
