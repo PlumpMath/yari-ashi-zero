@@ -10,7 +10,7 @@ home = rc_generic(require('./components/home/index.coffee'))
 professional = rc_generic(require('./components/professional/index.coffee'))
 professional_blog = rc_generic(require('./components/professional/blog/index.coffee'))
 professional_portfolio = rc_generic(require('./components/professional/portfolio/index.coffee'))
-amateur = rc_generic(require('./components/amateur/index.coffee'))
+# amateur = rc_generic(require('./components/amateur/index.coffee'))
 
 # TODO figure out a way to automate this process with an fs function and a sensible protocol
 # in other words the routes would be iterated out inside the router.
@@ -33,7 +33,7 @@ routes =
     childRoutes: [
         {path: '/', component: home},
         { path: 'professional', component: professional }
-        { path: 'amateur', component: amateur }
+        # { path: 'amateur', component: amateur }
         { path: 'professional/blog', component: professional_blog }
         { path: 'professional/articles', component: professional_articles }
         { path: 'professional/portfolio', component: professional_portfolio }
