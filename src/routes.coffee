@@ -22,19 +22,10 @@ ai_coltrane = rc_generic(require('./components/amateur/articles/AI_Coltrane_.cof
 
 
 articles_list_000 = require.context('./components/professional/blog/entries/', false, /.*/)
-# c 'articles_list', articles_list_000
-keys = articles_list_000.keys()
-# c 'keys', keys
-
-arq = {}
-
-for key in articles_list_000.keys()
-    arq[key.split('/')[1].split('.')[0]] = rc_generic(articles_list_000.resolve(key))
-
 
 entries = for key in articles_list_000.keys()
     path: "/professional/blog/entries/#{key.split('/')[1].split('.')[0]}"
-    component: rc_generic(articles_list_000(key))
+    component: rc_generic(articles_list_000(key).component)
 
 routes =
     # path: '/'
@@ -44,6 +35,8 @@ routes =
         { path: 'professional', component: professional }
         { path: 'amateur', component: amateur }
         { path: 'professional/blog', component: professional_blog }
+        { path: 'professional/articles', component: professional_articles }
+        { path: 'professional/portfolio', component: professional_portfolio }
     ]
 
 routes.childRoutes = routes.childRoutes.concat entries

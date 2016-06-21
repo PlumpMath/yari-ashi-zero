@@ -1,5 +1,13 @@
+
+exports.metadata =
+    date_created: new Date(2016, 6 - 1, 22)
+    date_updated: new Date(2016, 6 - 1, 22)
+    title: "blog entry 000"
+    preview_text: "This is a blog entry about something or other.. blah blah blah"
+    tags: ["nonsense", "dynamic routing", "other stuff"]
+
 # top_nav = rc_generic(require('../../top_nav_001_.coffee'))
-module.exports = entry = rr
+exports.component = entry = rr
     # c 'something here'
     # getInitialState: ->
     #     showing_bars_nav: false
@@ -7,7 +15,7 @@ module.exports = entry = rr
     #     @setState
     #         showing_bars_nav: not @state.showing_bars_nav
     render: ->
-        c 'rendering'
+
         # theme = theme_definitions[@props.theme]
         #
         # main1 =
