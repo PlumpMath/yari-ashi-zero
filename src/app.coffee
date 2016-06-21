@@ -2,10 +2,7 @@
 require('./globals_000_.coffee')
 root = document.getElementById 'root'
 
-
 Immutable = require 'immutable'
-
-
 
 { syncHistoryWithStore } = require 'react-router-redux'
 
@@ -15,8 +12,6 @@ Immutable = require 'immutable'
 
 window.onload = =>
     rectangle = root.getBoundingClientRect()
-    c 'rectangle', rectangle
-    c 'window.devicePixelRatio', window.devicePixelRatio
     { width, height } = rectangle
 
     initial_state = Immutable.Map
@@ -25,12 +20,6 @@ window.onload = =>
         # ui_state: HOME
         viewport_width: width
         viewport_height: height
-
-
-
-    # can factor these out into helper file if make set_boundingRect pure.
-    # { debounce, set_boundingRect } = require('./helpers/helpers_000_.coffee')
-
 
     debounce = (func, wait, immediate) ->
         timeout = 'scoped here'
@@ -47,8 +36,6 @@ window.onload = =>
 
     set_boundingRect = ->
         rectangle = root.getBoundingClientRect()
-        c 'window.devicePixelRatio', window.devicePixelRatio
-        c 'rectangle', rectangle
         { width, height } = rectangle
         arq =
             viewport_width: width
@@ -56,7 +43,6 @@ window.onload = =>
         store.dispatch(set_bounding_rect(arq))
 
     window.onresize = debounce(set_boundingRect, 200, false)
-
 
     store = require('./store/configure_store.coffee')(initial_state)
     history = syncHistoryWithStore(browserHistory, store,

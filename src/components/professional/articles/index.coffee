@@ -1,6 +1,7 @@
+
 top_nav = rc_generic(require('../top_nav_001_.coffee'))
-thing = require.context('./entries')
-fara = thing.keys()
+
+
 module.exports = professional_blog = rr
     getInitialState: ->
         showing_bars_nav: false
@@ -9,7 +10,7 @@ module.exports = professional_blog = rr
             showing_bars_nav: not @state.showing_bars_nav
     render: ->
         theme = theme_definitions[@props.theme]
-
+        grad_000 = shortid() ; filter_000 = shortid()
         main1 =
             style:
                 color: theme.text_color
@@ -23,30 +24,16 @@ module.exports = professional_blog = rr
 
             text
                 x: '10%'
-                y: '20%'
+                y: '40%'
                 fontSize: 40
                 fill: 'red'
                 ,
-                "blog"
-
-            for key, idx in fara
-                do (key, idx) =>
-                    frag = key.split('/')[1].split('.')[0]
-                    text
-                        x: '40%'
-                        y: "#{40 + (idx * .0036 * @props.height)}%"
-                        fontSize: .02 * @props.height
-                        fill: 'red'
-                        cursor: 'pointer'
-                        onClick: -> browserHistory.push "/professional/blog/entries/#{frag}"
-                        ,
-                        "#{frag}"
+                "articles"
 
 
-            top_nav
-                toggle_bars_nav: @toggle_bars_nav
-            bars_nav_001()
+            top_nav()
 
+            # bars_nav_001()
 
 
 

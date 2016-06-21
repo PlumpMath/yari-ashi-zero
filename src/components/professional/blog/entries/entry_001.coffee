@@ -1,9 +1,5 @@
-
-top_nav = rc_generic(require('../top_nav_001_.coffee'))
-
-
-
-module.exports = professional_blog = rr
+top_nav = rc_generic(require('../../top_nav_001_.coffee'))
+module.exports = entry = rr
     getInitialState: ->
         showing_bars_nav: false
     toggle_bars_nav: ->
@@ -11,7 +7,7 @@ module.exports = professional_blog = rr
             showing_bars_nav: not @state.showing_bars_nav
     render: ->
         theme = theme_definitions[@props.theme]
-        grad_000 = shortid() ; filter_000 = shortid()
+
         main1 =
             style:
                 color: theme.text_color
@@ -29,13 +25,14 @@ module.exports = professional_blog = rr
                 fontSize: 40
                 fill: 'red'
                 ,
-                "portfolio"
+                "entry 001"
 
 
             top_nav
                 toggle_bars_nav: @toggle_bars_nav
-
             bars_nav_001()
 
 
-        )# -------------------------------------------
+
+
+        )# -------------------------

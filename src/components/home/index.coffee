@@ -1,5 +1,5 @@
 # home_mid_nav_000_container = rc_generic(require('./home_mid_nav_000_.coffee'))
-home_top_nav = rc_generic(require('./home_top_nav_001_.coffee'))
+# home_top_nav = rc_generic(require('./home_top_nav_001_.coffee'))
 
 module.exports = home = rr
     vindaloos: {}  # TODO: should rename to something descriptive like intervals
@@ -24,14 +24,12 @@ module.exports = home = rr
                 clearInterval @vindaloos["fader_animation:#{name}"]
         , 20
 
-
     getInitialState: ->
         "luminosity:professional": 50
         "luminosity:amateur": 50
         time_hours: 0
         time_minutes: 0
         time_seconds: 0
-
 
     timekeep: ->
         now = new Date()
@@ -91,7 +89,6 @@ module.exports = home = rr
                 onMouseOver: => @onset_vindaloo_000({name: "professional"})
                 onMouseOut: => @fader_vindaloo_000({name: "professional"})
                 onClick:-> browserHistory.push '/professional'
-
                 ,
                 rect
                     x: "13%"
@@ -110,8 +107,6 @@ module.exports = home = rr
                     cursor: 'pointer'
                     ,
                     "professional"
-
-
             g
                 onMouseOver: => @onset_vindaloo_000({name: "amateur"})
                 onMouseOut: => @fader_vindaloo_000({name: "amateur"})
@@ -134,7 +129,6 @@ module.exports = home = rr
                     cursor: 'pointer'
                     ,
                     "amateur"
-
             text
                 x: '4%'
                 y: '97%'
@@ -145,7 +139,6 @@ module.exports = home = rr
                 fontSize: .01523 * @props.height
                 ,
                 " #{@state.time_hours}:#{@state.time_minutes}:#{@state.time_seconds}"
-
             bars_nav_001()
 
         )

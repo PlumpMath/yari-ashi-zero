@@ -14,14 +14,6 @@ module.exports = nav_bar_top = rr
                 '/svgs/black/bars.svg'
         svg1(
 
-            image
-                x: '95%'
-                y: '2%'
-                style: cursor: 'pointer'
-                width: .05 * @props.height
-                height: .05 * @props.height
-                xlinkHref: bars_glyph
-                onClick: @props.toggle_bars_nav
 
             rect
                 opacity: 0
@@ -43,6 +35,15 @@ module.exports = nav_bar_top = rr
                 onClick:-> browserHistory.push '/professional/blog'
                 ,
                 "blog"
+            rect
+                opacity: 0
+                x: @props.width * .18
+                y: '0%'
+                width: '11%'
+                height: nav_bar_height
+                fill: 'white'
+                cursor: 'pointer'
+                onClick: -> browserHistory.push '/professional/articles'
             text
                 x: @props.width * .2
                 y: '4%'
@@ -51,21 +52,9 @@ module.exports = nav_bar_top = rr
                 textLength: @props.width * .06
                 fill: theme.nav_text_color
                 cursor: 'pointer'
-                onClick:-> browserHistory.push '/'
+                onClick:-> browserHistory.push '/professional/articles'
                 ,
                 "articles"
-            text
-                x: @props.width * .35
-                y: '4%'
-                'font-family': 'Sans'
-                fontSize: font_size
-                textLength: @props.width * .06
-                fill: theme.nav_text_color
-                cursor: 'pointer'
-                onClick:-> browserHistory.push '/'
-                ,
-                "portfolio"
-
             rect
                 x: @props.width * .34
                 y: '0%'
@@ -75,20 +64,29 @@ module.exports = nav_bar_top = rr
                 height: .06 * @props.height
                 fill: 'white'
                 cursor: 'pointer'
-
             text
-                x: @props.width * .55
+                x: @props.width * .35
                 y: '4%'
                 'font-family': 'Sans'
                 fontSize: font_size
-                textLength: @props.width * .12
+                textLength: @props.width * .06
                 fill: theme.nav_text_color
                 cursor: 'pointer'
-                onClick:-> browserHistory.push '/'
+                onClick:-> browserHistory.push '/professional/portfolio'
                 ,
-                "home / about / profile"
+                "portfolio"
 
+            # rect
+            #     x: @props.width * .34
+            #     y: '0%'
+            #     opacity: 0
+            #     onClick: -> browserHistory.push '/professional/portfolio'
+            #     width: .08 * @props.width
+            #     height: .06 * @props.height
+            #     fill: 'white'
+            #     cursor: 'pointer'
 
+            bars_nav_001()
 
 
 

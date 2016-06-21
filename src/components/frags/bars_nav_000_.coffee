@@ -136,10 +136,7 @@ module.exports = bars_nav = rr
                 textLength: '8.6%'
                 fill: text_color
                 cursor: 'pointer'
-
                 fontSize: font_size
-
-
                 ,
                 "site home"
             rect
@@ -165,7 +162,6 @@ module.exports = bars_nav = rr
                         rect {x: '60%', y: '32%', width: '40%', height: '40%', fill: 'white'}
                         text {x: '62%', y: '44%', fontSize: .027 * @props.height, fill: 'grey'},
                             "Site is deployed to Heroku."
-
                         a
                             xlinkHref: 'https://github.com/kulicuu/yari-ashi-zero'
                             xlinkShow: 'new'
@@ -174,24 +170,14 @@ module.exports = bars_nav = rr
                                 ,
                                 'Site source code at github'
 
-
-
-
-
             text
                 x: '90.8%'
                 y: '60%'
                 textLength: '8.6%'
                 fill: text_color
                 cursor: 'pointer'
-
                 fontSize: font_size
-
-
                 ,
                 "about person"
-
-
-
 
         )#----------------------------------
