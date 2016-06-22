@@ -1,7 +1,17 @@
 { DEFAULT_THEME, LIGHT_THEME } = require '../../constants/theme_changes_.coffee'
 module.exports = nav_bar_top = rr
+
+
+
     render: ->
-        theme = theme_definitions[@props.theme]
+        c '@props', @props
+        {theme, location} = @props
+        {background_color, text_color, nav_text_color, active_link_color} = theme_definitions[theme]
+
+        location_rayy = location.split '/'
+
+
+
         tMat = @props.t_mat
         nav_bar_height = @props.height * .05
         font_size = nav_bar_height * .38
@@ -12,6 +22,13 @@ module.exports = nav_bar_top = rr
                 '/svgs/white/bars.svg'
             when LIGHT_THEME
                 '/svgs/black/bars.svg'
+
+
+        get_color = (loc_str) ->
+            if _.includes(location_rayy, loc_str)
+                return active_link_color
+            else
+                return nav_text_color
         svg1(
 
 
@@ -30,7 +47,7 @@ module.exports = nav_bar_top = rr
                 'font-family': 'Sans'
                 fontSize: font_size
                 textLength: @props.width * .06
-                fill: theme.nav_text_color
+                fill: do -> get_color('blog')
                 cursor: 'pointer'
                 onClick:-> browserHistory.push '/professional/blog'
                 ,
@@ -50,7 +67,7 @@ module.exports = nav_bar_top = rr
                 'font-family': 'Sans'
                 fontSize: font_size
                 textLength: @props.width * .06
-                fill: theme.nav_text_color
+                fill: nav_text_color
                 cursor: 'pointer'
                 onClick:-> browserHistory.push '/professional/articles'
                 ,
@@ -70,7 +87,7 @@ module.exports = nav_bar_top = rr
                 'font-family': 'Sans'
                 fontSize: font_size
                 textLength: @props.width * .06
-                fill: theme.nav_text_color
+                fill: nav_text_color
                 cursor: 'pointer'
                 onClick:-> browserHistory.push '/professional/portfolio'
                 ,

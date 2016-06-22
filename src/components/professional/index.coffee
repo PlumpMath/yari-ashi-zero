@@ -23,6 +23,20 @@ module.exports = professional = rr
                 height: '100%'
                 fill: theme.background_color
 
+            # foreignObject
+            #     width: '30%'
+            #     height: '30%'
+            #     x: '30%'
+            #     y: '30%'
+            #     ,
+            #     Link
+            #         to: '/'
+            #         style:
+            #             color: 'white'
+            #         ,
+            #
+            #         "home"
+
             top_nav
                 toggle_bars_nav: @toggle_bars_nav
 

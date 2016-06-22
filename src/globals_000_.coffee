@@ -38,7 +38,10 @@ for item in ['textArea', 'filter', 'foreignObject', 'feGaussianBlur', 'feImage',
     window[item] = React.createFactory item
 
 { connect } = require 'react-redux' ; window.connect = connect
-{ browserHistory } = require 'react-router' ; window.browserHistory = browserHistory
+{ browserHistory, Link: _Link } = require 'react-router' ; window.browserHistory = browserHistory
+
+c '_Link', _Link
+window.Link = React.createFactory _Link
 
 
 window.svg1 = ->
