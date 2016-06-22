@@ -14,7 +14,6 @@ exports.component = entry = rr
     render: ->
         {theme, height } = @props
         {text_color , background_color} = theme_definitions[theme]
-
         # main1 =
         #     style:
         #         color: theme.text_color
@@ -27,12 +26,31 @@ exports.component = entry = rr
                 fill: background_color
 
             text
-                x: '80%'
-                y: '70%'
-                fontSize: .03 * height
+                x: '10%'
+                y: '40%'
+                fontSize: .03 * @height
                 fill: text_color
                 ,
-                "entry 000"
+                "blog entry template"
+
+            foreignObject
+                x: '20%'
+                y: '10%'
+                width: '50%'
+                height: '70%'
+                ,
+                div
+                    style:
+                        color: text_color
+                    ,
+                    h1 null,
+                        "
+Rolling my own blog from scratch with CoffeeScript & React.
+                        "
+                    p null,
+                        "
+Check out the source code.  I'll talk about stuff that I did.  This is a personal website intended to be my primary means of professional communication with the development and software engineering world; also another aspect of the site is everything i do in an amateur sense, for the love of it, or as part of my life generally.
+                        "
 
 
             table_contents_nav()

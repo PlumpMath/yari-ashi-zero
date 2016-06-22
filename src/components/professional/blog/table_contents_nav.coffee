@@ -29,12 +29,24 @@ module.exports = professional_blog = rr
             #     fill: text_color
             #     ,
             #     "blog"
+            our_size = .013
+            our_sep = .02
+            our_sep2 = 1.4
+            our_x = "2%"
+
+            g null,
+                text
+                    x: our_x
+                    y: "13%"
+                    fontSize: our_size * height
+                    fill: text_color
+                    cursor: 'pointer'
+                    onClick: -> browserHistory.push "/professional/blog"
+                    ,
+                    "blog home"
 
             for key, idx in keychain
-                our_size = .013
-                our_sep = .02
-                our_sep2 = 1.4
-                our_x = "2%"
+
 
                 do (key, idx) =>
                     meta = blog_entries(key).metadata
@@ -43,7 +55,7 @@ module.exports = professional_blog = rr
                         text
                             x: our_x
                             y: "#{17 + (idx * our_sep * @props.height)}%"
-                            fontSize: our_size * @props.height
+                            fontSize: our_size * 1.44 * @props.height
                             fill: text_color
                             cursor: 'pointer'
                             onClick: -> browserHistory.push "/professional/blog/entries/#{frag}"

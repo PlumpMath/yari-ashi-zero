@@ -2,8 +2,8 @@
 exports.metadata =
     date_created: new Date(2016, 6 - 1, 22)
     date_updated: new Date(2016, 6 - 1, 22)
-    title: "blog entry 000"
-    preview_text: "this is a mock blog entry"
+    title: "Another blog test"
+    preview_text: "testing adding entries"
     tags: ["nonsense", "dynamic routing", "other stuff"]
 
 top_nav = rc_generic(require('../../top_nav_001_.coffee'))
@@ -14,7 +14,6 @@ exports.component = entry = rr
     render: ->
         {theme, height } = @props
         {text_color , background_color} = theme_definitions[theme]
-
         # main1 =
         #     style:
         #         color: theme.text_color
@@ -26,13 +25,24 @@ exports.component = entry = rr
                 height: '100%'
                 fill: background_color
 
-            text
-                x: '80%'
-                y: '70%'
-                fontSize: .03 * height
-                fill: text_color
+            foreignObject
+                x: '20%'
+                y: '10%'
+                width: '50%'
+                height: '70%'
                 ,
-                "entry 000"
+                div
+                    style:
+                        color: text_color
+                    ,
+                    h1 null,
+                        "
+Another test.
+                        "
+                    p null,
+                        "
+Check out the source code.  I'll talk about stuff that I did.  This is a personal website intended to be my primary means of professional communication with the development and software engineering world; also another aspect of the site is everything i do in an amateur sense, for the love of it, or as part of my life generally.
+                        "
 
 
             table_contents_nav()

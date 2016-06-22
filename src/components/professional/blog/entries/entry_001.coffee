@@ -7,12 +7,12 @@ exports.metadata =
 
 top_nav = rc_generic(require('../../top_nav_001_.coffee'))
 table_contents_nav = rc_generic(require('../table_contents_nav.coffee'))
+
 exports.component = entry = rr
 
     render: ->
         {theme } = @props
         {text_color , background_color} = theme_definitions[theme]
-        c 'theme', theme
 
         main1 =
             style:
@@ -24,14 +24,6 @@ exports.component = entry = rr
                 width: '100%'
                 height: '100%'
                 fill: background_color
-
-            text
-                x: '80%'
-                y: '70%'
-                fontSize: 40
-                fill: 'red'
-                ,
-                "entry 001"
 
             foreignObject
                 x: '20%'
