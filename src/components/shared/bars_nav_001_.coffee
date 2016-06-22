@@ -84,6 +84,10 @@ module.exports = bars_nav = rr
             x: 91
             y: 23
 
+        home_place =
+            x: 91
+            y: 33
+
 
 
         theme = theme_definitions[@props.theme]
@@ -92,7 +96,7 @@ module.exports = bars_nav = rr
             when DEFAULT_THEME
                 background_fill = 'white'
                 text_color = 'darkgrey'
-                home_glyph = '/svgs/white/home.svg'
+                home_glyph = '/svgs/black/home.svg'
                 sun_glyph =  '/svgs/black/sun-o.svg'
 
                 bars_glyph = '/svgs/white/bars.svg'
@@ -115,9 +119,7 @@ module.exports = bars_nav = rr
 
 
 
-        home_place =
-            x: 92
-            y: 23
+
 
         svg1(
             image
@@ -148,6 +150,15 @@ module.exports = bars_nav = rr
                         fill: background_fill
                         opacity: .8
                         cursor: 'pointer'
+
+                    image
+                        x: "#{home_place.x}%"
+                        y: "#{home_place.y}%"
+                        style: cursor: 'pointer'
+                        width: .03 * @props.height
+                        height: .03 * @props.height
+                        xlinkHref: home_glyph
+                        onClick: -> browserHistory.push '/'
 
 
                     image

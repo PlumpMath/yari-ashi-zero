@@ -1,4 +1,4 @@
-exports.metadata =
+exports.metadata = metadata =
     date_created: new Date(2016, 6 - 1, 22)
     date_updated: new Date(2016, 6 - 1, 22)
     title: "Rolling my own blog from scratch"
@@ -35,6 +35,7 @@ exports.component = entry = rr
                     style:
                         color: text_color
                     ,
+                    h6 null, "created: #{metadata.date_created.toDateString()}, updated: #{metadata.date_updated.toDateString()}"
                     h1 null,
                         "
 Rolling my own blog from scratch with CoffeeScript & React.

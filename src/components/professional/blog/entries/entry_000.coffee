@@ -1,5 +1,5 @@
 
-exports.metadata =
+exports.metadata = metadata =
     date_created: new Date(2016, 6 - 1, 22)
     date_updated: new Date(2016, 6 - 1, 22)
     title: "blog entry 000"

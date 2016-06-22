@@ -9,8 +9,9 @@ module.exports = professional_blog = rr
         @setState
             showing_bars_nav: not @state.showing_bars_nav
     render: ->
-        theme = theme_definitions[@props.theme]
-        grad_000 = shortid() ; filter_000 = shortid()
+        { theme, height, width } = @props
+        { text_color, background_color }= theme_definitions[theme]
+        # grad_000 = shortid() ; filter_000 = shortid()
         main1 =
             style:
                 color: theme.text_color
@@ -20,20 +21,20 @@ module.exports = professional_blog = rr
                 y: 0
                 width: '100%'
                 height: '100%'
-                fill: theme.background_color
+                fill: background_color
 
-            text
-                x: '10%'
-                y: '40%'
-                fontSize: 40
-                fill: 'red'
-                ,
-                "articles"
+            # text
+            #     x: '10%'
+            #     y: '40%'
+            #     fontSize: 40
+            #     fill: 'red'
+            #     ,
+            #     "articles"
 
 
             top_nav()
 
-            # bars_nav_001()
+            bars_nav_001()
 
 
 

@@ -67,7 +67,7 @@ module.exports = nav_bar_top = rr
                 'font-family': 'Sans'
                 fontSize: font_size
                 textLength: @props.width * .06
-                fill: nav_text_color
+                fill: do -> get_color('articles')
                 cursor: 'pointer'
                 onClick:-> browserHistory.push '/professional/articles'
                 ,
@@ -87,23 +87,13 @@ module.exports = nav_bar_top = rr
                 'font-family': 'Sans'
                 fontSize: font_size
                 textLength: @props.width * .06
-                fill: nav_text_color
+                fill: do -> get_color('portfolio')
                 cursor: 'pointer'
                 onClick:-> browserHistory.push '/professional/portfolio'
                 ,
                 "portfolio"
 
-            # rect
-            #     x: @props.width * .34
-            #     y: '0%'
-            #     opacity: 0
-            #     onClick: -> browserHistory.push '/professional/portfolio'
-            #     width: .08 * @props.width
-            #     height: .06 * @props.height
-            #     fill: 'white'
-            #     cursor: 'pointer'
 
-            bars_nav_001()
 
 
 
