@@ -15,6 +15,8 @@ professional_portfolio = rc_generic(require('./components/professional/portfolio
 # TODO figure out a way to automate this process with an fs function and a sensible protocol
 # in other words the routes would be iterated out inside the router.
 
+
+professional_about = rc_generic(require('./components/professional/about/index.coffee'))
 professional_articles = rc_generic(require('./components/professional/articles/index.coffee'))
 
 terraforming = rc_generic(require('./components/amateur/articles/terraforming_000_.coffee'))
@@ -35,6 +37,7 @@ routes =
         { path: 'professional', component: professional }
         # { path: 'amateur', component: amateur }
         { path: 'professional/blog', component: professional_blog }
+        { path: 'professional/about', component: professional_about }
         { path: 'professional/articles', component: professional_articles }
         { path: 'professional/portfolio', component: professional_portfolio }
     ]

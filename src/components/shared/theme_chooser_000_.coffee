@@ -1,8 +1,9 @@
 module.exports = theme_chooser = rr
 
     render: ->
-        # c 'theme choosers props', @props
-        { x, y, font_size, height, mouse_over, mouse_out, opacity } = @props
+
+        { x, y, font_size, height, mouse_over, mouse_out, opacity, theme } = @props
+
         text3 = (i, strang, click_handler) =>
             g null,
                 rect
@@ -40,5 +41,9 @@ module.exports = theme_chooser = rr
                 opacity: '.7'
                 onMouseOver: mouse_over
                 onMouseOut: mouse_out
-            text3 0, "Dark", @props.change_to_default_theme
-            text3 1, "Light", @props.change_to_light_theme
+
+
+            if theme is "DEFAULT_THEME"
+                text3 1, "Light", @props.change_to_light_theme
+            else
+                text3 0, "Dark", @props.change_to_default_theme

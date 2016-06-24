@@ -1,4 +1,7 @@
 top_nav = rc_generic(require('../top_nav_001_.coffee'))
+spacewar = rc_generic(require('./spacewar.coffee'))
+yari = rc_generic(require('./yari_ashi_zero_website.coffee'))
+
 module.exports = portfolio_index = rr
     getInitialState: ->
         image_001: '/images/minesweeper_image_000.png'
@@ -21,6 +24,9 @@ module.exports = portfolio_index = rr
                 width: '100%'
                 height: '100%'
                 fill: background_color
+
+            spacewar()
+            yari()
 
             text
                 x: mso.x * width
