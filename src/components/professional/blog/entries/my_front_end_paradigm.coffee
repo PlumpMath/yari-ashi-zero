@@ -1,4 +1,4 @@
-
+\
 exports.metadata = metadata =
     date_created: new Date(2016, 6 - 1, 27)
     date_updated: new Date(2016, 6 - 1, 27)
@@ -46,7 +46,10 @@ My Frontend Paradigm
                         "
                     p null,
                         "
-I've been developing single page applications (SPAs) for some years now.  A few years ago when surfing the web on my typically favorite sites I was always annoyed by the fact that navigating around a typical site involved an incessant stream of micro-aggressive waiting-times (for fucking pages to load!), as the site had to call back to the server for the requested page, and if caching wasn't well implemented this often meant reloading pages that I'd already been to.  So, ..., it was clear to me at least that it would be easy to preload what was mostly just text, and make the navigation simply a client side calculation.  Now three years on and I've experienced Angular-1 for a year and then two years now of React, this is a reality.
+I've been developing single page applications (SPAs) for some years now."
+                    p null,
+                        "
+It was only a few years ago that surfing the web -- for me is text navigation -- involved perpetual annoyance at the few-second waiting times for intra-site navigation to render, as every navigation action --within a site-- demanded a new server request, could take 5 seconds could take 30... ; to add insult to injury, depending on caching even a page I'd just been reading could require a fresh request.  It was clear to me at least (I remember when I thought I had a relatively original idea here!) that it would be easy to preload what was mostly just text, and make the navigation simply a client side calculation.  Later on I learned that other people had the same idea, and they called it the singe-page-app (SPA). Today I've been programming SPAs for 3+ years, first with Jade templates and JQuery, then Angular-1 for a year, and then two years now of React, this is a reality.  There are many options for frameworks; I recommend React as best all around.
                         "
                     h3 null, "Reflections on lessons learned, comments on how I put together my 'apps'"
                     ul null,
