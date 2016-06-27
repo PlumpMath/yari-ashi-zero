@@ -84,12 +84,12 @@ I was introduced to the
                         " this code snippet"
                     pre null,
                         code
-                            class: "language-klipse-eval-js"
+                            className: "language-klipse-eval-js"
                             style:
                                 color: text_color
                                 # background: 'red
                             ,
-                            "[1,2,3].map(function(x){ return x + 1;})"
+                            "[1,2,3, 4].map(function(x){ return x + 1;})"
 
 
 
