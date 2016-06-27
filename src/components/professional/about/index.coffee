@@ -8,6 +8,25 @@ module.exports = professional_blog = rr
     toggle_bars_nav: ->
         @setState
             showing_bars_nav: not @state.showing_bars_nav
+
+    render_CV_link: ->
+        { theme, height, width } = @props
+        { text_color, background_color }= theme_definitions[theme]
+
+        a
+            xlinkHref: "https://yadi.sk/i/FEUS8l2IsignJ"
+            xlinkShow: 'new'
+            ,
+            text
+                x: '80%'
+                y: '20.3%'
+                fontSize: .014 * height
+                fill: text_color
+                ,
+                "CV / resume PDF"
+
+
+
     render: ->
         { theme, height, width } = @props
         { text_color, background_color }= theme_definitions[theme]
@@ -65,7 +84,7 @@ module.exports = professional_blog = rr
                     fill: text_color
                     ,
                     "github: kulicuu"
-
+            @render_CV_link()
             text
                 x: '10%'
                 y: '34%'

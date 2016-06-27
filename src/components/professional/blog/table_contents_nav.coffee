@@ -29,7 +29,7 @@ module.exports = professional_blog = rr
             #     fill: text_color
             #     ,
             #     "blog"
-            our_size = .013
+            our_size = .0139
             our_sep = .02
             our_sep2 = 1.4
             our_x = "2%"
