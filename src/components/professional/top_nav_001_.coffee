@@ -37,7 +37,7 @@ module.exports = nav_bar_top = rr
                 x: '2%'
                 y: '0%'
                 width: '11%'
-                height: nav_bar_height
+                height: nav_bar_height * 1.2
                 fill: 'white'
                 cursor: 'pointer'
                 onClick: -> browserHistory.push '/professional/blog'

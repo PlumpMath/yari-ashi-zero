@@ -32,7 +32,14 @@ app.all '/*', (req, res, next) ->
 
 
 app.use(express.static(public_dir))
-port = process.env.PORT or 3333
+
+if process.env.PORT
+    port = process.env.PORT
+else if process.env.NODE_ENV is 'production'
+    port = 4444
+else
+    port = 3333
+# port = process.env.PORT or 3333
 
 app.listen port, ->
     c 'server listening on ', port
