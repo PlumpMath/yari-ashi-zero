@@ -44,6 +44,7 @@ exports.component = entry = rr
                         color: text_color
                     ,
                     h6 null, "created: #{metadata.date_created.toDateString()}, updated: #{metadata.date_updated.toDateString()}"
+                    h1 null, "NOTE: This turned out to not work, will continue experimenting with various options for in-browser code evaluation, although it's not a high priority for me now,... to many other projects. So."
                     h1 null,
                         "
 Using Klipse to interactively demo code
