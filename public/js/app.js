@@ -32622,6 +32622,13 @@
 
 	module.exports = bars_nav = rr({
 	  vindaloos: {},
+	  toggle_theme: function() {
+	    if (this.props.theme === "DEFAULT_THEME") {
+	      return this.props.change_to_light_theme();
+	    } else {
+	      return this.props.change_to_default_theme();
+	    }
+	  },
 	  toggle_nav: function() {
 	    return this.setState({
 	      my_opacity: 1,
@@ -32759,14 +32766,14 @@
 	        background_fill = 'white';
 	        text_color = 'darkgrey';
 	        home_glyph = '/svgs/black/home.svg';
-	        sun_glyph = '/svgs/black/sun-o.svg';
+	        sun_glyph = '/svgs/white/sun-o.svg';
 	        bars_glyph = '/svgs/white/bars.svg';
 	        setter = this.props.change_to_default_theme;
 	        break;
 	      case LIGHT_THEME:
 	        background_fill = 'darkgrey';
 	        text_color = 'white';
-	        sun_glyph = '/svgs/white/sun-o.svg';
+	        sun_glyph = '/svgs/black/sun-o.svg';
 	        home_glyph = '/svgs/black/home.svg';
 	        bars_glyph = '/svgs/black/bars.svg';
 	        setter = this.props.change_to_light_theme;
@@ -32774,108 +32781,20 @@
 	    tMat = this.props.t_mat;
 	    height = this.props.height;
 	    return svg1(image({
-	      x: '94%',
-	      y: '3%',
+	      x: "94%",
+	      y: "4%",
 	      style: {
 	        cursor: 'pointer'
 	      },
 	      width: .06 * this.props.height,
 	      height: .06 * this.props.height,
-	      xlinkHref: bars_glyph,
-	      onMouseOver: (function(_this) {
-	        return function() {
-	          return _this.onset_vindaloo_001({
-	            name: "bars_nav"
-	          });
-	        };
-	      })(this),
-	      onMouseLeave: (function(_this) {
-	        return function() {
-	          return _this.fader_vindaloo_001({
-	            name: "bars_nav"
-	          });
-	        };
-	      })(this)
-	    }), this.state["visible:bars_nav"] ? g({
-	      onMouseLeave: (function(_this) {
-	        return function() {
-	          return _this.fader_vindaloo_001({
-	            name: "bars_nav"
-	          });
-	        };
-	      })(this),
-	      opacity: this.state["opacity:bars_nav"],
-	      onMouseEnter: (function(_this) {
-	        return function() {
-	          return _this.onset_vindaloo_001({
-	            name: "bars_nav"
-	          });
-	        };
-	      })(this)
-	    }, rect({
-	      x: '90%',
-	      y: '10%',
-	      width: '10%',
-	      height: '80%',
-	      fill: background_fill,
-	      opacity: .8,
-	      cursor: 'pointer'
-	    }), image({
-	      x: home_place.x + "%",
-	      y: home_place.y + "%",
-	      style: {
-	        cursor: 'pointer'
-	      },
-	      width: .03 * this.props.height,
-	      height: .03 * this.props.height,
-	      xlinkHref: home_glyph,
-	      onClick: function() {
-	        return browserHistory.push('/');
-	      }
-	    }), image({
-	      x: sun_place.x + "%",
-	      y: sun_place.y + "%",
-	      style: {
-	        cursor: 'pointer'
-	      },
-	      width: .03 * this.props.height,
-	      height: .03 * this.props.height,
 	      xlinkHref: sun_glyph,
-	      onMouseOver: (function(_this) {
+	      onClick: (function(_this) {
 	        return function() {
-	          return _this.onset_vindaloo_001({
-	            name: "tooltip_lights"
-	          });
-	        };
-	      })(this),
-	      onMouseOut: (function(_this) {
-	        return function() {
-	          return _this.fader_vindaloo_001({
-	            name: "tooltip_lights"
-	          });
+	          return _this.toggle_theme();
 	        };
 	      })(this)
-	    }), this.state["visible:tooltip_lights"] === true ? theme_chooser_000({
-	      opacity: this.state["opacity:tooltip_lights"],
-	      height: this.props.height,
-	      x: sun_place.x,
-	      y: sun_place.y,
-	      font_size: .014 * this.props.height,
-	      mouse_over: (function(_this) {
-	        return function() {
-	          return _this.onset_vindaloo_001({
-	            name: "tooltip_lights"
-	          });
-	        };
-	      })(this),
-	      mouse_out: (function(_this) {
-	        return function() {
-	          return _this.fader_vindaloo_001({
-	            name: "tooltip_lights"
-	          });
-	        };
-	      })(this)
-	    }) : void 0) : void 0);
+	    }));
 	  }
 	});
 

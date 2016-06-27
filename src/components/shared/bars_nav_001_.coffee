@@ -6,6 +6,15 @@ module.exports = bars_nav = rr
 
     vindaloos: {}
 
+    toggle_theme: ->
+        # c "props", @props
+        # theme = theme_definitions[@props.theme]
+
+        if @props.theme is "DEFAULT_THEME"
+            @props.change_to_light_theme()
+        else
+            @props.change_to_default_theme()
+
     toggle_nav: ->
         @setState
             my_opacity: 1
@@ -90,6 +99,8 @@ module.exports = bars_nav = rr
 
 
 
+
+
         theme = theme_definitions[@props.theme]
         font_size = .024 * @props.height
         switch @props.theme
@@ -97,7 +108,7 @@ module.exports = bars_nav = rr
                 background_fill = 'white'
                 text_color = 'darkgrey'
                 home_glyph = '/svgs/black/home.svg'
-                sun_glyph =  '/svgs/black/sun-o.svg'
+                sun_glyph =  '/svgs/white/sun-o.svg'
 
                 bars_glyph = '/svgs/white/bars.svg'
                 setter = @props.change_to_default_theme
@@ -105,7 +116,7 @@ module.exports = bars_nav = rr
             when LIGHT_THEME
                 background_fill = 'darkgrey'
                 text_color = 'white'
-                sun_glyph = '/svgs/white/sun-o.svg'
+                sun_glyph = '/svgs/black/sun-o.svg'
                 home_glyph = '/svgs/black/home.svg'
                 bars_glyph = '/svgs/black/bars.svg'
                 setter = @props.change_to_light_theme
@@ -122,73 +133,84 @@ module.exports = bars_nav = rr
 
 
         svg1(
+            # image
+            #     x: '94%'
+            #     y: '3%'
+            #     style: cursor: 'pointer'
+            #     width: .06 * @props.height
+            #     height: .06 * @props.height
+            #     xlinkHref: bars_glyph
+                # onClick: -> @onset_vindaloo_001 "bars_nav"
+                # onMouseOver: => @onset_vindaloo_001 name: "bars_nav"
+                # onMouseLeave: => @fader_vindaloo_001(name: "bars_nav")
+
             image
-                x: '94%'
-                y: '3%'
+                x: "94%"
+                y: "4%"
                 style: cursor: 'pointer'
                 width: .06 * @props.height
                 height: .06 * @props.height
-                xlinkHref: bars_glyph
-                # onClick: -> @onset_vindaloo_001 "bars_nav"
-                onMouseOver: => @onset_vindaloo_001 name: "bars_nav"
-                onMouseLeave: => @fader_vindaloo_001(name: "bars_nav")
+                xlinkHref: sun_glyph
+                onClick: => @toggle_theme()
+                # onMouseOver: => @onset_vindaloo_001 name: "tooltip_lights"
+                # onMouseOut: => @fader_vindaloo_001 name: "tooltip_lights"
 
 
 
 
-            if @state["visible:bars_nav"]
-                g
-                    onMouseLeave: => @fader_vindaloo_001(name: "bars_nav")
-                    opacity: @state["opacity:bars_nav"]
-                    onMouseEnter: => @onset_vindaloo_001(name: "bars_nav")
-                    ,
-                    rect
-                        x: '90%'
-                        y: '10%'
-                        width: '10%'
-                        height: '80%'
-                        fill: background_fill
-                        opacity: .8
-                        cursor: 'pointer'
-
-                    image
-                        x: "#{home_place.x}%"
-                        y: "#{home_place.y}%"
-                        style: cursor: 'pointer'
-                        width: .03 * @props.height
-                        height: .03 * @props.height
-                        xlinkHref: home_glyph
-                        onClick: -> browserHistory.push '/'
-
-
-                    image
-                        x: "#{sun_place.x}%"
-                        y: "#{sun_place.y}%"
-                        style: cursor: 'pointer'
-                        width: .03 * @props.height
-                        height: .03 * @props.height
-                        xlinkHref: sun_glyph
-                        onMouseOver: => @onset_vindaloo_001 name: "tooltip_lights"
-                        onMouseOut: => @fader_vindaloo_001 name: "tooltip_lights"
-                    if @state["visible:tooltip_lights"] is true
-
-                        # tooltip_000
-                        #     opacity: @state["opacity:tooltip_lights"]
-                        #     height: @props.height
-                        #     x: sun_place.x
-                        #     y: sun_place.y
-                        #     font_size: .014 * @props.height
-                        #     tip_string: 'CHANGE THEME'
-
-                        theme_chooser_000
-                            opacity: @state["opacity:tooltip_lights"]
-                            height: @props.height
-                            x: sun_place.x
-                            y: sun_place.y
-                            font_size: .014 * @props.height
-                            # tip_string: 'CHANGE THEME'
-                            mouse_over: => @onset_vindaloo_001 name: "tooltip_lights"
-                            mouse_out: => @fader_vindaloo_001 name: "tooltip_lights"
+            # if @state["visible:bars_nav"]
+            #     g
+            #         onMouseLeave: => @fader_vindaloo_001(name: "bars_nav")
+            #         opacity: @state["opacity:bars_nav"]
+            #         onMouseEnter: => @onset_vindaloo_001(name: "bars_nav")
+            #         ,
+            #         rect
+            #             x: '90%'
+            #             y: '10%'
+            #             width: '10%'
+            #             height: '80%'
+            #             fill: background_fill
+            #             opacity: .8
+            #             cursor: 'pointer'
+            #
+            #         image
+            #             x: "#{home_place.x}%"
+            #             y: "#{home_place.y}%"
+            #             style: cursor: 'pointer'
+            #             width: .03 * @props.height
+            #             height: .03 * @props.height
+            #             xlinkHref: home_glyph
+            #             onClick: -> browserHistory.push '/'
+            #
+            #
+            #         image
+            #             x: "#{sun_place.x}%"
+            #             y: "#{sun_place.y}%"
+            #             style: cursor: 'pointer'
+            #             width: .03 * @props.height
+            #             height: .03 * @props.height
+            #             xlinkHref: sun_glyph
+            #             onMouseOver: => @onset_vindaloo_001 name: "tooltip_lights"
+            #             onMouseOut: => @fader_vindaloo_001 name: "tooltip_lights"
+            #         if @state["visible:tooltip_lights"] is true
+            #
+            #             # tooltip_000
+            #             #     opacity: @state["opacity:tooltip_lights"]
+            #             #     height: @props.height
+            #             #     x: sun_place.x
+            #             #     y: sun_place.y
+            #             #     font_size: .014 * @props.height
+            #             #     tip_string: 'CHANGE THEME'
+            #
+            #             theme_chooser_000
+            #                 opacity: @state["opacity:tooltip_lights"]
+            #                 height: @props.height
+            #                 x: sun_place.x
+            #                 y: sun_place.y
+            #                 font_size: .014 * @props.height
+            #                 # tip_string: 'CHANGE THEME'
+            #                 mouse_over: => @onset_vindaloo_001 name: "tooltip_lights"
+            #                 mouse_out: => @fader_vindaloo_001 name: "tooltip_lights"
 
                 # onBlur: @props.toggle_bars_nav
 
