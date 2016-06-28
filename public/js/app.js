@@ -71,7 +71,7 @@
 	    rectangle = root.getBoundingClientRect();
 	    width = rectangle.width, height = rectangle.height;
 	    initial_state = Immutable.Map({
-	      theme_name: THEME_ZERO,
+	      theme_name: THEME_ONE,
 	      routing: '/',
 	      viewport_width: width,
 	      viewport_height: height
@@ -200,7 +200,11 @@
 	window.svg1 = function() {
 	  return svg({
 	    width: '100%',
-	    height: (Math.pow(window.devicePixelRatio, 1.5) * 99.4) + "%"
+	    height: (Math.pow(window.devicePixelRatio, 1.5) * 100) + "%",
+	    style: {
+	      overflow: 'hidden'
+	    },
+	    overflow: 'hidden'
 	  }, arguments);
 	};
 
@@ -32626,23 +32630,12 @@
 /* 121 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var bars_nav, lights_themes, theme_definitions, tooltip;
+	var bars_nav, sun_svg;
 
-	lights_themes = rc_generic(__webpack_require__(118));
-
-	theme_definitions = __webpack_require__(119);
-
-	tooltip = __webpack_require__(120);
+	sun_svg = __webpack_require__(168);
 
 	module.exports = bars_nav = rr({
 	  vindaloos: {},
-	  toggle_theme: function() {
-	    if (this.props.theme === "DEFAULT_THEME") {
-	      return this.props.change_to_light_theme();
-	    } else {
-	      return this.props.change_to_default_theme();
-	    }
-	  },
 	  toggle_nav: function() {
 	    return this.setState({
 	      my_opacity: 1,
@@ -32764,7 +32757,8 @@
 	    };
 	  },
 	  render: function() {
-	    var background_fill, bars_glyph, font_size, height, home_glyph, home_place, setter, sun_glyph, sun_place, tMat, text_color, theme;
+	    var font_size, height, home_place, sun_place, tMat, theme;
+	    c(this.props.theme_name);
 	    sun_place = {
 	      x: 91,
 	      y: 23
@@ -32774,48 +32768,22 @@
 	      y: 33
 	    };
 	    theme = theme_definitions[this.props.theme_name];
+	    c('theme', theme);
 	    font_size = .024 * this.props.height;
-	    switch (this.props.theme_name) {
-	      case DEFAULT_THEME:
-	        background_fill = 'white';
-	        text_color = 'darkgrey';
-	        home_glyph = '/svgs/black/home.svg';
-	        sun_glyph = '/svgs/white/sun-o.svg';
-	        bars_glyph = '/svgs/white/bars.svg';
-	        setter = this.props.change_to_default_theme;
-	        break;
-	      case LIGHT_THEME:
-	        background_fill = 'darkgrey';
-	        text_color = 'white';
-	        sun_glyph = '/svgs/black/sun-o.svg';
-	        home_glyph = '/svgs/black/home.svg';
-	        bars_glyph = '/svgs/black/bars.svg';
-	        setter = this.props.change_to_light_theme;
-	        break;
-	      case THEME_ZERO:
-	        background_fill = 'darkgrey';
-	        text_color = 'white';
-	        sun_glyph = '/svgs/black/sun-o.svg';
-	        home_glyph = '/svgs/black/home.svg';
-	        bars_glyph = '/svgs/black/bars.svg';
-	        setter = this.props.change_to_light_theme;
-	    }
 	    tMat = this.props.t_mat;
 	    height = this.props.height;
-	    return svg1(image({
-	      x: "94%",
-	      y: "4%",
-	      style: {
-	        cursor: 'pointer'
+	    return svg1(sun_svg({
+	      on_click: this.props.toggle_theme,
+	      rect_attr: {
+	        x: .93 * this.props.width,
+	        y: .07 * this.props.height,
+	        width: .035 * this.props.width,
+	        height: .035 * this.props.width,
+	        fill: 'red',
+	        opacity: 0
 	      },
-	      width: .06 * this.props.height,
-	      height: .06 * this.props.height,
-	      xlinkHref: sun_glyph,
-	      onClick: (function(_this) {
-	        return function() {
-	          return _this.toggle_theme();
-	        };
-	      })(this)
+	      fill_color: theme.sun_color || 'chartreuse',
+	      transform: "translate(" + (.93 * this.props.width) + ", " + (.07 * this.props.height) + "), scale(" + (this.props.height * .000039) + ")"
 	    }));
 	  }
 	});
@@ -32879,51 +32847,199 @@
 /* 123 */
 /***/ function(module, exports) {
 
-	var DEFAULT_THEME, LIGHT_THEME, THEME_ONE, THEME_TWO, THEME_ZERO, ref, ref1, theme_one, theme_zero, themes_definitions;
+	var DEFAULT_THEME, LIGHT_THEME, THEME_ONE, THEME_TWO, THEME_ZERO, ref, ref1, theme_one, theme_two, theme_zero, themes_definitions;
 
 	ref = '../constants/theme_changes_.coffee', DEFAULT_THEME = ref.DEFAULT_THEME, LIGHT_THEME = ref.LIGHT_THEME;
 
 	ref1 = '../constants/theme_changes_.coffee', THEME_ZERO = ref1.THEME_ZERO, THEME_ONE = ref1.THEME_ONE, THEME_TWO = ref1.THEME_TWO;
 
 	theme_zero = {
-	  fill_000: "url(#theme_zero_grad_000)",
-	  fill_001: "url(#theme_zero_grad_001)",
+	  initial_state_mixin: function() {
+	    return {
+	      "luminosity:professional": 80,
+	      "luminosity:amateur": 80
+	    };
+	  },
+	  onset_vindaloo_000: function(arg) {
+	    var name;
+	    name = arg.name;
+	    clearInterval(this.vindaloos["fader_animation:" + name]);
+	    return this.vindaloos["onset_animation:" + name] = setInterval((function(_this) {
+	      return function() {
+	        var obj;
+	        if (_this.state["luminosity:" + name] > 30) {
+	          return _this.setState((
+	            obj = {},
+	            obj["luminosity:" + name] = _this.state["luminosity:" + name] - 2,
+	            obj
+	          ));
+	        } else {
+	          return clearInterval(_this.vindaloos["onset_animation:" + name]);
+	        }
+	      };
+	    })(this), 20);
+	  },
+	  fader_vindaloo_000: function(arg) {
+	    var name;
+	    name = arg.name;
+	    clearInterval(this.vindaloos["onset_animation:" + name]);
+	    return this.vindaloos["fader_animation:" + name] = setInterval((function(_this) {
+	      return function() {
+	        var obj;
+	        if (_this.state["luminosity:" + name] < 80) {
+	          return _this.setState((
+	            obj = {},
+	            obj["luminosity:" + name] = _this.state["luminosity:" + name] + 2,
+	            obj
+	          ));
+	        } else {
+	          return clearInterval(_this.vindaloos["fader_animation:" + name]);
+	        }
+	      };
+	    })(this), 20);
+	  },
+	  fill_000: "url(#grad_000)",
+	  fill_001: "url(#grad_001)",
+	  fill_002: "url(#grad_professional)",
+	  fill_003: "url(#grad_amateur)",
 	  defs: function(state) {
-	    return (linearGradient({
-	      id: "theme_zero_grad_000"
-	    }, stop({
-	      offset: '0%',
-	      stopColor: "hsl(230, 94%, 87%)"
-	    }), stop({
-	      offset: '92%',
-	      stopColor: "hsl(280, 96%, 88%)"
-	    })), linearGradient({
-	      id: "theme_zero_grad_001"
-	    }, stop({
-	      offset: '10%',
-	      stopColor: "hsl(140, 88%, " + state['luminosity:grad_001'] + "%)"
-	    }), stop({
-	      offset: '77%',
-	      stopColor: "hsl(300, 87%, " + state['luminosity:grad_001'] + "%)"
-	    })));
+	    return [
+	      linearGradient({
+	        id: "grad_amateur"
+	      }, stop({
+	        offset: '0%',
+	        stopColor: "hsl(280, 96%, " + state["luminosity:amateur"] + "%)"
+	      }), stop({
+	        offset: '92%',
+	        stopColor: "hsl(280, 96%, " + state["luminosity:amateur"] + "%)"
+	      }), linearGradient({
+	        id: "grad_professional"
+	      }, stop({
+	        offset: '0%',
+	        stopColor: "hsl(230, 94%, " + state["luminosity:professional"] + "%)"
+	      }), stop({
+	        offset: '92%',
+	        stopColor: "hsl(280, 96%, " + state["luminosity:professional"] + "%)"
+	      }), linearGradient({
+	        id: "grad_000"
+	      }, stop({
+	        offset: '0%',
+	        stopColor: "hsl(230, 94%, 87%)"
+	      }), stop({
+	        offset: '92%',
+	        stopColor: "hsl(280, 96%, 88%)"
+	      }), linearGradient({
+	        id: "grad_001"
+	      }, stop({
+	        offset: '10%',
+	        stopColor: "hsl(140, 88%, " + state['luminosity:grad_001'] + "%)"
+	      }), stop({
+	        offset: '77%',
+	        stopColor: "hsl(300, 87%, " + state['luminosity:grad_001'] + "%)"
+	      })))))
+	    ];
 	  },
 	  background_color: '#F3F5EA',
 	  text_color: '#2478E7',
 	  nav_text_color: 'darkgrey',
-	  active_link_color: 'green'
+	  active_link_color: 'green',
+	  sun_color: 'magenta'
 	};
 
 	theme_one = {
-	  fill_000: "url(#theme_zero_grad_000)",
-	  defs: linearGradient({
-	    id: "theme_zero_grad_000"
-	  }, stop({
-	    offset: '0%',
-	    stopColor: "hsl(230, 94%, 87%)"
-	  }), stop({
-	    offset: '92%',
-	    stopColor: "hsl(280, 96%, 88%)"
-	  })),
+	  initial_state_mixin: function() {
+	    return {
+	      "luminosity:professional": 50,
+	      "luminosity:amateur": 50
+	    };
+	  },
+	  onset_vindaloo_000: function(arg) {
+	    var name;
+	    name = arg.name;
+	    clearInterval(this.vindaloos["fader_animation:" + name]);
+	    return this.vindaloos["onset_animation:" + name] = setInterval((function(_this) {
+	      return function() {
+	        var obj;
+	        if (_this.state["luminosity:" + name] < 100) {
+	          return _this.setState((
+	            obj = {},
+	            obj["luminosity:" + name] = _this.state["luminosity:" + name] + 2,
+	            obj
+	          ));
+	        } else {
+	          return clearInterval(_this.vindaloos["onset_animation:" + name]);
+	        }
+	      };
+	    })(this), 20);
+	  },
+	  fader_vindaloo_000: function(arg) {
+	    var name;
+	    name = arg.name;
+	    clearInterval(this.vindaloos["onset_animation:" + name]);
+	    return this.vindaloos["fader_animation:" + name] = setInterval((function(_this) {
+	      return function() {
+	        var obj;
+	        if (_this.state["luminosity:" + name] > 50) {
+	          return _this.setState((
+	            obj = {},
+	            obj["luminosity:" + name] = _this.state["luminosity:" + name] - 2,
+	            obj
+	          ));
+	        } else {
+	          return clearInterval(_this.vindaloos["fader_animation:" + name]);
+	        }
+	      };
+	    })(this), 20);
+	  },
+	  fill_000: "url(#grad_000)",
+	  fill_001: "url(#grad_001)",
+	  fill_002: "url(#grad_professional)",
+	  fill_003: "url(#grad_amateur)",
+	  defs: function(state) {
+	    return [
+	      linearGradient({
+	        id: "grad_amateur"
+	      }, stop({
+	        offset: '0%',
+	        stopColor: "hsl(280, 96%, " + state["luminosity:amateur"] + "%)"
+	      }), stop({
+	        offset: '92%',
+	        stopColor: "hsl(280, 96%, " + state["luminosity:amateur"] + "%)"
+	      }), linearGradient({
+	        id: "grad_professional"
+	      }, stop({
+	        offset: '0%',
+	        stopColor: "hsl(230, 94%, " + state["luminosity:professional"] + "%)"
+	      }), stop({
+	        offset: '92%',
+	        stopColor: "hsl(280, 96%, " + state["luminosity:professional"] + "%)"
+	      }), linearGradient({
+	        id: "grad_000"
+	      }, stop({
+	        offset: '0%',
+	        stopColor: "hsl(230, 94%, 87%)"
+	      }), stop({
+	        offset: '92%',
+	        stopColor: "hsl(280, 96%, 88%)"
+	      }), linearGradient({
+	        id: "grad_001"
+	      }, stop({
+	        offset: '10%',
+	        stopColor: "hsl(140, 88%, " + state['luminosity:grad_001'] + "%)"
+	      }), stop({
+	        offset: '77%',
+	        stopColor: "hsl(300, 87%, " + state['luminosity:grad_001'] + "%)"
+	      })))))
+	    ];
+	  },
+	  background_color: 'black',
+	  text_color: 'lightgrey',
+	  nav_text_color: 'white',
+	  active_link_color: '#549AE3',
+	  sun_color: 'chartreuse'
+	};
+
+	theme_two = {
 	  background_color: 'black',
 	  text_color: 'lightgrey',
 	  nav_text_color: 'white',
@@ -32933,18 +33049,7 @@
 	module.exports = themes_definitions = {
 	  THEME_ZERO: theme_zero,
 	  THEME_ONE: theme_one,
-	  DEFAULT_THEME: {
-	    background_color: 'black',
-	    text_color: 'lightgrey',
-	    nav_text_color: 'white',
-	    active_link_color: '#549AE3'
-	  },
-	  LIGHT_THEME: {
-	    background_color: '#F3F5EA',
-	    text_color: '#2478E7',
-	    nav_text_color: 'darkgrey',
-	    active_link_color: 'green'
-	  }
+	  THEME_TWO: theme_two
 	};
 
 
@@ -39418,23 +39523,25 @@
 /* 142 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var CHANGE_TO_DEFAULT_THEME, CHANGE_TO_LIGHT_THEME, CHANGE_TO_SOME_OTHER_THEME, DEFAULT_THEME, LIGHT_THEME, TOGGLE_THEME, combineReducers, ref;
+	var combineReducers;
 
 	combineReducers = __webpack_require__(143).combineReducers;
 
-	ref = __webpack_require__(115), CHANGE_TO_DEFAULT_THEME = ref.CHANGE_TO_DEFAULT_THEME, CHANGE_TO_LIGHT_THEME = ref.CHANGE_TO_LIGHT_THEME, CHANGE_TO_SOME_OTHER_THEME = ref.CHANGE_TO_SOME_OTHER_THEME, LIGHT_THEME = ref.LIGHT_THEME, DEFAULT_THEME = ref.DEFAULT_THEME, TOGGLE_THEME = ref.TOGGLE_THEME;
-
 	module.exports = function(initial_state) {
-	  var ref1, routeReducer, theme_name, viewport_height, viewport_width, viewport_x, viewport_y;
+	  var ref, routeReducer, theme_name, viewport_height, viewport_width, viewport_x, viewport_y;
 	  routeReducer = __webpack_require__(149);
-	  ref1 = __webpack_require__(150), viewport_x = ref1.viewport_x, viewport_y = ref1.viewport_y, viewport_height = ref1.viewport_height, viewport_width = ref1.viewport_width;
+	  ref = __webpack_require__(150), viewport_x = ref.viewport_x, viewport_y = ref.viewport_y, viewport_height = ref.viewport_height, viewport_width = ref.viewport_width;
 	  theme_name = function(prev_state, action) {
 	    if (prev_state == null) {
 	      prev_state = initial_state;
 	    }
 	    if (action.type === TOGGLE_THEME) {
-	      c(prev_state);
-	      return prev_state;
+	      switch (prev_state) {
+	        case THEME_ZERO:
+	          return THEME_ONE;
+	        case THEME_ONE:
+	          return THEME_ZERO;
+	      }
 	    } else {
 	      return prev_state;
 	    }
@@ -39835,52 +39942,12 @@
 
 	module.exports = home = rr({
 	  vindaloos: {},
-	  onset_vindaloo_000: function(arg) {
-	    var name;
-	    name = arg.name;
-	    clearInterval(this.vindaloos["fader_animation:" + name]);
-	    return this.vindaloos["onset_animation:" + name] = setInterval((function(_this) {
-	      return function() {
-	        var obj;
-	        if (_this.state["luminosity:" + name] < 100) {
-	          return _this.setState((
-	            obj = {},
-	            obj["luminosity:" + name] = _this.state["luminosity:" + name] + 2,
-	            obj
-	          ));
-	        } else {
-	          return clearInterval(_this.vindaloos["onset_animation:" + name]);
-	        }
-	      };
-	    })(this), 20);
-	  },
-	  fader_vindaloo_000: function(arg) {
-	    var name;
-	    name = arg.name;
-	    clearInterval(this.vindaloos["onset_animation:" + name]);
-	    return this.vindaloos["fader_animation:" + name] = setInterval((function(_this) {
-	      return function() {
-	        var obj;
-	        if (_this.state["luminosity:" + name] > 50) {
-	          return _this.setState((
-	            obj = {},
-	            obj["luminosity:" + name] = _this.state["luminosity:" + name] - 2,
-	            obj
-	          ));
-	        } else {
-	          return clearInterval(_this.vindaloos["fader_animation:" + name]);
-	        }
-	      };
-	    })(this), 20);
-	  },
 	  getInitialState: function() {
-	    return {
-	      "luminosity:professional": 50,
-	      "luminosity:amateur": 50,
+	    return _.assign(theme_definitions[this.props.theme_name].initial_state_mixin(), {
 	      time_hours: 0,
 	      time_minutes: 0,
 	      time_seconds: 0
-	    };
+	    });
 	  },
 	  timekeep: function() {
 	    var hours, minutes, now, seconds;
@@ -39912,7 +39979,20 @@
 	  componentWillUnmount: function() {
 	    return clearInterval(this.keeper_interval);
 	  },
+	  componentWillReceiveProps: function(nextProps) {
+	    var height, orientation, theme, theme_name, width;
+	    c('nextProps', nextProps);
+	    theme_name = nextProps.theme_name, height = nextProps.height, width = nextProps.width, orientation = nextProps.orientation;
+	    theme = theme_definitions[theme_name];
+	    this.onset_vindaloo_000 = theme.onset_vindaloo_000;
+	    return this.fader_vindaloo_000 = theme.fader_vindaloo_000;
+	  },
 	  componentWillMount: function() {
+	    var height, orientation, ref, theme, theme_name, width;
+	    ref = this.props, theme_name = ref.theme_name, height = ref.height, width = ref.width, orientation = ref.orientation;
+	    theme = theme_definitions[theme_name];
+	    this.onset_vindaloo_000 = theme.onset_vindaloo_000;
+	    this.fader_vindaloo_000 = theme.fader_vindaloo_000;
 	    return this.keeper_interval = setInterval((function(_this) {
 	      return function() {
 	        return _this.timekeep();
@@ -39920,25 +40000,21 @@
 	    })(this), 50);
 	  },
 	  render: function() {
-	    var grad_amateur, grad_professional, space_0;
+	    var background_color, height, orientation, ref, space_0, text_color, theme, theme_name, width;
+	    ref = this.props, theme_name = ref.theme_name, height = ref.height, width = ref.width, orientation = ref.orientation;
+	    theme = theme_definitions[theme_name];
+	    text_color = theme.text_color, background_color = theme.background_color;
 	    space_0 = .0413;
-	    return svg1(grad_professional = shortid(), grad_amateur = shortid(), defs, linearGradient({
-	      id: grad_professional
-	    }, stop({
-	      offset: '0%',
-	      stopColor: "hsl(230, 94%, " + this.state["luminosity:professional"] + "%)"
-	    }), stop({
-	      offset: '92%',
-	      stopColor: "hsl(280, 96%, " + this.state["luminosity:professional"] + "%)"
-	    })), linearGradient({
-	      id: grad_amateur
-	    }, stop({
-	      offset: '0%',
-	      stopColor: "hsl(280, 96%, " + this.state["luminosity:amateur"] + "%)"
-	    }), stop({
-	      offset: '92%',
-	      stopColor: "hsl(280, 96%, " + this.state["luminosity:amateur"] + "%)"
-	    })), g({
+	    return svg({
+	      width: '100%',
+	      height: '100%'
+	    }, defs, theme.defs(this.state), rect({
+	      x: -5,
+	      y: -5,
+	      width: '250%',
+	      height: '250%',
+	      fill: background_color
+	    }), g({
 	      onMouseOver: (function(_this) {
 	        return function() {
 	          return _this.onset_vindaloo_000({
@@ -39969,7 +40045,7 @@
 	      y: "34%",
 	      textLength: space_0 * 12 * this.props.width,
 	      fontSize: .0323 * this.props.height,
-	      fill: "url(#" + grad_professional + ")",
+	      fill: theme.fill_002,
 	      cursor: 'pointer'
 	    }, "professional")), g({
 	      onMouseOver: (function(_this) {
@@ -40002,7 +40078,7 @@
 	      y: "53%",
 	      textLength: space_0 * 7 * this.props.width,
 	      fontSize: .0323 * this.props.height,
-	      fill: "url(#" + grad_amateur + ")",
+	      fill: theme.fill_003,
 	      cursor: 'pointer'
 	    }, "amateur")), text({
 	      x: '4%',
@@ -40259,10 +40335,6 @@
 	    var background_color, height, idx, key, main1, our_sep, our_sep2, our_size, our_x, ref, ref1, text_color, theme, theme_name;
 	    ref = this.props, theme_name = ref.theme_name, height = ref.height;
 	    theme = theme_definitions[theme_name];
-	    ({
-	      text_color: text_color,
-	      background_color: background_color
-	    });
 	    ref1 = theme = theme_definitions[theme_name], text_color = ref1.text_color, background_color = ref1.background_color;
 	    main1 = {
 	      style: {
@@ -40280,7 +40352,12 @@
 	      y: '20%',
 	      fontSize: 0.03 * height,
 	      fill: theme.fill_001
-	    }, "blog"), (function() {
+	    }, "blog"), text({
+	      x: '10%',
+	      y: '24%',
+	      fontSize: 0.03 * height,
+	      fill: theme.fill_000
+	    }, "another text"), (function() {
 	      var i, len, results;
 	      results = [];
 	      for (idx = i = 0, len = keychain.length; i < len; idx = ++i) {
@@ -40935,6 +41012,32 @@
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
 	webpackContext.id = 167;
+
+
+/***/ },
+/* 168 */
+/***/ function(module, exports) {
+
+	module.exports = function(arg) {
+	  var fill_color, on_click, rect_attr, transform;
+	  fill_color = arg.fill_color, transform = arg.transform, rect_attr = arg.rect_attr, on_click = arg.on_click;
+	  c(transform);
+	  return svg({
+	    fill: fill_color,
+	    width: "1792",
+	    height: "1792",
+	    viewBox: "0 0 1792 1792",
+	    xmlns: "http://www.w3.org/2000/svg"
+	  }, g({
+	    style: {
+	      cursor: 'pointer'
+	    },
+	    onClick: on_click
+	  }, rect(rect_attr), path({
+	    transform: transform,
+	    d: "M1472 896q0-117-45.5-223.5t-123-184-184-123-223.5-45.5-223.5 45.5-184 123-123 184-45.5 223.5 45.5 223.5 123 184 184 123 223.5 45.5 223.5-45.5 184-123 123-184 45.5-223.5zm276 277q-4 15-20 20l-292 96v306q0 16-13 26-15 10-29 4l-292-94-180 248q-10 13-26 13t-26-13l-180-248-292 94q-14 6-29-4-13-10-13-26v-306l-292-96q-16-5-20-20-5-17 4-29l180-248-180-248q-9-13-4-29 4-15 20-20l292-96v-306q0-16 13-26 15-10 29-4l292 94 180-248q9-12 26-12t26 12l180 248 292-94q14-6 29 4 13 10 13 26v306l292 96q16 5 20 20 5 16-4 29l-180 248 180 248q9 12 4 29z"
+	  })));
+	};
 
 
 /***/ }

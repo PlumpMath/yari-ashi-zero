@@ -4,32 +4,11 @@
 module.exports = home = rr
     vindaloos: {}  # TODO: should rename to something descriptive like intervals
 
-    onset_vindaloo_000: ({ name }) ->
-        clearInterval @vindaloos["fader_animation:#{name}"]
-        @vindaloos["onset_animation:#{name}"] = setInterval =>
-            if @state["luminosity:#{name}"] < 100
-                @setState
-                    "luminosity:#{name}": @state["luminosity:#{name}"] + 2
-            else
-                clearInterval @vindaloos["onset_animation:#{name}"]
-        , 20
-
-    fader_vindaloo_000: ({ name }) ->
-        clearInterval @vindaloos["onset_animation:#{name}"]
-        @vindaloos["fader_animation:#{name}"] = setInterval =>
-            if @state["luminosity:#{name}"] > 50
-                @setState
-                    "luminosity:#{name}": @state["luminosity:#{name}"] - 2
-            else
-                clearInterval @vindaloos["fader_animation:#{name}"]
-        , 20
-
     getInitialState: ->
-        "luminosity:professional": 50
-        "luminosity:amateur": 50
-        time_hours: 0
-        time_minutes: 0
-        time_seconds: 0
+        _.assign theme_definitions[@props.theme_name].initial_state_mixin(),
+            time_hours: 0
+            time_minutes: 0
+            time_seconds: 0
 
     timekeep: ->
         now = new Date()
@@ -57,33 +36,36 @@ module.exports = home = rr
     componentWillUnmount: ->
         clearInterval @keeper_interval
 
+    componentWillReceiveProps: (nextProps) ->
+        c 'nextProps', nextProps
+        { theme_name, height, width, orientation } = nextProps
+        theme = theme_definitions[theme_name]
+        @onset_vindaloo_000 = theme.onset_vindaloo_000
+        @fader_vindaloo_000 = theme.fader_vindaloo_000
+
     componentWillMount: ->
+        { theme_name, height, width, orientation } = @props
+        theme = theme_definitions[theme_name]
+        @onset_vindaloo_000 = theme.onset_vindaloo_000
+        @fader_vindaloo_000 = theme.fader_vindaloo_000
         @keeper_interval = setInterval =>
             @timekeep()
         , 50
 
     render: ->
+        { theme_name, height, width, orientation } = @props
+        theme = theme_definitions[theme_name]
+        { text_color, background_color } = theme
         space_0 = .0413
 
-        svg1(
-            grad_professional = shortid(); grad_amateur = shortid()
+        svg
+            width: '100%'
+            height: '100%'
             defs
-                linearGradient
-                    id: grad_professional
-                    stop
-                        offset: '0%'
-                        stopColor: "hsl(230, 94%, #{@state["luminosity:professional"]}%)"
-                    stop
-                        offset: '92%'
-                        stopColor: "hsl(280, 96%, #{@state["luminosity:professional"]}%)"
-                linearGradient
-                    id: grad_amateur
-                    stop
-                        offset: '0%'
-                        stopColor: "hsl(280, 96%, #{@state["luminosity:amateur"]}%)"
-                    stop
-                        offset: '92%'
-                        stopColor: "hsl(280, 96%, #{@state["luminosity:amateur"]}%)"
+                theme.defs @state
+
+            rect {x: -5, y: -5, width: '250%', height: '250%', fill: background_color}
+
 
             g
                 onMouseOver: => @onset_vindaloo_000({name: "professional"})
@@ -103,7 +85,7 @@ module.exports = home = rr
                     y: "34%"
                     textLength: space_0 * 12 * @props.width
                     fontSize: .0323 * @props.height
-                    fill: "url(##{grad_professional})"
+                    fill: theme.fill_002
                     cursor: 'pointer'
                     ,
                     "professional"
@@ -125,7 +107,7 @@ module.exports = home = rr
                     y: "53%"
                     textLength: space_0 * 7 * @props.width
                     fontSize: .0323 * @props.height
-                    fill: "url(##{grad_amateur})"
+                    fill: theme.fill_003
                     cursor: 'pointer'
                     ,
                     "amateur"
@@ -140,5 +122,3 @@ module.exports = home = rr
                 ,
                 " #{@state.time_hours}:#{@state.time_minutes}:#{@state.time_seconds}"
             bars_nav_001()
-
-        )

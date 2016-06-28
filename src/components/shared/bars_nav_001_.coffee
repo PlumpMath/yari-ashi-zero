@@ -1,26 +1,17 @@
-lights_themes = rc_generic(require('../shared/lights_themes_000_.coffee'))
-theme_definitions = require '../../themes/themes_000_.coffee'
-tooltip = require './tooltip_000_.coffee'
+# lights_themes = rc_generic(require('../shared/lights_themes_000_.coffee'))
+# tooltip = require './tooltip_000_.coffee'
+
+sun_svg = require('../../glyphs/sun.coffee')
 
 module.exports = bars_nav = rr
 
     vindaloos: {}
 
-    toggle_theme: ->
-        # c "props", @props
-        # theme = theme_definitions[@props.theme]
-
-        if @props.theme is "DEFAULT_THEME"
-            @props.change_to_light_theme()
-        else
-            @props.change_to_default_theme()
 
     toggle_nav: ->
         @setState
             my_opacity: 1
             nav_visible: not @state.nav_visible
-
-
 
     cancel_fade_me: ->
         clearInterval @int_2
@@ -89,6 +80,7 @@ module.exports = bars_nav = rr
 
 
     render: ->
+        c @props.theme_name
         sun_place =
             x: 91
             y: 23
@@ -102,31 +94,32 @@ module.exports = bars_nav = rr
 
 
         theme = theme_definitions[@props.theme_name]
+        c 'theme', theme
         font_size = .024 * @props.height
-        switch @props.theme_name
-            when DEFAULT_THEME
-                background_fill = 'white'
-                text_color = 'darkgrey'
-                home_glyph = '/svgs/black/home.svg'
-                sun_glyph =  '/svgs/white/sun-o.svg'
-
-                bars_glyph = '/svgs/white/bars.svg'
-                setter = @props.change_to_default_theme
-
-            when LIGHT_THEME
-                background_fill = 'darkgrey'
-                text_color = 'white'
-                sun_glyph = '/svgs/black/sun-o.svg'
-                home_glyph = '/svgs/black/home.svg'
-                bars_glyph = '/svgs/black/bars.svg'
-                setter = @props.change_to_light_theme
-            when THEME_ZERO
-                background_fill = 'darkgrey'
-                text_color = 'white'
-                sun_glyph = '/svgs/black/sun-o.svg'
-                home_glyph = '/svgs/black/home.svg'
-                bars_glyph = '/svgs/black/bars.svg'
-                setter = @props.change_to_light_theme
+        # switch @props.theme_name
+        #     when DEFAULT_THEME
+        #         background_fill = 'white'
+        #         text_color = 'darkgrey'
+        #         home_glyph = '/svgs/black/home.svg'
+        #         sun_glyph =  '/svgs/white/sun-o.svg'
+        #
+        #         bars_glyph = '/svgs/white/bars.svg'
+        #         setter = @props.change_to_default_theme
+        #
+        #     when LIGHT_THEME
+        #         background_fill = 'darkgrey'
+        #         text_color = 'white'
+        #         sun_glyph = '/svgs/black/sun-o.svg'
+        #         home_glyph = '/svgs/black/home.svg'
+        #         bars_glyph = '/svgs/black/bars.svg'
+        #         setter = @props.change_to_light_theme
+        #     when THEME_ZERO
+        #         background_fill = 'darkgrey'
+        #         text_color = 'white'
+        #         sun_glyph = '/svgs/black/sun-o.svg'
+        #         home_glyph = '/svgs/black/home.svg'
+        #         bars_glyph = '/svgs/black/bars.svg'
+        #         setter = @props.change_to_light_theme
 
 
 
@@ -150,14 +143,23 @@ module.exports = bars_nav = rr
                 # onMouseOver: => @onset_vindaloo_001 name: "bars_nav"
                 # onMouseLeave: => @fader_vindaloo_001(name: "bars_nav")
 
-            image
-                x: "94%"
-                y: "4%"
-                style: cursor: 'pointer'
-                width: .06 * @props.height
-                height: .06 * @props.height
-                xlinkHref: sun_glyph
-                onClick: => @toggle_theme()
+            # image
+            #     x: "94%"
+            #     y: "14%"
+            #     style: cursor: 'pointer'
+            #     width: .06 * @props.height
+            #     height: .06 * @props.height
+            #     xlinkHref: sun_glyph
+            #     onClick: @props.toggle_theme
+
+
+            sun_svg
+                on_click: @props.toggle_theme
+                rect_attr: {x: .93 * @props.width, y: .07 * @props.height, width: .035 * @props.width, height: .035 * @props.width, fill: 'red', opacity: 0}
+                fill_color: theme.sun_color or 'chartreuse'
+                transform: "translate(#{.93 * @props.width}, #{.07 * @props.height}), scale(#{@props.height * .000039})"
+
+
                 # onMouseOver: => @onset_vindaloo_001 name: "tooltip_lights"
                 # onMouseOut: => @fader_vindaloo_001 name: "tooltip_lights"
 

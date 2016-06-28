@@ -33,7 +33,6 @@ module.exports = professional_blog = rr
     render: ->
         { theme_name, height } = @props
         theme = theme_definitions[theme_name]
-        {text_color, background_color}
         { text_color, background_color} = theme = theme_definitions[theme_name]
 
         main1 =
@@ -59,6 +58,14 @@ module.exports = professional_blog = rr
                 fill: theme.fill_001
                 ,
                 "blog"
+            text
+                x: '10%'
+                y: '24%'
+                fontSize: 0.03 * height
+                # fill: text_color
+                fill: theme.fill_000
+                ,
+                "another text"
 
             for key, idx in keychain
                 our_size = .017

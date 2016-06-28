@@ -15,7 +15,7 @@ window.onload = =>
     { width, height } = rectangle
 
     initial_state = Immutable.Map
-        theme_name: THEME_ZERO
+        theme_name: THEME_ONE
         routing: '/'
         # ui_state: HOME
         viewport_width: width

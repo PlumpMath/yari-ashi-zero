@@ -47,11 +47,11 @@ window.Link = React.createFactory _Link
 window.svg1 = ->
     svg
         width: '100%'
-        height: "#{Math.pow(window.devicePixelRatio, 1.5) * 99.4}%"
+        height: "#{Math.pow(window.devicePixelRatio, 1.5) * 100}%"
         # style: fill: 'black'
-        # style:
-        #     overflow: 'hidden'
-        # overflow: 'hidden'
+        style:
+            overflow: 'hidden'
+        overflow: 'hidden'
         ,
         arguments
 
