@@ -8,8 +8,8 @@ module.exports = professional_blog = rr
 
 
     render: ->
-        { theme, height } = @props
-        { text_color, background_color} = theme_definitions[theme]
+        { theme_name, height } = @props
+        { text_color, background_color} = theme_definitions[theme_name]
 
         main1 =
             style:

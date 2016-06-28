@@ -10,8 +10,8 @@ module.exports = professional_blog = rr
             showing_bars_nav: not @state.showing_bars_nav
 
     render_CV_link: ->
-        { theme, height, width } = @props
-        { text_color, background_color }= theme_definitions[theme]
+        { theme_name, height, width } = @props
+        { text_color, background_color }= theme_definitions[theme_name]
 
         a
             xlinkHref: "https://yadi.sk/i/FEUS8l2IsignJ"
@@ -28,8 +28,8 @@ module.exports = professional_blog = rr
 
 
     render: ->
-        { theme, height, width } = @props
-        { text_color, background_color }= theme_definitions[theme]
+        { theme_name, height, width } = @props
+        { text_color, background_color }= theme_definitions[theme_name]
         # grad_000 = shortid() ; filter_000 = shortid()
         main1 =
             style:

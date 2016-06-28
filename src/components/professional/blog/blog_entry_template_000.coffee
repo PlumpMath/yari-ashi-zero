@@ -12,8 +12,8 @@ table_contents_nav = rc_generic(require('../table_contents_nav.coffee'))
 exports.component = entry = rr
 
     render: ->
-        {theme, height } = @props
-        {text_color , background_color} = theme_definitions[theme]
+        {theme_name, height } = @props
+        {text_color , background_color} = theme_definitions[theme_name]
         # main1 =
         #     style:
         #         color: theme.text_color

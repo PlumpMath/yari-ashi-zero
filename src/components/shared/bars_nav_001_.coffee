@@ -101,9 +101,9 @@ module.exports = bars_nav = rr
 
 
 
-        theme = theme_definitions[@props.theme]
+        theme = theme_definitions[@props.theme_name]
         font_size = .024 * @props.height
-        switch @props.theme
+        switch @props.theme_name
             when DEFAULT_THEME
                 background_fill = 'white'
                 text_color = 'darkgrey'
@@ -120,7 +120,13 @@ module.exports = bars_nav = rr
                 home_glyph = '/svgs/black/home.svg'
                 bars_glyph = '/svgs/black/bars.svg'
                 setter = @props.change_to_light_theme
-
+            when THEME_ZERO
+                background_fill = 'darkgrey'
+                text_color = 'white'
+                sun_glyph = '/svgs/black/sun-o.svg'
+                home_glyph = '/svgs/black/home.svg'
+                bars_glyph = '/svgs/black/bars.svg'
+                setter = @props.change_to_light_theme
 
 
 

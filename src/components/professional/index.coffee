@@ -9,7 +9,7 @@ module.exports = professional = rr
         @setState
             showing_bars_nav: not @state.showing_bars_nav
     render: ->
-        theme = theme_definitions[@props.theme]
+        theme = theme_definitions[@props.theme_name]
         grad_000 = shortid() ; filter_000 = shortid()
         main1 =
                 color: theme.text_color
@@ -37,7 +37,7 @@ module.exports = professional = rr
             #
             #         "home"
 
-            top_nav
-                toggle_bars_nav: @toggle_bars_nav
+            top_nav()
+                # toggle_bars_nav: @toggle_bars_nav
 
             bars_nav_001()

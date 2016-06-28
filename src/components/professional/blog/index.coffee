@@ -2,16 +2,47 @@ top_nav = rc_generic(require('../top_nav_001_.coffee'))
 blog_entries = require.context('./entries', false)
 keychain = blog_entries.keys()
 module.exports = professional_blog = rr
+    animations: {}
+
+    componentWillUnmount: ->
+        clearInterval @animations["test_000"]
+
     getInitialState: ->
         filter: null
+        "luminosity:grad_001": 50
+
+    componentDidMount: ->
+        going_up = true
+        @animations["test_000"] = setInterval =>
+            if @state["luminosity:grad_001"] < 80 and going_up is true
+                @setState
+                    "luminosity:grad_001": ++@state["luminosity:grad_001"]
+            else if @state["luminosity:grad_001"] is 80 and going_up is true
+                going_up = false
+                @setState
+                    "luminosity:grad_001": --@state["luminosity:grad_001"]
+            else if @state["luminosity:grad_001"] > 50 and going_up is false
+                @setState
+                    "luminosity:grad_001": --@state["luminosity:grad_001"]
+            else if @state["luminosity:grad_001"] is 50 and going_up is false
+                going_up = true
+                @setState
+                    "luminosity:grad_001": ++@state["luminosity:grad_001"]
+        , 40
 
     render: ->
-        { theme, height } = @props
-        { text_color, background_color} = theme_definitions[theme]
+        { theme_name, height } = @props
+        theme = theme_definitions[theme_name]
+        {text_color, background_color}
+        { text_color, background_color} = theme = theme_definitions[theme_name]
+
         main1 =
             style:
                 color: text_color
         svg1(
+            defs
+                theme.defs @state
+
             rect
                 x: 0
                 y: 0
@@ -19,11 +50,13 @@ module.exports = professional_blog = rr
                 height: '100%'
                 fill: background_color
 
+
             text
                 x: '10%'
                 y: '20%'
                 fontSize: 0.03 * height
-                fill: text_color
+                # fill: text_color
+                fill: theme.fill_001
                 ,
                 "blog"
 
@@ -67,7 +100,7 @@ module.exports = professional_blog = rr
                         text
                             x: our_x
                             y: "#{17 + (3 * our_sep2) + (idx * our_sep * @props.height)}%"
-                            fontSize: our_size * @props.height
+                            fontSize: our_size * @props.height * .75
                             fill: text_color
                             cursor: 'pointer'
                             onClick: -> browserHistory.push "/professional/blog/entries/#{frag}"

@@ -7,8 +7,8 @@ module.exports = portfolio_index = rr
         image_001: '/images/minesweeper_image_000.png'
 
     render: ->
-        {theme, height, width} = @props
-        {text_color, background_color} = theme_definitions[theme]
+        {theme_name, height, width} = @props
+        {text_color, background_color} = theme_definitions[theme_name]
 
         mso =
             x: .06

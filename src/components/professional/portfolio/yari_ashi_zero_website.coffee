@@ -2,8 +2,8 @@
 
 module.exports = rr
     render: ->
-        { theme, height, width } = @props
-        { text_color, background_color } = theme_definitions[theme]
+        { theme_name, height, width } = @props
+        { text_color, background_color } = theme_definitions[theme_name]
         sw =
             x: .3
             y: .16

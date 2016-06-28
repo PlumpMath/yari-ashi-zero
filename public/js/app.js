@@ -51,19 +51,19 @@
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var DEFAULT_THEME, Immutable, root, set_bounding_rect, syncHistoryWithStore;
+	var DEFAULT_THEME, Immutable, THEME_ONE, THEME_ZERO, ref, root, set_bounding_rect, syncHistoryWithStore;
 
 	__webpack_require__(2);
 
 	root = document.getElementById('root');
 
-	Immutable = __webpack_require__(123);
+	Immutable = __webpack_require__(124);
 
-	syncHistoryWithStore = __webpack_require__(124).syncHistoryWithStore;
+	syncHistoryWithStore = __webpack_require__(125).syncHistoryWithStore;
 
-	DEFAULT_THEME = __webpack_require__(115).DEFAULT_THEME;
+	ref = __webpack_require__(115), DEFAULT_THEME = ref.DEFAULT_THEME, THEME_ZERO = ref.THEME_ZERO, THEME_ONE = ref.THEME_ONE;
 
-	set_bounding_rect = __webpack_require__(129).set_bounding_rect;
+	set_bounding_rect = __webpack_require__(130).set_bounding_rect;
 
 	window.onload = (function(_this) {
 	  return function() {
@@ -71,7 +71,7 @@
 	    rectangle = root.getBoundingClientRect();
 	    width = rectangle.width, height = rectangle.height;
 	    initial_state = Immutable.Map({
-	      theme: DEFAULT_THEME,
+	      theme_name: THEME_ZERO,
 	      routing: '/',
 	      viewport_width: width,
 	      viewport_height: height
@@ -108,13 +108,13 @@
 	      return store.dispatch(set_bounding_rect(arq));
 	    };
 	    window.onresize = debounce(set_boundingRect, 200, false);
-	    store = __webpack_require__(131)(initial_state);
+	    store = __webpack_require__(132)(initial_state);
 	    history = syncHistoryWithStore(browserHistory, store, {
 	      selectLocationState: function(state) {
 	        return state.get('routing');
 	      }
 	    });
-	    routes = __webpack_require__(150)({
+	    routes = __webpack_require__(151)({
 	      store: store,
 	      history: history
 	    });
@@ -236,7 +236,7 @@
 	  window[k] = v;
 	}
 
-	window.theme_definitions = __webpack_require__(119);
+	window.theme_definitions = __webpack_require__(123);
 
 
 /***/ },
@@ -32055,9 +32055,9 @@
 /* 113 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var change_to_default_theme, change_to_light_theme, mapDispatchToProps, mapStateToProps, ref;
+	var change_to_default_theme, change_to_light_theme, mapDispatchToProps, mapStateToProps, ref, toggle_theme;
 
-	ref = __webpack_require__(114), change_to_default_theme = ref.change_to_default_theme, change_to_light_theme = ref.change_to_light_theme;
+	ref = __webpack_require__(114), change_to_default_theme = ref.change_to_default_theme, change_to_light_theme = ref.change_to_light_theme, toggle_theme = ref.toggle_theme;
 
 	mapStateToProps = function(state, ownProps) {
 	  var height, larger, orientation, smaller, transform_matrix, width;
@@ -32074,7 +32074,7 @@
 	  }
 	  transform_matrix = [width, 0, 0, 0, height, 0, 1 / width, 1 / height, 1];
 	  return {
-	    theme: state.get('theme'),
+	    theme_name: state.get('theme_name'),
 	    location: state.get('routing').locationBeforeTransitions.pathname,
 	    orientation: orientation,
 	    larger: larger,
@@ -32093,6 +32093,9 @@
 	    },
 	    change_to_light_theme: function() {
 	      return dispatch(change_to_light_theme());
+	    },
+	    toggle_theme: function() {
+	      return dispatch(toggle_theme());
 	    }
 	  };
 	  _.assign(props, ownProps);
@@ -32108,9 +32111,15 @@
 /* 114 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var CHANGE_TO_DEFAULT_THEME, CHANGE_TO_LIGHT_THEME, CHANGE_TO_SOME_OTHER_THEME, change_to_default_theme, change_to_light_theme, ref;
+	var CHANGE_TO_DEFAULT_THEME, CHANGE_TO_LIGHT_THEME, CHANGE_TO_SOME_OTHER_THEME, TOGGLE_THEME, change_to_default_theme, change_to_light_theme, ref, toggle_theme;
 
-	ref = __webpack_require__(115), CHANGE_TO_DEFAULT_THEME = ref.CHANGE_TO_DEFAULT_THEME, CHANGE_TO_LIGHT_THEME = ref.CHANGE_TO_LIGHT_THEME, CHANGE_TO_SOME_OTHER_THEME = ref.CHANGE_TO_SOME_OTHER_THEME;
+	ref = __webpack_require__(115), CHANGE_TO_DEFAULT_THEME = ref.CHANGE_TO_DEFAULT_THEME, CHANGE_TO_LIGHT_THEME = ref.CHANGE_TO_LIGHT_THEME, CHANGE_TO_SOME_OTHER_THEME = ref.CHANGE_TO_SOME_OTHER_THEME, TOGGLE_THEME = ref.TOGGLE_THEME;
+
+	toggle_theme = function() {
+	  return {
+	    type: TOGGLE_THEME
+	  };
+	};
 
 	change_to_default_theme = function() {
 	  return {
@@ -32126,7 +32135,8 @@
 
 	module.exports = {
 	  change_to_default_theme: change_to_default_theme,
-	  change_to_light_theme: change_to_light_theme
+	  change_to_light_theme: change_to_light_theme,
+	  toggle_theme: toggle_theme
 	};
 
 
@@ -32143,7 +32153,11 @@
 	  CHANGE_TO_LIGHT_THEME: null,
 	  CHANGE_TO_SOME_OTHER_THEME: null,
 	  LIGHT_THEME: null,
-	  DEFAULT_THEME: null
+	  DEFAULT_THEME: null,
+	  THEME_ZERO: null,
+	  THEME_ONE: null,
+	  THEME_TWO: null,
+	  TOGGLE_THEME: null
 	});
 
 
@@ -32759,9 +32773,9 @@
 	      x: 91,
 	      y: 33
 	    };
-	    theme = theme_definitions[this.props.theme];
+	    theme = theme_definitions[this.props.theme_name];
 	    font_size = .024 * this.props.height;
-	    switch (this.props.theme) {
+	    switch (this.props.theme_name) {
 	      case DEFAULT_THEME:
 	        background_fill = 'white';
 	        text_color = 'darkgrey';
@@ -32771,6 +32785,14 @@
 	        setter = this.props.change_to_default_theme;
 	        break;
 	      case LIGHT_THEME:
+	        background_fill = 'darkgrey';
+	        text_color = 'white';
+	        sun_glyph = '/svgs/black/sun-o.svg';
+	        home_glyph = '/svgs/black/home.svg';
+	        bars_glyph = '/svgs/black/bars.svg';
+	        setter = this.props.change_to_light_theme;
+	        break;
+	      case THEME_ZERO:
 	        background_fill = 'darkgrey';
 	        text_color = 'white';
 	        sun_glyph = '/svgs/black/sun-o.svg';
@@ -32855,6 +32877,79 @@
 
 /***/ },
 /* 123 */
+/***/ function(module, exports) {
+
+	var DEFAULT_THEME, LIGHT_THEME, THEME_ONE, THEME_TWO, THEME_ZERO, ref, ref1, theme_one, theme_zero, themes_definitions;
+
+	ref = '../constants/theme_changes_.coffee', DEFAULT_THEME = ref.DEFAULT_THEME, LIGHT_THEME = ref.LIGHT_THEME;
+
+	ref1 = '../constants/theme_changes_.coffee', THEME_ZERO = ref1.THEME_ZERO, THEME_ONE = ref1.THEME_ONE, THEME_TWO = ref1.THEME_TWO;
+
+	theme_zero = {
+	  fill_000: "url(#theme_zero_grad_000)",
+	  fill_001: "url(#theme_zero_grad_001)",
+	  defs: function(state) {
+	    return (linearGradient({
+	      id: "theme_zero_grad_000"
+	    }, stop({
+	      offset: '0%',
+	      stopColor: "hsl(230, 94%, 87%)"
+	    }), stop({
+	      offset: '92%',
+	      stopColor: "hsl(280, 96%, 88%)"
+	    })), linearGradient({
+	      id: "theme_zero_grad_001"
+	    }, stop({
+	      offset: '10%',
+	      stopColor: "hsl(140, 88%, " + state['luminosity:grad_001'] + "%)"
+	    }), stop({
+	      offset: '77%',
+	      stopColor: "hsl(300, 87%, " + state['luminosity:grad_001'] + "%)"
+	    })));
+	  },
+	  background_color: '#F3F5EA',
+	  text_color: '#2478E7',
+	  nav_text_color: 'darkgrey',
+	  active_link_color: 'green'
+	};
+
+	theme_one = {
+	  fill_000: "url(#theme_zero_grad_000)",
+	  defs: linearGradient({
+	    id: "theme_zero_grad_000"
+	  }, stop({
+	    offset: '0%',
+	    stopColor: "hsl(230, 94%, 87%)"
+	  }), stop({
+	    offset: '92%',
+	    stopColor: "hsl(280, 96%, 88%)"
+	  })),
+	  background_color: 'black',
+	  text_color: 'lightgrey',
+	  nav_text_color: 'white',
+	  active_link_color: '#549AE3'
+	};
+
+	module.exports = themes_definitions = {
+	  THEME_ZERO: theme_zero,
+	  THEME_ONE: theme_one,
+	  DEFAULT_THEME: {
+	    background_color: 'black',
+	    text_color: 'lightgrey',
+	    nav_text_color: 'white',
+	    active_link_color: '#549AE3'
+	  },
+	  LIGHT_THEME: {
+	    background_color: '#F3F5EA',
+	    text_color: '#2478E7',
+	    nav_text_color: 'darkgrey',
+	    active_link_color: 'green'
+	  }
+	};
+
+
+/***/ },
+/* 124 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -37838,7 +37933,7 @@
 	}));
 
 /***/ },
-/* 124 */
+/* 125 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37848,7 +37943,7 @@
 	});
 	exports.routerMiddleware = exports.routerActions = exports.goForward = exports.goBack = exports.go = exports.replace = exports.push = exports.CALL_HISTORY_METHOD = exports.routerReducer = exports.LOCATION_CHANGE = exports.syncHistoryWithStore = undefined;
 
-	var _reducer = __webpack_require__(125);
+	var _reducer = __webpack_require__(126);
 
 	Object.defineProperty(exports, 'LOCATION_CHANGE', {
 	  enumerable: true,
@@ -37863,7 +37958,7 @@
 	  }
 	});
 
-	var _actions = __webpack_require__(126);
+	var _actions = __webpack_require__(127);
 
 	Object.defineProperty(exports, 'CALL_HISTORY_METHOD', {
 	  enumerable: true,
@@ -37908,11 +38003,11 @@
 	  }
 	});
 
-	var _sync = __webpack_require__(127);
+	var _sync = __webpack_require__(128);
 
 	var _sync2 = _interopRequireDefault(_sync);
 
-	var _middleware = __webpack_require__(128);
+	var _middleware = __webpack_require__(129);
 
 	var _middleware2 = _interopRequireDefault(_middleware);
 
@@ -37922,7 +38017,7 @@
 	exports.routerMiddleware = _middleware2.default;
 
 /***/ },
-/* 125 */
+/* 126 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -37964,7 +38059,7 @@
 	}
 
 /***/ },
-/* 126 */
+/* 127 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -38006,7 +38101,7 @@
 	var routerActions = exports.routerActions = { push: push, replace: replace, go: go, goBack: goBack, goForward: goForward };
 
 /***/ },
-/* 127 */
+/* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38019,7 +38114,7 @@
 
 	exports.default = syncHistoryWithStore;
 
-	var _reducer = __webpack_require__(125);
+	var _reducer = __webpack_require__(126);
 
 	var defaultSelectLocationState = function defaultSelectLocationState(state) {
 	  return state.routing;
@@ -38158,7 +38253,7 @@
 	}
 
 /***/ },
-/* 128 */
+/* 129 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38168,7 +38263,7 @@
 	});
 	exports.default = routerMiddleware;
 
-	var _actions = __webpack_require__(126);
+	var _actions = __webpack_require__(127);
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -38196,12 +38291,12 @@
 	}
 
 /***/ },
-/* 129 */
+/* 130 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var SET_BOUNDING_RECT, set_bounding_rect;
 
-	SET_BOUNDING_RECT = __webpack_require__(130).SET_BOUNDING_RECT;
+	SET_BOUNDING_RECT = __webpack_require__(131).SET_BOUNDING_RECT;
 
 	set_bounding_rect = function(arg) {
 	  var viewport_height, viewport_width;
@@ -38219,7 +38314,7 @@
 
 
 /***/ },
-/* 130 */
+/* 131 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var action_types, keymirror;
@@ -38232,30 +38327,30 @@
 
 
 /***/ },
-/* 131 */
+/* 132 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var applyMiddleware, configure_store, createLogger, createStore, logger, promise, ref, thunk;
 
 	ref = __webpack_require__(39), createStore = ref.createStore, applyMiddleware = ref.applyMiddleware;
 
-	thunk = __webpack_require__(132)["default"];
+	thunk = __webpack_require__(133)["default"];
 
-	promise = __webpack_require__(133);
+	promise = __webpack_require__(134);
 
-	createLogger = __webpack_require__(140);
+	createLogger = __webpack_require__(141);
 
 	logger = createLogger();
 
 	configure_store = module.exports = function(initial_state) {
 	  var root_reducer;
-	  root_reducer = __webpack_require__(141)(initial_state);
+	  root_reducer = __webpack_require__(142)(initial_state);
 	  return createStore(root_reducer, initial_state, applyMiddleware(thunk));
 	};
 
 
 /***/ },
-/* 132 */
+/* 133 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -38283,7 +38378,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 133 */
+/* 134 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38294,7 +38389,7 @@
 
 	exports['default'] = promiseMiddleware;
 
-	var _fluxStandardAction = __webpack_require__(134);
+	var _fluxStandardAction = __webpack_require__(135);
 
 	function isPromise(val) {
 	  return val && typeof val.then === 'function';
@@ -38321,7 +38416,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 134 */
+/* 135 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38332,7 +38427,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _lodashIsplainobject = __webpack_require__(135);
+	var _lodashIsplainobject = __webpack_require__(136);
 
 	var _lodashIsplainobject2 = _interopRequireDefault(_lodashIsplainobject);
 
@@ -38351,7 +38446,7 @@
 	}
 
 /***/ },
-/* 135 */
+/* 136 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -38362,9 +38457,9 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var baseFor = __webpack_require__(136),
-	    isArguments = __webpack_require__(137),
-	    keysIn = __webpack_require__(138);
+	var baseFor = __webpack_require__(137),
+	    isArguments = __webpack_require__(138),
+	    keysIn = __webpack_require__(139);
 
 	/** `Object#toString` result references. */
 	var objectTag = '[object Object]';
@@ -38460,7 +38555,7 @@
 
 
 /***/ },
-/* 136 */
+/* 137 */
 /***/ function(module, exports) {
 
 	/**
@@ -38514,7 +38609,7 @@
 
 
 /***/ },
-/* 137 */
+/* 138 */
 /***/ function(module, exports) {
 
 	/**
@@ -38763,7 +38858,7 @@
 
 
 /***/ },
-/* 138 */
+/* 139 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -38774,8 +38869,8 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var isArguments = __webpack_require__(137),
-	    isArray = __webpack_require__(139);
+	var isArguments = __webpack_require__(138),
+	    isArray = __webpack_require__(140);
 
 	/** Used to detect unsigned integer values. */
 	var reIsUint = /^\d+$/;
@@ -38901,7 +38996,7 @@
 
 
 /***/ },
-/* 139 */
+/* 140 */
 /***/ function(module, exports) {
 
 	/**
@@ -39087,7 +39182,7 @@
 
 
 /***/ },
-/* 140 */
+/* 141 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -39320,58 +39415,37 @@
 	module.exports = createLogger;
 
 /***/ },
-/* 141 */
+/* 142 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var CHANGE_TO_DEFAULT_THEME, CHANGE_TO_LIGHT_THEME, CHANGE_TO_SOME_OTHER_THEME, DEFAULT_THEME, LIGHT_THEME, combineReducers, ref;
+	var CHANGE_TO_DEFAULT_THEME, CHANGE_TO_LIGHT_THEME, CHANGE_TO_SOME_OTHER_THEME, DEFAULT_THEME, LIGHT_THEME, TOGGLE_THEME, combineReducers, ref;
 
-	combineReducers = __webpack_require__(142).combineReducers;
+	combineReducers = __webpack_require__(143).combineReducers;
 
-	ref = __webpack_require__(115), CHANGE_TO_DEFAULT_THEME = ref.CHANGE_TO_DEFAULT_THEME, CHANGE_TO_LIGHT_THEME = ref.CHANGE_TO_LIGHT_THEME, CHANGE_TO_SOME_OTHER_THEME = ref.CHANGE_TO_SOME_OTHER_THEME, LIGHT_THEME = ref.LIGHT_THEME, DEFAULT_THEME = ref.DEFAULT_THEME;
+	ref = __webpack_require__(115), CHANGE_TO_DEFAULT_THEME = ref.CHANGE_TO_DEFAULT_THEME, CHANGE_TO_LIGHT_THEME = ref.CHANGE_TO_LIGHT_THEME, CHANGE_TO_SOME_OTHER_THEME = ref.CHANGE_TO_SOME_OTHER_THEME, LIGHT_THEME = ref.LIGHT_THEME, DEFAULT_THEME = ref.DEFAULT_THEME, TOGGLE_THEME = ref.TOGGLE_THEME;
 
 	module.exports = function(initial_state) {
-	  var ref1, routeReducer, theme, viewport_height, viewport_width, viewport_x, viewport_y;
-	  routeReducer = __webpack_require__(148);
-	  ref1 = __webpack_require__(149), viewport_x = ref1.viewport_x, viewport_y = ref1.viewport_y, viewport_height = ref1.viewport_height, viewport_width = ref1.viewport_width;
-	  theme = function(prev_state, action) {
+	  var ref1, routeReducer, theme_name, viewport_height, viewport_width, viewport_x, viewport_y;
+	  routeReducer = __webpack_require__(149);
+	  ref1 = __webpack_require__(150), viewport_x = ref1.viewport_x, viewport_y = ref1.viewport_y, viewport_height = ref1.viewport_height, viewport_width = ref1.viewport_width;
+	  theme_name = function(prev_state, action) {
 	    if (prev_state == null) {
 	      prev_state = initial_state;
 	    }
-	    if (action.type === CHANGE_TO_DEFAULT_THEME) {
-	      return DEFAULT_THEME;
-	    } else if (action.type === CHANGE_TO_LIGHT_THEME) {
-	      return LIGHT_THEME;
+	    if (action.type === TOGGLE_THEME) {
+	      c(prev_state);
+	      return prev_state;
 	    } else {
 	      return prev_state;
 	    }
 	  };
 	  return combineReducers({
-	    theme: theme,
+	    theme_name: theme_name,
 	    viewport_width: viewport_width,
 	    viewport_height: viewport_height,
 	    routing: routeReducer
 	  });
 	};
-
-
-/***/ },
-/* 142 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.combineReducers = undefined;
-
-	var _combineReducers = __webpack_require__(143);
-
-	var _combineReducers2 = _interopRequireDefault(_combineReducers);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.combineReducers = _combineReducers2.default;
 
 
 /***/ },
@@ -39383,10 +39457,30 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+	exports.combineReducers = undefined;
 
-	var _utilities = __webpack_require__(144);
+	var _combineReducers = __webpack_require__(144);
 
-	var _immutable = __webpack_require__(123);
+	var _combineReducers2 = _interopRequireDefault(_combineReducers);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.combineReducers = _combineReducers2.default;
+
+
+/***/ },
+/* 144 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _utilities = __webpack_require__(145);
+
+	var _immutable = __webpack_require__(124);
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
@@ -39442,7 +39536,7 @@
 
 
 /***/ },
-/* 144 */
+/* 145 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39453,15 +39547,15 @@
 	});
 	exports.validateNextState = exports.getUnexpectedInvocationParameterMessage = exports.getStateName = undefined;
 
-	var _getStateName2 = __webpack_require__(145);
+	var _getStateName2 = __webpack_require__(146);
 
 	var _getStateName3 = _interopRequireDefault(_getStateName2);
 
-	var _getUnexpectedInvocationParameterMessage2 = __webpack_require__(146);
+	var _getUnexpectedInvocationParameterMessage2 = __webpack_require__(147);
 
 	var _getUnexpectedInvocationParameterMessage3 = _interopRequireDefault(_getUnexpectedInvocationParameterMessage2);
 
-	var _validateNextState2 = __webpack_require__(147);
+	var _validateNextState2 = __webpack_require__(148);
 
 	var _validateNextState3 = _interopRequireDefault(_validateNextState2);
 
@@ -39473,7 +39567,7 @@
 
 
 /***/ },
-/* 145 */
+/* 146 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -39490,7 +39584,7 @@
 
 
 /***/ },
-/* 146 */
+/* 147 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39499,11 +39593,11 @@
 	    value: true
 	});
 
-	var _immutable = __webpack_require__(123);
+	var _immutable = __webpack_require__(124);
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
-	var _getStateName = __webpack_require__(145);
+	var _getStateName = __webpack_require__(146);
 
 	var _getStateName2 = _interopRequireDefault(_getStateName);
 
@@ -39539,7 +39633,7 @@
 
 
 /***/ },
-/* 147 */
+/* 148 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -39560,12 +39654,12 @@
 
 
 /***/ },
-/* 148 */
+/* 149 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var LOCATION_CHANGE, c, routeReducer;
 
-	LOCATION_CHANGE = __webpack_require__(124).LOCATION_CHANGE;
+	LOCATION_CHANGE = __webpack_require__(125).LOCATION_CHANGE;
 
 	c = function() {
 	  return console.log.apply(console, arguments);
@@ -39588,7 +39682,7 @@
 
 
 /***/ },
-/* 149 */
+/* 150 */
 /***/ function(module, exports) {
 
 	var viewport_height, viewport_width, viewport_x, viewport_y;
@@ -39646,7 +39740,7 @@
 
 
 /***/ },
-/* 150 */
+/* 151 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Provider, Route, Router, _IndexRoute, _Route, _Router, ai_coltrane, articles_list_000, browserHistory, entries, home, index, key, professional, professional_about, professional_articles, professional_blog, professional_portfolio, ref, routes, terraforming;
@@ -39659,11 +39753,11 @@
 
 	Route = React.createFactory(_Route);
 
-	home = rc_generic(__webpack_require__(151));
+	home = rc_generic(__webpack_require__(152));
 
-	professional = rc_generic(__webpack_require__(152));
+	professional = rc_generic(__webpack_require__(153));
 
-	professional_blog = rc_generic(__webpack_require__(155));
+	professional_blog = rc_generic(__webpack_require__(156));
 
 	professional_portfolio = rc_generic(__webpack_require__(160));
 
@@ -39734,7 +39828,7 @@
 
 
 /***/ },
-/* 151 */
+/* 152 */
 /***/ function(module, exports) {
 
 	var home;
@@ -39923,14 +40017,14 @@
 
 
 /***/ },
-/* 152 */
+/* 153 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var portfolio, professional, top_nav;
 
-	portfolio = __webpack_require__(153);
+	portfolio = __webpack_require__(154);
 
-	top_nav = rc_generic(__webpack_require__(154));
+	top_nav = rc_generic(__webpack_require__(155));
 
 	module.exports = professional = rr({
 	  getInitialState: function() {
@@ -39945,7 +40039,7 @@
 	  },
 	  render: function() {
 	    var filter_000, grad_000, main1, theme;
-	    theme = theme_definitions[this.props.theme];
+	    theme = theme_definitions[this.props.theme_name];
 	    grad_000 = shortid();
 	    filter_000 = shortid();
 	    main1 = {
@@ -39960,15 +40054,13 @@
 	      width: '100%',
 	      height: '100%',
 	      fill: theme.background_color
-	    }), top_nav({
-	      toggle_bars_nav: this.toggle_bars_nav
-	    }), bars_nav_001());
+	    }), top_nav(), bars_nav_001());
 	  }
 	});
 
 
 /***/ },
-/* 153 */
+/* 154 */
 /***/ function(module, exports) {
 
 	var portfolio;
@@ -40013,33 +40105,22 @@
 
 
 /***/ },
-/* 154 */
-/***/ function(module, exports, __webpack_require__) {
+/* 155 */
+/***/ function(module, exports) {
 
-	var DEFAULT_THEME, LIGHT_THEME, nav_bar_top, ref;
-
-	ref = __webpack_require__(115), DEFAULT_THEME = ref.DEFAULT_THEME, LIGHT_THEME = ref.LIGHT_THEME;
+	var nav_bar_top;
 
 	module.exports = nav_bar_top = rr({
 	  render: function() {
-	    var active_link_color, background_color, bars_glyph, font_size, get_color, height, location, location_rayy, nav_bar_height, nav_text_color, ref1, ref2, tMat, text_color, text_y, theme;
-	    c('@props', this.props);
-	    ref1 = this.props, theme = ref1.theme, location = ref1.location;
-	    ref2 = theme_definitions[theme], background_color = ref2.background_color, text_color = ref2.text_color, nav_text_color = ref2.nav_text_color, active_link_color = ref2.active_link_color;
+	    var active_link_color, background_color, font_size, get_color, height, location, location_rayy, nav_bar_height, nav_text_color, ref, ref1, tMat, text_color, text_y, theme_name;
+	    ref = this.props, theme_name = ref.theme_name, location = ref.location;
+	    ref1 = theme_definitions[theme_name], background_color = ref1.background_color, text_color = ref1.text_color, nav_text_color = ref1.nav_text_color, active_link_color = ref1.active_link_color;
 	    location_rayy = location.split('/');
 	    tMat = this.props.t_mat;
 	    nav_bar_height = this.props.height * .05;
 	    font_size = nav_bar_height * .38;
 	    text_y = (nav_bar_height * .5) + (.5 * font_size);
 	    height = this.props.height;
-	    bars_glyph = (function() {
-	      switch (this.props.theme) {
-	        case DEFAULT_THEME:
-	          return '/svgs/white/bars.svg';
-	        case LIGHT_THEME:
-	          return '/svgs/black/bars.svg';
-	      }
-	    }).call(this);
 	    get_color = function(loc_str) {
 	      if (_.includes(location_rayy, loc_str)) {
 	        return active_link_color;
@@ -40125,33 +40206,70 @@
 
 
 /***/ },
-/* 155 */
+/* 156 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var blog_entries, keychain, professional_blog, top_nav;
 
-	top_nav = rc_generic(__webpack_require__(154));
+	top_nav = rc_generic(__webpack_require__(155));
 
-	blog_entries = __webpack_require__(156);
+	blog_entries = __webpack_require__(157);
 
 	keychain = blog_entries.keys();
 
 	module.exports = professional_blog = rr({
+	  animations: {},
+	  componentWillUnmount: function() {
+	    return clearInterval(this.animations["test_000"]);
+	  },
 	  getInitialState: function() {
 	    return {
-	      filter: null
+	      filter: null,
+	      "luminosity:grad_001": 50
 	    };
 	  },
+	  componentDidMount: function() {
+	    var going_up;
+	    going_up = true;
+	    return this.animations["test_000"] = setInterval((function(_this) {
+	      return function() {
+	        if (_this.state["luminosity:grad_001"] < 80 && going_up === true) {
+	          return _this.setState({
+	            "luminosity:grad_001": ++_this.state["luminosity:grad_001"]
+	          });
+	        } else if (_this.state["luminosity:grad_001"] === 80 && going_up === true) {
+	          going_up = false;
+	          return _this.setState({
+	            "luminosity:grad_001": --_this.state["luminosity:grad_001"]
+	          });
+	        } else if (_this.state["luminosity:grad_001"] > 50 && going_up === false) {
+	          return _this.setState({
+	            "luminosity:grad_001": --_this.state["luminosity:grad_001"]
+	          });
+	        } else if (_this.state["luminosity:grad_001"] === 50 && going_up === false) {
+	          going_up = true;
+	          return _this.setState({
+	            "luminosity:grad_001": ++_this.state["luminosity:grad_001"]
+	          });
+	        }
+	      };
+	    })(this), 40);
+	  },
 	  render: function() {
-	    var background_color, height, idx, key, main1, our_sep, our_sep2, our_size, our_x, ref, ref1, text_color, theme;
-	    ref = this.props, theme = ref.theme, height = ref.height;
-	    ref1 = theme_definitions[theme], text_color = ref1.text_color, background_color = ref1.background_color;
+	    var background_color, height, idx, key, main1, our_sep, our_sep2, our_size, our_x, ref, ref1, text_color, theme, theme_name;
+	    ref = this.props, theme_name = ref.theme_name, height = ref.height;
+	    theme = theme_definitions[theme_name];
+	    ({
+	      text_color: text_color,
+	      background_color: background_color
+	    });
+	    ref1 = theme = theme_definitions[theme_name], text_color = ref1.text_color, background_color = ref1.background_color;
 	    main1 = {
 	      style: {
 	        color: text_color
 	      }
 	    };
-	    return svg1(rect({
+	    return svg1(defs, theme.defs(this.state), rect({
 	      x: 0,
 	      y: 0,
 	      width: '100%',
@@ -40161,7 +40279,7 @@
 	      x: '10%',
 	      y: '20%',
 	      fontSize: 0.03 * height,
-	      fill: text_color
+	      fill: theme.fill_001
 	    }, "blog"), (function() {
 	      var i, len, results;
 	      results = [];
@@ -40197,7 +40315,7 @@
 	            }, "created: " + (meta.date_created.toDateString()) + "; updated: " + (meta.date_updated.toDateString())), text({
 	              x: our_x,
 	              y: (17 + (3 * our_sep2) + (idx * our_sep * _this.props.height)) + "%",
-	              fontSize: our_size * _this.props.height,
+	              fontSize: our_size * _this.props.height * .75,
 	              fill: text_color,
 	              cursor: 'pointer',
 	              onClick: function() {
@@ -40214,12 +40332,11 @@
 
 
 /***/ },
-/* 156 */
+/* 157 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./klipse_.coffee": 157,
-		"./my_front_end_paradigm.coffee": 159
+		"./my_front_end_paradigm.coffee": 158
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -40232,11 +40349,11 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 156;
+	webpackContext.id = 157;
 
 
 /***/ },
-/* 157 */
+/* 158 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var entry, metadata, table_contents_nav, top_nav;
@@ -40244,66 +40361,50 @@
 	exports.metadata = metadata = {
 	  date_created: new Date(2016, 6 - 1, 27),
 	  date_updated: new Date(2016, 6 - 1, 27),
-	  title: "Using Klipse to interactively demo code",
-	  preview_text: "I was introduced to Klipse during a Clojure Meetup in Tel Aviv at Madlan's offices ...",
+	  title: "My frontend paradigm",
+	  preview_text: "I've been building SPAs for four years now; what have I learned and what do I look forward to ?",
 	  tags: ["nonsense", "dynamic routing", "other stuff"]
 	};
 
-	top_nav = rc_generic(__webpack_require__(154));
+	top_nav = rc_generic(__webpack_require__(155));
 
-	table_contents_nav = rc_generic(__webpack_require__(158));
+	table_contents_nav = rc_generic(__webpack_require__(159));
 
 	exports.component = entry = rr({
 	  render: function() {
-	    var background_color, height, ref, ref1, text_color, theme;
-	    ref = this.props, theme = ref.theme, height = ref.height;
-	    ref1 = theme_definitions[theme], text_color = ref1.text_color, background_color = ref1.background_color;
-	    return svg1(rect({
+	    var background_color, height, ref, ref1, text_color, theme_name;
+	    ref = this.props, theme_name = ref.theme_name, height = ref.height;
+	    ref1 = theme_definitions[theme_name], text_color = ref1.text_color, background_color = ref1.background_color;
+	    return svg({
+	      width: '100%',
+	      height: '200%'
+	    }, rect({
 	      x: 0,
 	      y: 0,
 	      width: '100%',
-	      height: '100%',
+	      height: "100%",
 	      fill: background_color
-	    }), text({
-	      x: '10%',
-	      y: '40%',
-	      fontSize: .03 * this.height,
-	      fill: text_color
-	    }, "blog entry template"), foreignObject({
-	      x: '20%',
+	    }), foreignObject({
+	      x: '30%',
 	      y: '10%',
 	      width: '50%',
-	      height: '70%'
+	      height: '100%'
 	    }, div({
 	      style: {
 	        color: text_color
 	      }
-	    }, h6(null, "created: " + (metadata.date_created.toDateString()) + ", updated: " + (metadata.date_updated.toDateString())), h1(null, "NOTE: This turned out to not work, will continue experimenting with various options for in-browser code evaluation, although it's not a high priority for me now,... to many other projects. So.  "), h1(null, "Using Klipse to interactively demo code"), p(null, "I was introduced to the", span(null, " "), a({
-	      target: '_blank',
-	      href: 'https://github.com/viebel/klipse'
-	    }, span(null, "Klipse plugin")), span(null, " "), span(null, " at a "), a({
-	      target: '_blank',
-	      href: 'http://www.meetup.com/Tel-Aviv-Yafo-Clojure-Round-Table/events/231891125/'
-	    }, span(null, "Clojure Meetup")), span(null, " "), span(null, "in Tel Aviv at"), span(null, " "), a({
-	      target: '_blank',
-	      href: 'https://www.facebook.com/madlan.co.il'
-	    }, span(null, "Madlan's")), span(null, " offices.")), p(null, "And now, we are going to ", strong(null, " klipsify "), " this code snippet"), pre(null, code({
-	      className: "language-klipse-eval-js",
-	      style: {
-	        color: text_color
-	      }
-	    }, "[1,2,3, 4].map(function(x){ return x + 1;})")))), table_contents_nav(), top_nav(), bars_nav_001());
+	    }, h6(null, "created: " + (metadata.date_created.toDateString()) + ", updated: " + (metadata.date_updated.toDateString())), h1(null, "My Frontend Paradigm"), p(null, "I've been developing single page applications (SPAs) for some years now."), p(null, "It was only a few years ago that surfing the web -- for me primarily a reading activity involving extensive inter-site navigation -- entailed perpetual annoyance at the few-second waiting times for intra-site navigation to render, as every navigation action --within a site-- demanded a new server request, could take 5 seconds could take 30... ; to add insult to injury, depending on caching even a page I'd just been reading could require a fresh request.  It was clear to me at least (I remember when I thought I had a relatively original idea here!) that it would be easy to preload what was mostly just text, and make the navigation simply a client side calculation.  Later on I learned that other people had the same idea, and they called it the singe-page-app (SPA). Today I've been programming SPAs for 3+ years, first with Jade templates and JQuery, then Angular-1 for a year, and then two years now of React, this is a reality.  There are many options for frameworks; I recommend React as best all around."), h3(null, "Reflections on lessons learned, comments on how I put together my 'apps'"), ul(null, li(null, "React:  There may be some similarly good options out there, but they are probably for obscure langs like Erlang without much support for the whole Npm ecosystem.  React does the one thing right that needed to be done right: declarative views, enabling pure functional coding of view over parametric state.  Redux takes care of state, and that's all you need.  Angular-1 was a nightmare, poorly conceived.  The greatest strength of Angular-2 is that it can be used in a stripped down way as a React clone, with the VDOM and none of the nonsense toys they add in to confuse aspiring architects, like arbitrary 2-way binding, watching, observables.  Related sidenote: I'm interested in RxJS, but haven't had much chance to use it."), li(null, "SVG over HTML/CSS. HTML/CSS are tools for typesetting, they are not all purspose tools for building graphical components or a graphical environment.  HTML/CSS are typesetting tools.  Typesetting tools deal with type, meaning the written word. If you want to make a progress bar, program an SVG; you want a button, or a tooltip window animation, best be working with SVG.  Sure, an experienced HTML/CSS hacker can make these things happen with their **typesetting** tool, but that's an observation equivalent to noticing that we can implement a pretty good MonaLisa with ASCII art. Sure, doesn't make it the best tool.  If you want to make a graphical user interface (GUI) with a rectangular lightboard, you need to think more generally and isometrically in terms of planar space, geometry, etc.  Cartesian coordinates, transforms, shapes, polygons, paths, these kinds of things.  For this in the web-browser there is a most awesome toolset, the SVG API.  It's really awesome and flexible.  I organise my app so that the root element and most of the main components be SVG components.  Any substantial text content within the app can be rendered as HTML/CSS by using the SVG API's `foreignObject` function."), li(null, "Pure functions over templates, pure functions over JSX.  My markup is mercilessly free from JSX, I implement the React render function using pure functions.  Just CoffeeScript.  Rendering a `div` is just a function called `div`.  Just pure CoffeeScript, and you can do the same thing in JS vanilla.  I don't have anything against JSX, but it's a messy protocol that is not optimal in spite of being widely adopted."), li(null, "CoffeeScript over ES6/ES7.  Mosnt all the features found in ES6/7 were in CoffeeScript already years ago, the few that weren't like generators have found speedy implementation.  When ES20 adopts a terse Python/Ruby style syntax, then it will be `==` CoffeeScript, and the great internecine war will come to a bizarre conclusion.  Until then, I'll just stay ahead of the game by using ES20 (CoffeeScript) now.  Unless I'm contributing to OS project written in ES6 or doing professional duties; in such situations no complaints and no problem, I am fine with it. Just a preference and best practice, imho.  TypeScript: Carries ES6's pointless syntactic verbosity baggage, but facilitates solidifying type/parameter/function-signature protocol across an application stack.  This is attractive feature to those building large systems, but I think similar function can be hand-rolled by carefull application of development protocol. I'm against systematizing it in a language; you can test for it as a separated concern, thus avoiding overburdening the language and primary coding activity."), li(null, "React, Redux, ImmutableJS, Webpack.  I don't use the DevTools; I think if I need something like that I'll add it in adhoc-- it's not so difficult to do.  I don't use HotModuleReload, prefer to manually reload as I save files a bunch of times a minute and don't need so much background stuff going on everytime I do that.")), h3(null, "Things that I haven't mastered yet, are still goals "), ul(null, li(null, "WebRTC :: Make P2P happen, for gaming, for business communications topologies, distributed systems generally."), li(null, "WebWorkers / concurrency :: I've gotten some primitive WebWorkers tasks started, but I've never implemented hardcore concurrency solution on a computationally demanding webapp, and I think this is a gold standard to strive towards.  There are so many processors in modern devices, we need to leverage them or we are not providing full value."), li(null, "Progressive and responsive:  I'm very happy with what my SVG methodology can provide in terms of responsive visual presentation algorithms.  Computational SVG is incredibly flexible, and together with homogeneous coordinate driven composed matrix transforms offer tremendous options and workflow arrangement.  But I haven't actually had a chance to implement much of this.  I know the potential is there, next need a project which demands it. Similarly with progressive webapps, I know how to implement Webpack assets on demand, but haven't had a project yet requiring an app of suffcient size to demand it.  Exciting stuff, look forward to working with it."), li(null, "WebRTC again:  Did you know WebRTC has the API for audio in the browser , not to mention the microphone ?  While it's true that misplaced audio can be annoying in a website, when we're talking about more immersive apps (think Slack) there is a lot of room for creative features that take advantage of audio inputs and outputs."), li(null, "WebGL:  I'm just getting started with WebGL.  It's tremendous and beautiful.  I hope to implement a flight simulator in the browser before years end.")))), table_contents_nav(), top_nav(), bars_nav_001());
 	  }
 	});
 
 
 /***/ },
-/* 158 */
+/* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var blog_entries, chain2, keychain, professional_blog;
 
-	blog_entries = __webpack_require__(156);
+	blog_entries = __webpack_require__(157);
 
 	keychain = blog_entries.keys();
 
@@ -40314,9 +40415,9 @@
 	    };
 	  },
 	  render: function() {
-	    var background_color, height, idx, key, main1, our_sep, our_sep2, our_size, our_x, ref, ref1, text_color, theme;
-	    ref = this.props, theme = ref.theme, height = ref.height;
-	    ref1 = theme_definitions[theme], text_color = ref1.text_color, background_color = ref1.background_color;
+	    var background_color, height, idx, key, main1, our_sep, our_sep2, our_size, our_x, ref, ref1, text_color, theme_name;
+	    ref = this.props, theme_name = ref.theme_name, height = ref.height;
+	    ref1 = theme_definitions[theme_name], text_color = ref1.text_color, background_color = ref1.background_color;
 	    main1 = {
 	      style: {
 	        color: text_color
@@ -40384,58 +40485,12 @@
 
 
 /***/ },
-/* 159 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var entry, metadata, table_contents_nav, top_nav;
-
-	exports.metadata = metadata = {
-	  date_created: new Date(2016, 6 - 1, 27),
-	  date_updated: new Date(2016, 6 - 1, 27),
-	  title: "My frontend paradigm",
-	  preview_text: "I've been building SPAs for four years now; what have I learned and what do I look forward to ?",
-	  tags: ["nonsense", "dynamic routing", "other stuff"]
-	};
-
-	top_nav = rc_generic(__webpack_require__(154));
-
-	table_contents_nav = rc_generic(__webpack_require__(158));
-
-	exports.component = entry = rr({
-	  render: function() {
-	    var background_color, height, ref, ref1, text_color, theme;
-	    ref = this.props, theme = ref.theme, height = ref.height;
-	    ref1 = theme_definitions[theme], text_color = ref1.text_color, background_color = ref1.background_color;
-	    return svg({
-	      width: '100%',
-	      height: '200%'
-	    }, rect({
-	      x: 0,
-	      y: 0,
-	      width: '100%',
-	      height: "100%",
-	      fill: background_color
-	    }), foreignObject({
-	      x: '30%',
-	      y: '10%',
-	      width: '50%',
-	      height: '100%'
-	    }, div({
-	      style: {
-	        color: text_color
-	      }
-	    }, h6(null, "created: " + (metadata.date_created.toDateString()) + ", updated: " + (metadata.date_updated.toDateString())), h1(null, "My Frontend Paradigm"), p(null, "I've been developing single page applications (SPAs) for some years now."), p(null, "It was only a few years ago that surfing the web -- for me primarily a reading activity involving extensive inter-site navigation -- entailed perpetual annoyance at the few-second waiting times for intra-site navigation to render, as every navigation action --within a site-- demanded a new server request, could take 5 seconds could take 30... ; to add insult to injury, depending on caching even a page I'd just been reading could require a fresh request.  It was clear to me at least (I remember when I thought I had a relatively original idea here!) that it would be easy to preload what was mostly just text, and make the navigation simply a client side calculation.  Later on I learned that other people had the same idea, and they called it the singe-page-app (SPA). Today I've been programming SPAs for 3+ years, first with Jade templates and JQuery, then Angular-1 for a year, and then two years now of React, this is a reality.  There are many options for frameworks; I recommend React as best all around."), h3(null, "Reflections on lessons learned, comments on how I put together my 'apps'"), ul(null, li(null, "React:  There may be some similarly good options out there, but they are probably for obscure langs like Erlang without much support for the whole Npm ecosystem.  React does the one thing right that needed to be done right: declarative views, enabling pure functional coding of view over parametric state.  Redux takes care of state, and that's all you need.  Angular-1 was a nightmare, poorly conceived.  The greatest strength of Angular-2 is that it can be used in a stripped down way as a React clone, with the VDOM and none of the nonsense toys they add in to confuse aspiring architects, like arbitrary 2-way binding, watching, observables.  Related sidenote: I'm interested in RxJS, but haven't had much chance to use it."), li(null, "SVG over HTML/CSS. HTML/CSS are tools for typesetting, they are not all purspose tools for building graphical components or a graphical environment.  HTML/CSS are typesetting tools.  Typesetting tools deal with type, meaning the written word. If you want to make a progress bar, program an SVG; you want a button, or a tooltip window animation, best be working with SVG.  Sure, an experienced HTML/CSS hacker can make these things happen with their **typesetting** tool, but that's an observation equivalent to noticing that we can implement a pretty good MonaLisa with ASCII art. Sure, doesn't make it the best tool.  If you want to make a graphical user interface (GUI) with a rectangular lightboard, you need to think more generally and isometrically in terms of planar space, geometry, etc.  Cartesian coordinates, transforms, shapes, polygons, paths, these kinds of things.  For this in the web-browser there is a most awesome toolset, the SVG API.  It's really awesome and flexible.  I organise my app so that the root element and most of the main components be SVG components.  Any substantial text content within the app can be rendered as HTML/CSS by using the SVG API's `foreignObject` function."), li(null, "Pure functions over templates, pure functions over JSX.  My markup is mercilessly free from JSX, I implement the React render function using pure functions.  Just CoffeeScript.  Rendering a `div` is just a function called `div`.  Just pure CoffeeScript, and you can do the same thing in JS vanilla.  I don't have anything against JSX, but it's a messy protocol that is not optimal in spite of being widely adopted."), li(null, "CoffeeScript over ES6/ES7.  Mosnt all the features found in ES6/7 were in CoffeeScript already years ago, the few that weren't like generators have found speedy implementation.  When ES20 adopts a terse Python/Ruby style syntax, then it will be `==` CoffeeScript, and the great internecine war will come to a bizarre conclusion.  Until then, I'll just stay ahead of the game by using ES20 (CoffeeScript) now.  Unless I'm contributing to OS project written in ES6 or doing professional duties; in such situations no complaints and no problem, I am fine with it. Just a preference and best practice, imho.  TypeScript: Carries ES6's pointless syntactic verbosity baggage, but facilitates solidifying type/parameter/function-signature protocol across an application stack.  This is attractive feature to those building large systems, but I think similar function can be hand-rolled by carefull application of development protocol. I'm against systematizing it in a language; you can test for it as a separated concern, thus avoiding overburdening the language and primary coding activity."), li(null, "React, Redux, ImmutableJS, Webpack.  I don't use the DevTools; I think if I need something like that I'll add it in adhoc-- it's not so difficult to do.  I don't use HotModuleReload, prefer to manually reload as I save files a bunch of times a minute and don't need so much background stuff going on everytime I do that.")), h3(null, "Things that I haven't mastered yet, are still goals "), ul(null, li(null, "WebRTC :: Make P2P happen, for gaming, for business communications topologies, distributed systems generally."), li(null, "WebWorkers / concurrency :: I've gotten some primitive WebWorkers tasks started, but I've never implemented hardcore concurrency solution on a computationally demanding webapp, and I think this is a gold standard to strive towards.  There are so many processors in modern devices, we need to leverage them or we are not providing full value."), li(null, "Progressive and responsive:  I'm very happy with what my SVG methodology can provide in terms of responsive visual presentation algorithms.  Computational SVG is incredibly flexible, and together with homogeneous coordinate driven composed matrix transforms offer tremendous options and workflow arrangement.  But I haven't actually had a chance to implement much of this.  I know the potential is there, next need a project which demands it. Similarly with progressive webapps, I know how to implement Webpack assets on demand, but haven't had a project yet requiring an app of suffcient size to demand it.  Exciting stuff, look forward to working with it."), li(null, "WebRTC again:  Did you know WebRTC has the API for audio in the browser , not to mention the microphone ?  While it's true that misplaced audio can be annoying in a website, when we're talking about more immersive apps (think Slack) there is a lot of room for creative features that take advantage of audio inputs and outputs."), li(null, "WebGL:  I'm just getting started with WebGL.  It's tremendous and beautiful.  I hope to implement a flight simulator in the browser before years end.")))), table_contents_nav(), top_nav(), bars_nav_001());
-	  }
-	});
-
-
-/***/ },
 /* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var portfolio_index, spacewar, top_nav, yari;
 
-	top_nav = rc_generic(__webpack_require__(154));
+	top_nav = rc_generic(__webpack_require__(155));
 
 	spacewar = rc_generic(__webpack_require__(161));
 
@@ -40448,9 +40503,9 @@
 	    };
 	  },
 	  render: function() {
-	    var background_color, height, main1, mso, ref, ref1, text_color, theme, width;
-	    ref = this.props, theme = ref.theme, height = ref.height, width = ref.width;
-	    ref1 = theme_definitions[theme], text_color = ref1.text_color, background_color = ref1.background_color;
+	    var background_color, height, main1, mso, ref, ref1, text_color, theme_name, width;
+	    ref = this.props, theme_name = ref.theme_name, height = ref.height, width = ref.width;
+	    ref1 = theme_definitions[theme_name], text_color = ref1.text_color, background_color = ref1.background_color;
 	    mso = {
 	      x: .06,
 	      y: .16
@@ -40524,9 +40579,9 @@
 
 	module.exports = rr({
 	  render: function() {
-	    var background_color, height, ref, ref1, sw, text_color, theme, width;
-	    ref = this.props, theme = ref.theme, height = ref.height, width = ref.width;
-	    ref1 = theme_definitions[theme], text_color = ref1.text_color, background_color = ref1.background_color;
+	    var background_color, height, ref, ref1, sw, text_color, theme_name, width;
+	    ref = this.props, theme_name = ref.theme_name, height = ref.height, width = ref.width;
+	    ref1 = theme_definitions[theme_name], text_color = ref1.text_color, background_color = ref1.background_color;
 	    sw = {
 	      x: .6,
 	      y: .16
@@ -40570,9 +40625,9 @@
 
 	module.exports = rr({
 	  render: function() {
-	    var background_color, height, ref, ref1, sw, text_color, theme, width;
-	    ref = this.props, theme = ref.theme, height = ref.height, width = ref.width;
-	    ref1 = theme_definitions[theme], text_color = ref1.text_color, background_color = ref1.background_color;
+	    var background_color, height, ref, ref1, sw, text_color, theme_name, width;
+	    ref = this.props, theme_name = ref.theme_name, height = ref.height, width = ref.width;
+	    ref1 = theme_definitions[theme_name], text_color = ref1.text_color, background_color = ref1.background_color;
 	    sw = {
 	      x: .3,
 	      y: .16
@@ -40628,7 +40683,7 @@
 
 	var professional_blog, top_nav;
 
-	top_nav = rc_generic(__webpack_require__(154));
+	top_nav = rc_generic(__webpack_require__(155));
 
 	module.exports = professional_blog = rr({
 	  getInitialState: function() {
@@ -40642,9 +40697,9 @@
 	    });
 	  },
 	  render_CV_link: function() {
-	    var background_color, height, ref, ref1, text_color, theme, width;
-	    ref = this.props, theme = ref.theme, height = ref.height, width = ref.width;
-	    ref1 = theme_definitions[theme], text_color = ref1.text_color, background_color = ref1.background_color;
+	    var background_color, height, ref, ref1, text_color, theme_name, width;
+	    ref = this.props, theme_name = ref.theme_name, height = ref.height, width = ref.width;
+	    ref1 = theme_definitions[theme_name], text_color = ref1.text_color, background_color = ref1.background_color;
 	    return a({
 	      xlinkHref: "https://yadi.sk/i/FEUS8l2IsignJ",
 	      xlinkShow: 'new'
@@ -40656,9 +40711,9 @@
 	    }, "CV / resume PDF"));
 	  },
 	  render: function() {
-	    var background_color, height, main1, p_style, ref, ref1, text_color, theme, width;
-	    ref = this.props, theme = ref.theme, height = ref.height, width = ref.width;
-	    ref1 = theme_definitions[theme], text_color = ref1.text_color, background_color = ref1.background_color;
+	    var background_color, height, main1, p_style, ref, ref1, text_color, theme_name, width;
+	    ref = this.props, theme_name = ref.theme_name, height = ref.height, width = ref.width;
+	    ref1 = theme_definitions[theme_name], text_color = ref1.text_color, background_color = ref1.background_color;
 	    main1 = {
 	      style: {
 	        color: text_color
@@ -40766,7 +40821,7 @@
 
 	var professional_blog, top_nav;
 
-	top_nav = rc_generic(__webpack_require__(154));
+	top_nav = rc_generic(__webpack_require__(155));
 
 	module.exports = professional_blog = rr({
 	  getInitialState: function() {
@@ -40866,8 +40921,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./klipse_.coffee": 157,
-		"./my_front_end_paradigm.coffee": 159
+		"./my_front_end_paradigm.coffee": 158
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));

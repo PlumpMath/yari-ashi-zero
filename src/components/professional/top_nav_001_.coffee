@@ -1,12 +1,10 @@
-{ DEFAULT_THEME, LIGHT_THEME } = require '../../constants/theme_changes_.coffee'
+# { DEFAULT_THEME, LIGHT_THEME, THEME_ZERO, THEME_ONE } = require '../../constants/theme_changes_.coffee'
 module.exports = nav_bar_top = rr
 
-
-
     render: ->
-        c '@props', @props
-        {theme, location} = @props
-        {background_color, text_color, nav_text_color, active_link_color} = theme_definitions[theme]
+        # c '@props', @props
+        {theme_name, location} = @props
+        {background_color, text_color, nav_text_color, active_link_color} = theme_definitions[theme_name]
 
         location_rayy = location.split '/'
 
@@ -17,11 +15,11 @@ module.exports = nav_bar_top = rr
         font_size = nav_bar_height * .38
         text_y = (nav_bar_height * .5) + (.5 * font_size)
         height = @props.height
-        bars_glyph = switch @props.theme
-            when DEFAULT_THEME
-                '/svgs/white/bars.svg'
-            when LIGHT_THEME
-                '/svgs/black/bars.svg'
+        # bars_glyph = switch @props.theme_name
+        #     when DEFAULT_THEME
+        #         '/svgs/white/bars.svg'
+        #     when THEME_ZERO
+        #         '/svgs/black/bars.svg'
 
 
         get_color = (loc_str) ->
