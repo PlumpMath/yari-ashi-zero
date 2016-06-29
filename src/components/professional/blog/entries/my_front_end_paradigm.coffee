@@ -10,19 +10,29 @@ top_nav = rc_generic(require('../../top_nav_001_.coffee'))
 table_contents_nav = rc_generic(require('../table_contents_nav.coffee'))
 
 addWheelListener = require('wheel').addWheelListener
+removeWheelListener = require('wheel').removeWheelListener
 
 exports.component = entry = rr
+
+    scroller: (e) ->
+        @setState
+            scroll_state: @state.scroll_state - (e.deltaY / 10 )
 
     getInitialState: ->
         scroll_state: 10
 
+
+    componentWillUnmount: ->
+        removeWheelListener window, @scroller
+
+
     componentDidMount: ->
-        addWheelListener window,  (e) =>
-            c ' have wheel event ', e
-            c e.deltaY
-            numero = parseInt e.deltaY
-            @setState
-                scroll_state: @state.scroll_state - (numero / 10 )
+        # window.addEventListener "scroll", (e) ->
+        #     c 'have scroll', e
+        addWheelListener window,  @scroller
+            # c ' have wheel event ', e
+            # c e.deltaY
+
 
 
     render: ->

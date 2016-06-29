@@ -40459,7 +40459,7 @@
 /* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var addWheelListener, entry, metadata, table_contents_nav, top_nav;
+	var addWheelListener, entry, metadata, removeWheelListener, table_contents_nav, top_nav;
 
 	exports.metadata = metadata = {
 	  date_created: new Date(2016, 6 - 1, 27),
@@ -40475,24 +40475,24 @@
 
 	addWheelListener = __webpack_require__(169).addWheelListener;
 
+	removeWheelListener = __webpack_require__(169).removeWheelListener;
+
 	exports.component = entry = rr({
+	  scroller: function(e) {
+	    return this.setState({
+	      scroll_state: this.state.scroll_state - (e.deltaY / 10)
+	    });
+	  },
 	  getInitialState: function() {
 	    return {
 	      scroll_state: 10
 	    };
 	  },
+	  componentWillUnmount: function() {
+	    return removeWheelListener(window, this.scroller);
+	  },
 	  componentDidMount: function() {
-	    return addWheelListener(window, (function(_this) {
-	      return function(e) {
-	        var numero;
-	        c(' have wheel event ', e);
-	        c(e.deltaY);
-	        numero = parseInt(e.deltaY);
-	        return _this.setState({
-	          scroll_state: _this.state.scroll_state - (numero / 10)
-	        });
-	      };
-	    })(this));
+	    return addWheelListener(window, this.scroller);
 	  },
 	  render: function() {
 	    var background_color, height, ref, ref1, text_color, theme_name;
