@@ -9,7 +9,21 @@ exports.metadata = metadata =
 top_nav = rc_generic(require('../../top_nav_001_.coffee'))
 table_contents_nav = rc_generic(require('../table_contents_nav.coffee'))
 
+addWheelListener = require('wheel').addWheelListener
+
 exports.component = entry = rr
+
+    getInitialState: ->
+        scroll_state: 10
+
+    componentDidMount: ->
+        addWheelListener window,  (e) =>
+            c ' have wheel event ', e
+            c e.deltaY
+            numero = parseInt e.deltaY
+            @setState
+                scroll_state: @state.scroll_state - (numero / 10 )
+
 
     render: ->
         {theme_name, height } = @props
@@ -30,7 +44,7 @@ exports.component = entry = rr
 
             foreignObject
                 x: '30%'
-                y: '10%'
+                y: "#{@state.scroll_state}%"
                 width: '50%'
                 height: '100%'
                 ,
