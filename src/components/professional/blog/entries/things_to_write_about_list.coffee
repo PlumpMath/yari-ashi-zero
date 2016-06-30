@@ -75,6 +75,12 @@ exports.component = entry = rr
             width: '100%'
             height: '100%'
             ,
+            rect
+                x: 0
+                y: 0
+                width: '100%'
+                height: "100%"
+                fill: background_color
             g
                 onTouchStart: @handle_touchStart
                 onTouchMove: @handle_touchMove
@@ -82,10 +88,10 @@ exports.component = entry = rr
                 onWheel: @scroller
                 ,
                 rect
-                    x: 0
-                    y: 0
-                    width: '100%'
-                    height: "100%"
+                    x: "23%"
+                    y: "10%"
+                    width: '73%'
+                    height: "90%"
                     fill: background_color
 
                 foreignObject

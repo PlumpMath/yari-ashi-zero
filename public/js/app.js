@@ -40935,16 +40935,22 @@
 	    return svg({
 	      width: '100%',
 	      height: '100%'
-	    }, g({
-	      onTouchStart: this.handle_touchStart,
-	      onTouchMove: this.handle_touchMove,
-	      onTouchEnd: this.handle_touchEnd,
-	      onWheel: this.scroller
 	    }, rect({
 	      x: 0,
 	      y: 0,
 	      width: '100%',
 	      height: "100%",
+	      fill: background_color
+	    }), g({
+	      onTouchStart: this.handle_touchStart,
+	      onTouchMove: this.handle_touchMove,
+	      onTouchEnd: this.handle_touchEnd,
+	      onWheel: this.scroller
+	    }, rect({
+	      x: "23%",
+	      y: "10%",
+	      width: '73%',
+	      height: "90%",
 	      fill: background_color
 	    }), foreignObject({
 	      x: '30%',
