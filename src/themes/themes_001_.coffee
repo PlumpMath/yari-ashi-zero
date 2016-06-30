@@ -75,7 +75,7 @@ theme_zero =
     background_color: '#F3F5EA'
     text_color: '#2478E7'
     nav_text_color: 'darkgrey'
-    active_link_color: 'green'
+    active_link_color: 'chartreuse'
     sun_color: 'magenta'
 
 theme_one =

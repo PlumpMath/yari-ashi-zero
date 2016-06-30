@@ -14,9 +14,22 @@ module.exports = portfolio_index = rr
             x: .06
             y: .16
 
+        wbgl =
+            x: .06
+            y: .59
+
+        rnp =
+            x: .66
+            y: .59
+
+        backend =
+            x: .46
+            y: .80
+
         main1 =
             style:
                 color: text_color
+
         svg1(
             rect
                 x: 0
@@ -27,6 +40,40 @@ module.exports = portfolio_index = rr
 
             spacewar()
             yari()
+
+            text
+                x: rnp.x * width
+                y: rnp.y * height
+                textLength: .12 * width
+                fontSize: .02 * height
+                fill: text_color
+                ,
+                'current :: ReactNative projects'
+
+            text
+                x: backend.x * width
+                y: backend.y * height
+                textLength: .22 * width
+                fontSize: .02 * height
+                fill: text_color
+                ,
+                'Backend/fullstack/data'
+                tspan
+                    x: backend.x * width
+                    y: (backend.y + .03) * height
+                    textLength: .22 * width
+                    fontSize: .02 * height
+                    ,
+                    ":: distributed systems :: NodeJS, WebSockets, Redis/Lua"
+
+            text
+                x: wbgl.x * width
+                y: wbgl.y * height
+                textLength: .12 * width
+                fontSize: .02 * height
+                fill: text_color
+                ,
+                'current :: WebGL projects'
 
             text
                 x: mso.x * width

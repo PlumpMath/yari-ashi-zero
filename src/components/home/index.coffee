@@ -70,7 +70,7 @@ module.exports = home = rr
             g
                 onMouseOver: => @onset_vindaloo_000({name: "professional"})
                 onMouseOut: => @fader_vindaloo_000({name: "professional"})
-                onClick:-> browserHistory.push '/professional'
+                onClick:-> browserHistory.push '/professional/about'
                 ,
                 rect
                     x: "13%"

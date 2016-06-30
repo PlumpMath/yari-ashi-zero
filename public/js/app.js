@@ -127,7 +127,7 @@
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var React, React_DOM, _, _Link, a, arq, body, browserHistory, c, circle, clipPath, code, connect, d, defs, div, dom_stuff, ellipse, feBlend, feGaussianBlur, feMerge, feMergeNode, feOffset, filter, foreignObject, g, gl_mat, h1, h2, h3, h4, h5, h6, i, image, input, item, k, len, li, line, linearGradient, mat3, ol, p, path, pattern, polygon, polyline, pre, radialGradient, rect, ref, ref1, ref2, request, shortid, span, stop, strong, svg, text, textArea, theme_constants, ul, v, vec2, vec3;
+	var React, React_DOM, _, _Link, a, arq, body, browserHistory, c, circle, clipPath, code, connect, d, defs, div, dom_stuff, ellipse, feBlend, feGaussianBlur, feMerge, feMergeNode, feOffset, filter, foreignObject, g, gl_mat, h1, h2, h3, h4, h5, h6, i, image, input, item, k, len, li, line, linearGradient, mat3, ol, p, path, pattern, polygon, polyline, pre, radialGradient, rect, ref, ref1, ref2, request, shortid, span, stop, strong, svg, text, textArea, theme_constants, tspan, ul, v, vec2, vec3;
 
 	c = function() {
 	  return console.log.apply(console, arguments);
@@ -172,7 +172,7 @@
 	  window[k] = v;
 	}
 
-	dom_stuff = (ref = React.DOM, p = ref.p, strong = ref.strong, pre = ref.pre, div = ref.div, h1 = ref.h1, h2 = ref.h2, h3 = ref.h3, h4 = ref.h4, h5 = ref.h5, h6 = ref.h6, span = ref.span, svg = ref.svg, circle = ref.circle, rect = ref.rect, ul = ref.ul, line = ref.line, li = ref.li, ol = ref.ol, code = ref.code, a = ref.a, input = ref.input, defs = ref.defs, clipPath = ref.clipPath, body = ref.body, linearGradient = ref.linearGradient, stop = ref.stop, g = ref.g, path = ref.path, d = ref.d, polygon = ref.polygon, image = ref.image, pattern = ref.pattern, filter = ref.filter, feBlend = ref.feBlend, feOffset = ref.feOffset, polyline = ref.polyline, feGaussianBlur = ref.feGaussianBlur, feMergeNode = ref.feMergeNode, feMerge = ref.feMerge, radialGradient = ref.radialGradient, foreignObject = ref.foreignObject, text = ref.text, textArea = ref.textArea, ellipse = ref.ellipse, pattern = ref.pattern, ref);
+	dom_stuff = (ref = React.DOM, p = ref.p, strong = ref.strong, pre = ref.pre, div = ref.div, h1 = ref.h1, h2 = ref.h2, h3 = ref.h3, h4 = ref.h4, h5 = ref.h5, h6 = ref.h6, span = ref.span, svg = ref.svg, circle = ref.circle, tspan = ref.tspan, rect = ref.rect, ul = ref.ul, line = ref.line, li = ref.li, ol = ref.ol, code = ref.code, a = ref.a, input = ref.input, defs = ref.defs, clipPath = ref.clipPath, body = ref.body, linearGradient = ref.linearGradient, stop = ref.stop, g = ref.g, path = ref.path, d = ref.d, polygon = ref.polygon, image = ref.image, pattern = ref.pattern, filter = ref.filter, feBlend = ref.feBlend, feOffset = ref.feOffset, polyline = ref.polyline, feGaussianBlur = ref.feGaussianBlur, feMergeNode = ref.feMergeNode, feMerge = ref.feMerge, radialGradient = ref.radialGradient, foreignObject = ref.foreignObject, text = ref.text, textArea = ref.textArea, ellipse = ref.ellipse, pattern = ref.pattern, ref);
 
 	for (k in dom_stuff) {
 	  v = dom_stuff[k];
@@ -32968,7 +32968,7 @@
 	  background_color: '#F3F5EA',
 	  text_color: '#2478E7',
 	  nav_text_color: 'darkgrey',
-	  active_link_color: 'green',
+	  active_link_color: 'chartreuse',
 	  sun_color: 'magenta'
 	};
 
@@ -40056,7 +40056,7 @@
 	        };
 	      })(this),
 	      onClick: function() {
-	        return browserHistory.push('/professional');
+	        return browserHistory.push('/professional/about');
 	      }
 	    }, rect({
 	      x: "13%",
@@ -40440,6 +40440,7 @@
 
 	var map = {
 		"./my_front_end_paradigm.coffee": 159,
+		"./things_to_do_devving_this_site.coffee": 171,
 		"./things_to_write_about_list.coffee": 162
 	};
 	function webpackContext(req) {
@@ -40985,12 +40986,24 @@
 	    };
 	  },
 	  render: function() {
-	    var background_color, height, main1, mso, ref, ref1, text_color, theme_name, width;
+	    var backend, background_color, height, main1, mso, ref, ref1, rnp, text_color, theme_name, wbgl, width;
 	    ref = this.props, theme_name = ref.theme_name, height = ref.height, width = ref.width;
 	    ref1 = theme_definitions[theme_name], text_color = ref1.text_color, background_color = ref1.background_color;
 	    mso = {
 	      x: .06,
 	      y: .16
+	    };
+	    wbgl = {
+	      x: .06,
+	      y: .59
+	    };
+	    rnp = {
+	      x: .66,
+	      y: .59
+	    };
+	    backend = {
+	      x: .46,
+	      y: .80
 	    };
 	    main1 = {
 	      style: {
@@ -41004,6 +41017,29 @@
 	      height: '100%',
 	      fill: background_color
 	    }), spacewar(), yari(), text({
+	      x: rnp.x * width,
+	      y: rnp.y * height,
+	      textLength: .12 * width,
+	      fontSize: .02 * height,
+	      fill: text_color
+	    }, 'current :: ReactNative projects'), text({
+	      x: backend.x * width,
+	      y: backend.y * height,
+	      textLength: .22 * width,
+	      fontSize: .02 * height,
+	      fill: text_color
+	    }, 'Backend/fullstack/data', tspan({
+	      x: backend.x * width,
+	      y: (backend.y + .03) * height,
+	      textLength: .22 * width,
+	      fontSize: .02 * height
+	    }, ":: distributed systems :: NodeJS, WebSockets, Redis/Lua")), text({
+	      x: wbgl.x * width,
+	      y: wbgl.y * height,
+	      textLength: .12 * width,
+	      fontSize: .02 * height,
+	      fill: text_color
+	    }, 'current :: WebGL projects'), text({
 	      x: mso.x * width,
 	      y: mso.y * height,
 	      textLength: .12 * width,
@@ -41404,6 +41440,7 @@
 
 	var map = {
 		"./my_front_end_paradigm.coffee": 159,
+		"./things_to_do_devving_this_site.coffee": 171,
 		"./things_to_write_about_list.coffee": 162
 	};
 	function webpackContext(req) {
@@ -41418,6 +41455,130 @@
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
 	webpackContext.id = 170;
+
+
+/***/ },
+/* 171 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var addWheelListener, entry, metadata, removeWheelListener, table_contents_nav, top_nav;
+
+	exports.metadata = metadata = {
+	  date_created: new Date(2016, 6 - 1, 30),
+	  date_updated: new Date(2016, 6 - 1, 30),
+	  title: "things to do :: on this site construction",
+	  preview_text: "List of things to do on this site",
+	  tags: ["nonsense", "dynamic routing", "other stuff"]
+	};
+
+	top_nav = rc_generic(__webpack_require__(156));
+
+	table_contents_nav = rc_generic(__webpack_require__(160));
+
+	addWheelListener = __webpack_require__(161).addWheelListener;
+
+	removeWheelListener = __webpack_require__(161).removeWheelListener;
+
+	exports.component = entry = rr({
+	  counter: 0,
+	  scroll_limits: {
+	    top: 20,
+	    bottom: -120
+	  },
+	  scroller: function(e) {
+	    if (e.deltaY > 0 && this.state.scroll_state > this.scroll_limits.bottom) {
+	      return this.setState({
+	        scroll_state: this.state.scroll_state - (e.deltaY / 10)
+	      });
+	    } else if (e.deltaY < 0 && this.state.scroll_state < this.scroll_limits.top) {
+	      return this.setState({
+	        scroll_state: this.state.scroll_state - (e.deltaY / 10)
+	      });
+	    }
+	  },
+	  getInitialState: function() {
+	    return {
+	      scroll_state: 10
+	    };
+	  },
+	  touch_scroll: {
+	    bouncer: 0,
+	    start: null,
+	    last: null
+	  },
+	  handle_touchEnd: function(e) {
+	    return this.touch_scroll = {
+	      start: null,
+	      last: null,
+	      bouncer: 0
+	    };
+	  },
+	  handle_touchStart: function(e) {
+	    this.touch_scroll.start = e.changedTouches[0].pageY;
+	    return this.touch_scroll.last = e.changedTouches[0].pageY;
+	  },
+	  handle_touchMove: function(e) {
+	    var delta, now;
+	    this.touch_scroll.bouncer++;
+	    if (this.touch_scroll.bouncer % 5 === 0) {
+	      now = e.changedTouches[0].pageY;
+	      delta = this.touch_scroll.last - now;
+	      if (delta < 0 && this.state.scroll_state < 30) {
+	        this.setState({
+	          scroll_state: this.state.scroll_state - (delta * .3)
+	        });
+	      } else if (delta > 0 && this.state.scroll_state > -100) {
+	        this.setState({
+	          scroll_state: this.state.scroll_state - (delta * .3)
+	        });
+	      }
+	      return this.touch_scroll.last = e.changedTouches[0].pageY;
+	    }
+	  },
+	  render: function() {
+	    var background_color, height, p_st, ref, ref1, text_color, theme_name;
+	    height = this.props.height;
+	    p_st = {
+	      style: {
+	        margin: .01 * height,
+	        fontSize: .016 * height
+	      }
+	    };
+	    ref = this.props, theme_name = ref.theme_name, height = ref.height;
+	    ref1 = theme_definitions[theme_name], text_color = ref1.text_color, background_color = ref1.background_color;
+	    return svg({
+	      width: '100%',
+	      height: '100%'
+	    }, rect({
+	      x: 0,
+	      y: 0,
+	      width: '100%',
+	      height: "100%",
+	      fill: background_color
+	    }), g({
+	      onTouchStart: this.handle_touchStart,
+	      onTouchMove: this.handle_touchMove,
+	      onTouchEnd: this.handle_touchEnd,
+	      onWheel: this.scroller
+	    }, rect({
+	      x: "23%",
+	      y: "10%",
+	      width: '70%',
+	      height: "90%",
+	      fill: 'blue',
+	      opacity: 0
+	    }), foreignObject({
+	      x: '30%',
+	      y: this.state.scroll_state + "%",
+	      width: '50%',
+	      height: '100%'
+	    }, div({
+	      style: {
+	        color: text_color
+	      }
+	    }, h6(null, "created: " + (metadata.date_created.toDateString()) + ", updated: " + (metadata.date_updated.toDateString())), h4(null, "things to do :: this site construction"), div(null, ul(null, li(null, "add question-mark glyph where appropriate for helpful info and so not to burden repeat users with the info.  the noise.  "), li(null, "add a fullscreen button with a glyph, to encourage users who are actually engaging to take advantage of the fullscreen mode's much better experience"), li(null, "make a mobile version of the whole thing:: several days work necessarily"), li(null, "add time sorting to the blog entries navigation"), li(null, "eventually when enough entries, add tag based filtering"), li(null, "generalise somehow the concept of blog and articles collection, maybe articles are a subset of the elements of a blog. "), p(p_st, "Roughly, I think of articles as being serious and organised not according to time but some subject based structure, whereas blog entries are kind of frivolous, at least lighter, and tied to time, like journal entries."), li(null, "add clipping to the blog contents nav, so that it elements dissapear above certain point. There is an SVG element for this, clipPath maybe")))))), table_contents_nav(), top_nav(), bars_nav_001());
+	  }
+	});
 
 
 /***/ }
