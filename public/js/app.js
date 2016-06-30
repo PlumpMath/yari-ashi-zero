@@ -39892,17 +39892,17 @@
 
 	professional_blog = rc_generic(__webpack_require__(157));
 
-	professional_portfolio = rc_generic(__webpack_require__(163));
+	professional_portfolio = rc_generic(__webpack_require__(164));
 
-	professional_about = rc_generic(__webpack_require__(166));
+	professional_about = rc_generic(__webpack_require__(167));
 
-	professional_articles = rc_generic(__webpack_require__(167));
+	professional_articles = rc_generic(__webpack_require__(168));
 
-	terraforming = rc_generic(__webpack_require__(168));
+	terraforming = rc_generic(__webpack_require__(169));
 
-	ai_coltrane = rc_generic(__webpack_require__(169));
+	ai_coltrane = rc_generic(__webpack_require__(170));
 
-	articles_list_000 = __webpack_require__(170);
+	articles_list_000 = __webpack_require__(171);
 
 	entries = (function() {
 	  var i, len, ref1, results;
@@ -40122,9 +40122,7 @@
 /* 154 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var portfolio, professional, top_nav;
-
-	portfolio = __webpack_require__(155);
+	var professional, top_nav;
 
 	top_nav = rc_generic(__webpack_require__(156));
 
@@ -40162,51 +40160,7 @@
 
 
 /***/ },
-/* 155 */
-/***/ function(module, exports) {
-
-	var portfolio;
-
-	module.exports = portfolio = rr({
-	  getInitialState: function() {
-	    return {
-	      image_001: '/images/minesweeper_image_000.png'
-	    };
-	  },
-	  render: function() {
-	    return svg1(rect({
-	      x: '80%',
-	      y: '80%',
-	      width: '10%',
-	      height: '10%',
-	      fill: 'red',
-	      opacity: .34
-	    }), a({
-	      xlinkHref: "http://minesweeper-svg.herokuapp.com/",
-	      xlinkShow: 'new'
-	    }, image({
-	      x: .2 * this.props.width,
-	      y: .6 * this.props.height,
-	      width: .2 * this.props.width,
-	      height: .2 * this.props.height,
-	      xlinkHref: this.state.image_001
-	    }), text({
-	      x: .2 * this.props.width,
-	      y: .8 * this.props.height,
-	      fill: 'white'
-	    }, "play MineSweeper")), a({
-	      xlinkHref: "https://github.com/kulicuu/MineSweeper",
-	      xlinkShow: 'new'
-	    }, text({
-	      x: .2 * this.props.width,
-	      y: .9 * this.props.height,
-	      fill: 'white'
-	    }, "source code at github")));
-	  }
-	});
-
-
-/***/ },
+/* 155 */,
 /* 156 */
 /***/ function(module, exports) {
 
@@ -40215,12 +40169,12 @@
 	module.exports = nav_bar_top = rr({
 	  render: function() {
 	    var active_link_color, background_color, font_size, get_color, height, location, location_rayy, nav_bar_height, nav_text_color, ref, ref1, tMat, text_color, text_y, theme_name;
-	    ref = this.props, theme_name = ref.theme_name, location = ref.location;
+	    ref = this.props, theme_name = ref.theme_name, location = ref.location, height = ref.height;
 	    ref1 = theme_definitions[theme_name], background_color = ref1.background_color, text_color = ref1.text_color, nav_text_color = ref1.nav_text_color, active_link_color = ref1.active_link_color;
 	    location_rayy = location.split('/');
 	    tMat = this.props.t_mat;
-	    nav_bar_height = this.props.height * .05;
-	    font_size = nav_bar_height * .38;
+	    nav_bar_height = this.props.height * .1;
+	    font_size = nav_bar_height * .19;
 	    text_y = (nav_bar_height * .5) + (.5 * font_size);
 	    height = this.props.height;
 	    get_color = function(loc_str) {
@@ -40232,19 +40186,45 @@
 	    };
 	    return svg1(rect({
 	      opacity: 0,
-	      x: '2%',
+	      x: '0%',
 	      y: '0%',
-	      width: '11%',
-	      height: nav_bar_height * 1.2,
+	      width: '20%',
+	      height: nav_bar_height,
+	      fill: 'white',
+	      cursor: 'pointer',
+	      onClick: function() {
+	        return browserHistory.push('/professional/about');
+	      }
+	    }), text({
+	      x: '4%',
+	      y: '6%',
+	      'font-family': 'Sans',
+	      textAnchor: 'center',
+	      fontSize: font_size,
+	      textLength: this.props.width * .1,
+	      fill: (function() {
+	        return get_color('about');
+	      })(),
+	      cursor: 'pointer',
+	      onClick: function() {
+	        return browserHistory.push('/professional/about');
+	      }
+	    }, "about"), rect({
+	      opacity: 0,
+	      x: '20%',
+	      y: '0%',
+	      width: '20%',
+	      height: nav_bar_height,
 	      fill: 'white',
 	      cursor: 'pointer',
 	      onClick: function() {
 	        return browserHistory.push('/professional/blog');
 	      }
 	    }), text({
-	      x: this.props.width * .05,
-	      y: '4%',
+	      x: "24%",
+	      y: '6%',
 	      'font-family': 'Sans',
+	      textAnchor: 'center',
 	      fontSize: font_size,
 	      textLength: this.props.width * .06,
 	      fill: (function() {
@@ -40255,22 +40235,23 @@
 	        return browserHistory.push('/professional/blog');
 	      }
 	    }, "blog"), rect({
-	      x: this.props.width * .34,
+	      x: "40%",
 	      y: '0%',
 	      opacity: 0,
 	      onClick: function() {
 	        return browserHistory.push('/professional/portfolio');
 	      },
-	      width: .08 * this.props.width,
-	      height: .06 * this.props.height,
+	      width: "20%",
+	      height: nav_bar_height,
 	      fill: 'white',
 	      cursor: 'pointer'
 	    }), text({
-	      x: this.props.width * .35,
-	      y: '4%',
+	      x: "44%",
+	      y: '6%',
 	      'font-family': 'Sans',
 	      fontSize: font_size,
-	      textLength: this.props.width * .06,
+	      'text-anchor': 'right',
+	      textLength: this.props.width * .1,
 	      fill: (function() {
 	        return get_color('portfolio');
 	      })(),
@@ -40278,31 +40259,7 @@
 	      onClick: function() {
 	        return browserHistory.push('/professional/portfolio');
 	      }
-	    }, "portfolio"), rect({
-	      opacity: 0,
-	      x: this.props.width * .48,
-	      y: '0%',
-	      width: '11%',
-	      height: nav_bar_height,
-	      fill: 'white',
-	      cursor: 'pointer',
-	      onClick: function() {
-	        return browserHistory.push('/professional/about');
-	      }
-	    }), text({
-	      x: this.props.width * .5,
-	      y: '4%',
-	      'font-family': 'Sans',
-	      fontSize: font_size,
-	      textLength: this.props.width * .06,
-	      fill: (function() {
-	        return get_color('about');
-	      })(),
-	      cursor: 'pointer',
-	      onClick: function() {
-	        return browserHistory.push('/professional/about');
-	      }
-	    }, "about"));
+	    }, "portfolio"));
 	  }
 	});
 
@@ -40378,12 +40335,7 @@
 	      y: '20%',
 	      fontSize: 0.03 * height,
 	      fill: theme.fill_001
-	    }, "blog"), text({
-	      x: '10%',
-	      y: '24%',
-	      fontSize: 0.03 * height,
-	      fill: theme.fill_000
-	    }, "another text"), (function() {
+	    }, "blog"), (function() {
 	      var i, len, results;
 	      results = [];
 	      for (idx = i = 0, len = keychain.length; i < len; idx = ++i) {
@@ -40440,8 +40392,8 @@
 
 	var map = {
 		"./my_front_end_paradigm.coffee": 159,
-		"./things_to_do_devving_this_site.coffee": 171,
-		"./things_to_write_about_list.coffee": 162
+		"./things_to_do_devving_this_site.coffee": 162,
+		"./things_to_write_about_list.coffee": 163
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -40857,6 +40809,130 @@
 	exports.metadata = metadata = {
 	  date_created: new Date(2016, 6 - 1, 30),
 	  date_updated: new Date(2016, 6 - 1, 30),
+	  title: "things to do :: on this site construction",
+	  preview_text: "List of things to do on this site",
+	  tags: ["nonsense", "dynamic routing", "other stuff"]
+	};
+
+	top_nav = rc_generic(__webpack_require__(156));
+
+	table_contents_nav = rc_generic(__webpack_require__(160));
+
+	addWheelListener = __webpack_require__(161).addWheelListener;
+
+	removeWheelListener = __webpack_require__(161).removeWheelListener;
+
+	exports.component = entry = rr({
+	  counter: 0,
+	  scroll_limits: {
+	    top: 20,
+	    bottom: -120
+	  },
+	  scroller: function(e) {
+	    if (e.deltaY > 0 && this.state.scroll_state > this.scroll_limits.bottom) {
+	      return this.setState({
+	        scroll_state: this.state.scroll_state - (e.deltaY / 10)
+	      });
+	    } else if (e.deltaY < 0 && this.state.scroll_state < this.scroll_limits.top) {
+	      return this.setState({
+	        scroll_state: this.state.scroll_state - (e.deltaY / 10)
+	      });
+	    }
+	  },
+	  getInitialState: function() {
+	    return {
+	      scroll_state: 10
+	    };
+	  },
+	  touch_scroll: {
+	    bouncer: 0,
+	    start: null,
+	    last: null
+	  },
+	  handle_touchEnd: function(e) {
+	    return this.touch_scroll = {
+	      start: null,
+	      last: null,
+	      bouncer: 0
+	    };
+	  },
+	  handle_touchStart: function(e) {
+	    this.touch_scroll.start = e.changedTouches[0].pageY;
+	    return this.touch_scroll.last = e.changedTouches[0].pageY;
+	  },
+	  handle_touchMove: function(e) {
+	    var delta, now;
+	    this.touch_scroll.bouncer++;
+	    if (this.touch_scroll.bouncer % 5 === 0) {
+	      now = e.changedTouches[0].pageY;
+	      delta = this.touch_scroll.last - now;
+	      if (delta < 0 && this.state.scroll_state < 30) {
+	        this.setState({
+	          scroll_state: this.state.scroll_state - (delta * .3)
+	        });
+	      } else if (delta > 0 && this.state.scroll_state > -100) {
+	        this.setState({
+	          scroll_state: this.state.scroll_state - (delta * .3)
+	        });
+	      }
+	      return this.touch_scroll.last = e.changedTouches[0].pageY;
+	    }
+	  },
+	  render: function() {
+	    var background_color, height, p_st, ref, ref1, text_color, theme_name;
+	    height = this.props.height;
+	    p_st = {
+	      style: {
+	        margin: .01 * height,
+	        fontSize: .016 * height
+	      }
+	    };
+	    ref = this.props, theme_name = ref.theme_name, height = ref.height;
+	    ref1 = theme_definitions[theme_name], text_color = ref1.text_color, background_color = ref1.background_color;
+	    return svg({
+	      width: '100%',
+	      height: '100%'
+	    }, rect({
+	      x: 0,
+	      y: 0,
+	      width: '100%',
+	      height: "100%",
+	      fill: background_color
+	    }), g({
+	      onTouchStart: this.handle_touchStart,
+	      onTouchMove: this.handle_touchMove,
+	      onTouchEnd: this.handle_touchEnd,
+	      onWheel: this.scroller
+	    }, rect({
+	      x: "23%",
+	      y: "10%",
+	      width: '70%',
+	      height: "90%",
+	      fill: 'blue',
+	      opacity: 0
+	    }), foreignObject({
+	      x: '30%',
+	      y: this.state.scroll_state + "%",
+	      width: '50%',
+	      height: '100%'
+	    }, div({
+	      style: {
+	        color: text_color
+	      }
+	    }, h6(null, "created: " + (metadata.date_created.toDateString()) + ", updated: " + (metadata.date_updated.toDateString())), h4(null, "things to do :: this site construction"), div(null, ul(null, li(null, "add question-mark glyph where appropriate for helpful info and so not to burden repeat users with the info.  the noise.  "), li(null, "add a fullscreen button with a glyph, to encourage users who are actually engaging to take advantage of the fullscreen mode's much better experience"), li(null, "make a mobile version of the whole thing:: several days work necessarily"), li(null, "add time sorting to the blog entries navigation"), li(null, "eventually when enough entries, add tag based filtering"), li(null, "generalise somehow the concept of blog and articles collection, maybe articles are a subset of the elements of a blog. "), p(p_st, "Roughly, I think of articles as being serious and organised not according to time but some subject based structure, whereas blog entries are kind of frivolous, at least lighter, and tied to time, like journal entries."), li(null, "add clipping to the blog contents nav, so that it elements dissapear above certain point. There is an SVG element for this, clipPath maybe")))))), table_contents_nav(), top_nav(), bars_nav_001());
+	  }
+	});
+
+
+/***/ },
+/* 163 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var addWheelListener, entry, metadata, removeWheelListener, table_contents_nav, top_nav;
+
+	exports.metadata = metadata = {
+	  date_created: new Date(2016, 6 - 1, 30),
+	  date_updated: new Date(2016, 6 - 1, 30),
 	  title: "TTWA: List of things to write about, list of things to do in blog development.",
 	  preview_text: "Developments in blogging , advancements in this website.  meta stuff",
 	  tags: ["nonsense", "dynamic routing", "other stuff"]
@@ -40968,16 +41044,16 @@
 
 
 /***/ },
-/* 163 */
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var portfolio_index, spacewar, top_nav, yari;
 
 	top_nav = rc_generic(__webpack_require__(156));
 
-	spacewar = rc_generic(__webpack_require__(164));
+	spacewar = rc_generic(__webpack_require__(165));
 
-	yari = rc_generic(__webpack_require__(165));
+	yari = rc_generic(__webpack_require__(166));
 
 	module.exports = portfolio_index = rr({
 	  getInitialState: function() {
@@ -41092,7 +41168,7 @@
 
 
 /***/ },
-/* 164 */
+/* 165 */
 /***/ function(module, exports) {
 
 	module.exports = rr({
@@ -41138,7 +41214,7 @@
 
 
 /***/ },
-/* 165 */
+/* 166 */
 /***/ function(module, exports) {
 
 	module.exports = rr({
@@ -41196,7 +41272,7 @@
 
 
 /***/ },
-/* 166 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var professional_blog, top_nav;
@@ -41204,6 +41280,13 @@
 	top_nav = rc_generic(__webpack_require__(156));
 
 	module.exports = professional_blog = rr({
+	  full_screen: function() {
+	    var el;
+	    el = document.getElementsByTagName("body")[0];
+	    c(el);
+	    return el.webkitRequestFullScreen();
+	  },
+	  componentDidMount: function() {},
 	  getInitialState: function() {
 	    return {
 	      showing_bars_nav: false
@@ -41247,7 +41330,8 @@
 	      y: 0,
 	      width: '100%',
 	      height: '100%',
-	      fill: background_color
+	      fill: background_color,
+	      onClick: this.full_screen
 	    }), text({
 	      x: '10%',
 	      y: '20%',
@@ -41334,7 +41418,7 @@
 
 
 /***/ },
-/* 167 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var professional_blog, top_nav;
@@ -41373,7 +41457,7 @@
 
 
 /***/ },
-/* 168 */
+/* 169 */
 /***/ function(module, exports) {
 
 	var terraforming;
@@ -41400,7 +41484,7 @@
 
 
 /***/ },
-/* 169 */
+/* 170 */
 /***/ function(module, exports) {
 
 	var AI_Coltrane;
@@ -41435,13 +41519,13 @@
 
 
 /***/ },
-/* 170 */
+/* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
 		"./my_front_end_paradigm.coffee": 159,
-		"./things_to_do_devving_this_site.coffee": 171,
-		"./things_to_write_about_list.coffee": 162
+		"./things_to_do_devving_this_site.coffee": 162,
+		"./things_to_write_about_list.coffee": 163
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -41454,131 +41538,7 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 170;
-
-
-/***/ },
-/* 171 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var addWheelListener, entry, metadata, removeWheelListener, table_contents_nav, top_nav;
-
-	exports.metadata = metadata = {
-	  date_created: new Date(2016, 6 - 1, 30),
-	  date_updated: new Date(2016, 6 - 1, 30),
-	  title: "things to do :: on this site construction",
-	  preview_text: "List of things to do on this site",
-	  tags: ["nonsense", "dynamic routing", "other stuff"]
-	};
-
-	top_nav = rc_generic(__webpack_require__(156));
-
-	table_contents_nav = rc_generic(__webpack_require__(160));
-
-	addWheelListener = __webpack_require__(161).addWheelListener;
-
-	removeWheelListener = __webpack_require__(161).removeWheelListener;
-
-	exports.component = entry = rr({
-	  counter: 0,
-	  scroll_limits: {
-	    top: 20,
-	    bottom: -120
-	  },
-	  scroller: function(e) {
-	    if (e.deltaY > 0 && this.state.scroll_state > this.scroll_limits.bottom) {
-	      return this.setState({
-	        scroll_state: this.state.scroll_state - (e.deltaY / 10)
-	      });
-	    } else if (e.deltaY < 0 && this.state.scroll_state < this.scroll_limits.top) {
-	      return this.setState({
-	        scroll_state: this.state.scroll_state - (e.deltaY / 10)
-	      });
-	    }
-	  },
-	  getInitialState: function() {
-	    return {
-	      scroll_state: 10
-	    };
-	  },
-	  touch_scroll: {
-	    bouncer: 0,
-	    start: null,
-	    last: null
-	  },
-	  handle_touchEnd: function(e) {
-	    return this.touch_scroll = {
-	      start: null,
-	      last: null,
-	      bouncer: 0
-	    };
-	  },
-	  handle_touchStart: function(e) {
-	    this.touch_scroll.start = e.changedTouches[0].pageY;
-	    return this.touch_scroll.last = e.changedTouches[0].pageY;
-	  },
-	  handle_touchMove: function(e) {
-	    var delta, now;
-	    this.touch_scroll.bouncer++;
-	    if (this.touch_scroll.bouncer % 5 === 0) {
-	      now = e.changedTouches[0].pageY;
-	      delta = this.touch_scroll.last - now;
-	      if (delta < 0 && this.state.scroll_state < 30) {
-	        this.setState({
-	          scroll_state: this.state.scroll_state - (delta * .3)
-	        });
-	      } else if (delta > 0 && this.state.scroll_state > -100) {
-	        this.setState({
-	          scroll_state: this.state.scroll_state - (delta * .3)
-	        });
-	      }
-	      return this.touch_scroll.last = e.changedTouches[0].pageY;
-	    }
-	  },
-	  render: function() {
-	    var background_color, height, p_st, ref, ref1, text_color, theme_name;
-	    height = this.props.height;
-	    p_st = {
-	      style: {
-	        margin: .01 * height,
-	        fontSize: .016 * height
-	      }
-	    };
-	    ref = this.props, theme_name = ref.theme_name, height = ref.height;
-	    ref1 = theme_definitions[theme_name], text_color = ref1.text_color, background_color = ref1.background_color;
-	    return svg({
-	      width: '100%',
-	      height: '100%'
-	    }, rect({
-	      x: 0,
-	      y: 0,
-	      width: '100%',
-	      height: "100%",
-	      fill: background_color
-	    }), g({
-	      onTouchStart: this.handle_touchStart,
-	      onTouchMove: this.handle_touchMove,
-	      onTouchEnd: this.handle_touchEnd,
-	      onWheel: this.scroller
-	    }, rect({
-	      x: "23%",
-	      y: "10%",
-	      width: '70%',
-	      height: "90%",
-	      fill: 'blue',
-	      opacity: 0
-	    }), foreignObject({
-	      x: '30%',
-	      y: this.state.scroll_state + "%",
-	      width: '50%',
-	      height: '100%'
-	    }, div({
-	      style: {
-	        color: text_color
-	      }
-	    }, h6(null, "created: " + (metadata.date_created.toDateString()) + ", updated: " + (metadata.date_updated.toDateString())), h4(null, "things to do :: this site construction"), div(null, ul(null, li(null, "add question-mark glyph where appropriate for helpful info and so not to burden repeat users with the info.  the noise.  "), li(null, "add a fullscreen button with a glyph, to encourage users who are actually engaging to take advantage of the fullscreen mode's much better experience"), li(null, "make a mobile version of the whole thing:: several days work necessarily"), li(null, "add time sorting to the blog entries navigation"), li(null, "eventually when enough entries, add tag based filtering"), li(null, "generalise somehow the concept of blog and articles collection, maybe articles are a subset of the elements of a blog. "), p(p_st, "Roughly, I think of articles as being serious and organised not according to time but some subject based structure, whereas blog entries are kind of frivolous, at least lighter, and tied to time, like journal entries."), li(null, "add clipping to the blog contents nav, so that it elements dissapear above certain point. There is an SVG element for this, clipPath maybe")))))), table_contents_nav(), top_nav(), bars_nav_001());
-	  }
-	});
+	webpackContext.id = 171;
 
 
 /***/ }

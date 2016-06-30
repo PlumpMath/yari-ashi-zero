@@ -3,7 +3,16 @@ top_nav = rc_generic(require('../top_nav_001_.coffee'))
 
 
 module.exports = professional_blog = rr
+    full_screen: ->
+        el = document.getElementsByTagName("body")[0]
+        c el
+        # el.requestFullScreen()
+        el.webkitRequestFullScreen()
+
+    componentDidMount: ->
+
     getInitialState: ->
+
         showing_bars_nav: false
     toggle_bars_nav: ->
         @setState
@@ -25,8 +34,6 @@ module.exports = professional_blog = rr
                 ,
                 "CV / resume PDF"
 
-
-
     render: ->
         { theme_name, height, width } = @props
         { text_color, background_color }= theme_definitions[theme_name]
@@ -44,7 +51,7 @@ module.exports = professional_blog = rr
                 width: '100%'
                 height: '100%'
                 fill: background_color
-
+                onClick: @full_screen
             text
                 x: '10%'
                 y: '20%'
