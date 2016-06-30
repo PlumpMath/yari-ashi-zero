@@ -40541,18 +40541,25 @@
 	    return svg({
 	      width: '100%',
 	      height: '100%'
-	    }, g({
-	      onTouchStart: this.handle_touchStart,
-	      onTouchMove: this.handle_touchMove,
-	      onTouchEnd: this.handle_touchEnd
 	    }, rect({
 	      x: 0,
 	      y: 0,
 	      width: '100%',
 	      height: "100%",
 	      fill: background_color
+	    }), g({
+	      onTouchStart: this.handle_touchStart,
+	      onTouchMove: this.handle_touchMove,
+	      onTouchEnd: this.handle_touchEnd,
+	      onWheel: this.scroller
+	    }, rect({
+	      x: "23%",
+	      y: "10%",
+	      width: '70%',
+	      height: "90%",
+	      fill: 'blue',
+	      opacity: 0
 	    }), foreignObject({
-	      onWheel: this.scroller,
 	      x: '30%',
 	      y: this.state.scroll_state + "%",
 	      width: '50%',

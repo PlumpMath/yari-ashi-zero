@@ -79,20 +79,30 @@ exports.component = entry = rr
             width: '100%'
             height: '100%'
             ,
+            rect
+                x: 0
+                y: 0
+                width: '100%'
+                height: "100%"
+                fill: background_color
+
+
             g
                 onTouchStart: @handle_touchStart
                 onTouchMove: @handle_touchMove
                 onTouchEnd: @handle_touchEnd
+                onWheel: @scroller
                 ,
                 rect
-                    x: 0
-                    y: 0
-                    width: '100%'
-                    height: "100%"
-                    fill: background_color
+                    x: "23%"
+                    y: "10%"
+                    width: '70%'
+                    height: "90%"
+                    fill: 'blue'
+                    opacity: 0
 
                 foreignObject
-                    onWheel: @scroller
+
                     x: '30%'
                     y: "#{@state.scroll_state}%"
                     width: '50%'
@@ -111,7 +121,7 @@ exports.component = entry = rr
                             "
                         p null,
                             "
-    I've been developing single page applications (SPAs) for some years now."
+I've been developing single page applications (SPAs) for some years now."
                         p null,
                             "
     It was only a few years ago that surfing the web -- for me primarily a reading activity involving extensive inter-site navigation -- entailed perpetual annoyance at the few-second waiting times for intra-site navigation to render, as every navigation action --within a site-- demanded a new server request, could take 5 seconds could take 30... ; to add insult to injury, depending on caching even a page I'd just been reading could require a fresh request.  It was clear to me at least (I remember when I thought I had a relatively original idea here!) that it would be easy to preload what was mostly just text, and make the navigation simply a client side calculation.  Later on I learned that other people had the same idea, and they called it the singe-page-app (SPA). Today I've been programming SPAs for 3+ years, first with Jade templates and JQuery, then Angular-1 for a year, and then two years now of React, this is a reality.  There are many options for frameworks; I recommend React as best all around.
@@ -160,6 +170,8 @@ exports.component = entry = rr
                                 "
     WebGL:  I'm just getting started with WebGL.  It's tremendous and beautiful.  I hope to implement a flight simulator in the browser before years end.
                                 "
+
+
 
 
             table_contents_nav()
