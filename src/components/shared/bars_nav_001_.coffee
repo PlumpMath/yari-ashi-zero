@@ -155,9 +155,9 @@ module.exports = bars_nav = rr
 
             sun_svg
                 on_click: @props.toggle_theme
-                rect_attr: {x: .93 * @props.width, y: .07 * @props.height, width: .035 * @props.width, height: .035 * @props.width, fill: 'red', opacity: 0}
+                rect_attr: {x: .93 * @props.width, y: .07 * @props.height, width: .019 * @props.width, height: .019 * @props.width, fill: 'red', opacity: 0}
                 fill_color: theme.sun_color or 'chartreuse'
-                transform: "translate(#{.93 * @props.width}, #{.07 * @props.height}), scale(#{@props.height * .000039})"
+                transform: "translate(#{.93 * @props.width}, #{.07 * @props.height}), scale(#{@props.height * .000019})"
 
 
                 # onMouseOver: => @onset_vindaloo_001 name: "tooltip_lights"

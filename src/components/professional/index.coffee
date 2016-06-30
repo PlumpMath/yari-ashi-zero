@@ -15,7 +15,7 @@ module.exports = professional = rr
                 color: theme.text_color
         svg
             width: '100%'
-            height: '98%'
+            height: '100%'
             rect
                 x: 0
                 y: 0
