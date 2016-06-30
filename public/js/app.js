@@ -71,7 +71,7 @@
 	    rectangle = root.getBoundingClientRect();
 	    width = rectangle.width, height = rectangle.height;
 	    initial_state = Immutable.Map({
-	      theme_name: THEME_ONE,
+	      theme_name: THEME_ZERO,
 	      routing: '/',
 	      viewport_width: width,
 	      viewport_height: height
@@ -39892,17 +39892,17 @@
 
 	professional_blog = rc_generic(__webpack_require__(157));
 
-	professional_portfolio = rc_generic(__webpack_require__(162));
+	professional_portfolio = rc_generic(__webpack_require__(163));
 
-	professional_about = rc_generic(__webpack_require__(165));
+	professional_about = rc_generic(__webpack_require__(166));
 
-	professional_articles = rc_generic(__webpack_require__(166));
+	professional_articles = rc_generic(__webpack_require__(167));
 
-	terraforming = rc_generic(__webpack_require__(167));
+	terraforming = rc_generic(__webpack_require__(168));
 
-	ai_coltrane = rc_generic(__webpack_require__(168));
+	ai_coltrane = rc_generic(__webpack_require__(169));
 
-	articles_list_000 = __webpack_require__(169);
+	articles_list_000 = __webpack_require__(170);
 
 	entries = (function() {
 	  var i, len, ref1, results;
@@ -40439,7 +40439,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./my_front_end_paradigm.coffee": 159
+		"./my_front_end_paradigm.coffee": 159,
+		"./things_to_write_about_list.coffee": 162
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -40499,20 +40500,16 @@
 	      scroll_state: 10
 	    };
 	  },
-	  componentWillUnmount: function() {
-	    return removeWheelListener(window, this.scroller);
-	  },
-	  componentDidMount: function() {
-	    return addWheelListener(window, this.scroller);
-	  },
 	  touch_scroll: {
+	    bouncer: 0,
 	    start: null,
 	    last: null
 	  },
 	  handle_touchEnd: function(e) {
 	    return this.touch_scroll = {
 	      start: null,
-	      last: null
+	      last: null,
+	      bouncer: 0
 	    };
 	  },
 	  handle_touchStart: function(e) {
@@ -40521,11 +40518,21 @@
 	  },
 	  handle_touchMove: function(e) {
 	    var delta, now;
-	    now = e.changedTouches[0].pageY;
-	    delta = this.touch_scroll.last - now;
-	    return this.setState({
-	      scroll_state: this.state.scroll_state - (delta / 150)
-	    });
+	    this.touch_scroll.bouncer++;
+	    if (this.touch_scroll.bouncer % 5 === 0) {
+	      now = e.changedTouches[0].pageY;
+	      delta = this.touch_scroll.last - now;
+	      if (delta < 0 && this.state.scroll_state < 30) {
+	        this.setState({
+	          scroll_state: this.state.scroll_state - (delta * .3)
+	        });
+	      } else if (delta > 0 && this.state.scroll_state > -100) {
+	        this.setState({
+	          scroll_state: this.state.scroll_state - (delta * .3)
+	        });
+	      }
+	      return this.touch_scroll.last = e.changedTouches[0].pageY;
+	    }
 	  },
 	  render: function() {
 	    var background_color, height, ref, ref1, text_color, theme_name;
@@ -40545,6 +40552,7 @@
 	      height: "100%",
 	      fill: background_color
 	    }), foreignObject({
+	      onWheel: this.scroller,
 	      x: '30%',
 	      y: this.state.scroll_state + "%",
 	      width: '50%',
@@ -40571,8 +40579,58 @@
 	chain2 = module.exports = professional_blog = rr({
 	  getInitialState: function() {
 	    return {
-	      filter: null
+	      filter: null,
+	      scroll_state: 20
 	    };
+	  },
+	  touch_scroll: {
+	    bouncer: 0,
+	    start: null,
+	    last: null
+	  },
+	  scroll_limits: {
+	    top: 20,
+	    bottom: -40
+	  },
+	  scroller: function(e) {
+	    if (e.deltaY > 0 && this.state.scroll_state > this.scroll_limits.bottom) {
+	      return this.setState({
+	        scroll_state: this.state.scroll_state - (e.deltaY / 10)
+	      });
+	    } else if (e.deltaY < 0 && this.state.scroll_state < this.scroll_limits.top) {
+	      return this.setState({
+	        scroll_state: this.state.scroll_state - (e.deltaY / 10)
+	      });
+	    }
+	  },
+	  handle_touchEnd: function(e) {
+	    return this.touch_scroll = {
+	      start: null,
+	      last: null,
+	      bouncer: 0
+	    };
+	  },
+	  handle_touchStart: function(e) {
+	    this.touch_scroll.start = e.changedTouches[0].pageY;
+	    return this.touch_scroll.last = e.changedTouches[0].pageY;
+	  },
+	  handle_touchMove: function(e) {
+	    var delta, now;
+	    this.touch_scroll.bouncer++;
+	    if (this.touch_scroll.bouncer % 5 === 0) {
+	      now = e.changedTouches[0].pageY;
+	      delta = this.touch_scroll.last - now;
+	      if (delta < 0 && this.state.scroll_state < 30) {
+	        this.setState({
+	          scroll_state: this.state.scroll_state - (delta * .3)
+	        });
+	      } else if (delta > 0 && this.state.scroll_state > -100) {
+	        this.setState({
+	          scroll_state: this.state.scroll_state - (delta * .3)
+	        });
+	      }
+	      return this.touch_scroll.last = e.changedTouches[0].pageY;
+	    }
 	  },
 	  render: function() {
 	    var background_color, height, idx, key, main1, our_sep, our_sep2, our_size, our_x, ref, ref1, text_color, theme_name;
@@ -40583,7 +40641,19 @@
 	        color: text_color
 	      }
 	    };
-	    return svg1(our_size = .0139, our_sep = .02, our_sep2 = 1.4, our_x = "2%", g(null, text({
+	    return svg({
+	      width: '100%',
+	      height: '100%'
+	    }, our_size = .0139, our_sep = .04, our_sep2 = 8.4, our_x = "2%", g({
+	      onWheel: this.scroller
+	    }, rect({
+	      x: 0,
+	      y: "10%",
+	      width: "21%",
+	      height: "90%",
+	      opacity: 0,
+	      fill: 'blue'
+	    }), text({
 	      x: our_x,
 	      y: "13%",
 	      fontSize: our_size * height,
@@ -40592,7 +40662,16 @@
 	      onClick: function() {
 	        return browserHistory.push("/professional/blog");
 	      }
-	    }, "blog home")), (function() {
+	    }, "blog home"), g({
+	      onTouchStart: this.handle_touchStart,
+	      onTouchMove: this.handle_touchMove,
+	      onTouchEnd: this.handle_touchEnd
+	    }, foreignObject({
+	      x: our_x,
+	      y: this.state.scroll_state + "%",
+	      width: '16%',
+	      height: '20%'
+	    }, (function() {
 	      var i, len, results;
 	      results = [];
 	      for (idx = i = 0, len = keychain.length; i < len; idx = ++i) {
@@ -40602,44 +40681,38 @@
 	            var frag, meta;
 	            meta = blog_entries(key).metadata;
 	            frag = key.split('/')[1].split('.')[0];
-	            return g(null, text({
-	              x: our_x,
-	              y: (17 + (idx * our_sep * _this.props.height)) + "%",
-	              fontSize: our_size * 1.44 * _this.props.height,
-	              fill: text_color,
-	              cursor: 'pointer',
-	              onClick: function() {
-	                return browserHistory.push("/professional/blog/entries/" + frag);
-	              }
-	            }, "" + meta.title), text({
-	              x: our_x,
-	              y: (17 + our_sep2 + (idx * our_sep * _this.props.height)) + "%",
-	              fontSize: our_size * _this.props.height * .65,
-	              cursor: 'pointer',
-	              fill: text_color,
-	              onClick: function() {
-	                return browserHistory.push("/professional/blog/entries/" + frag);
-	              }
-	            }, "created: " + (meta.date_created.toDateString()) + "; updated: " + (meta.date_updated.toDateString())), foreignObject({
-	              x: our_x,
-	              y: (17 + (2 * our_sep2) + (idx * our_sep * _this.props.height)) + "%",
-	              width: '10%',
-	              height: '20%',
-	              cursor: 'pointer',
+	            return div({
+	              style: {
+	                cursor: 'pointer',
+	                margin: (.01 * height) + "%"
+	              },
 	              onClick: function() {
 	                return browserHistory.push("/professional/blog/entries/" + frag);
 	              }
 	            }, p({
 	              style: {
+	                margin: 0,
+	                fontSize: our_size * 1.22 * height,
+	                color: text_color
+	              }
+	            }, "" + meta.title), p({
+	              style: {
+	                margin: (.003 * height) + "%",
 	                fontSize: our_size * height,
 	                color: text_color
 	              }
-	            }, meta.preview_text + "  [...read on]")));
+	            }, "created: " + (meta.date_created.getDate()) + "/" + (meta.date_created.getMonth() + 1) + "/" + (meta.date_created.getYear() + 1900) + "; updated: " + (meta.date_updated.getDate()) + "/" + (meta.date_updated.getMonth() + 1) + "/" + (meta.date_updated.getYear() + 1900)), p({
+	              style: {
+	                margin: (.003 * height) + "%",
+	                fontSize: our_size * height,
+	                color: text_color
+	              }
+	            }, meta.preview_text + "  [...read on]"));
 	          };
 	        })(this)(key, idx));
 	      }
 	      return results;
-	    }).call(this));
+	    }).call(this)))));
 	  }
 	});
 
@@ -40771,13 +40844,126 @@
 /* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var addWheelListener, entry, metadata, removeWheelListener, table_contents_nav, top_nav;
+
+	exports.metadata = metadata = {
+	  date_created: new Date(2016, 6 - 1, 30),
+	  date_updated: new Date(2016, 6 - 1, 30),
+	  title: "TTWA: List of things to write about, list of things to do in blog development.",
+	  preview_text: "Developments in blogging , advancements in this website.  meta stuff",
+	  tags: ["nonsense", "dynamic routing", "other stuff"]
+	};
+
+	top_nav = rc_generic(__webpack_require__(156));
+
+	table_contents_nav = rc_generic(__webpack_require__(160));
+
+	addWheelListener = __webpack_require__(161).addWheelListener;
+
+	removeWheelListener = __webpack_require__(161).removeWheelListener;
+
+	exports.component = entry = rr({
+	  counter: 0,
+	  scroll_limits: {
+	    top: 10,
+	    bottom: -10
+	  },
+	  scroller: function(e) {
+	    if (e.deltaY > 0 && this.state.scroll_state > this.scroll_limits.bottom) {
+	      return this.setState({
+	        scroll_state: this.state.scroll_state - (e.deltaY / 10)
+	      });
+	    } else if (e.deltaY < 0 && this.state.scroll_state < this.scroll_limits.top) {
+	      return this.setState({
+	        scroll_state: this.state.scroll_state - (e.deltaY / 10)
+	      });
+	    }
+	  },
+	  getInitialState: function() {
+	    return {
+	      scroll_state: 15
+	    };
+	  },
+	  componentWillUnmount: function() {},
+	  componentDidMount: function() {},
+	  touch_scroll: {
+	    bouncer: 0,
+	    start: null,
+	    last: null
+	  },
+	  handle_touchEnd: function(e) {
+	    return this.touch_scroll = {
+	      start: null,
+	      last: null,
+	      bouncer: 0
+	    };
+	  },
+	  handle_touchStart: function(e) {
+	    this.touch_scroll.start = e.changedTouches[0].pageY;
+	    return this.touch_scroll.last = e.changedTouches[0].pageY;
+	  },
+	  handle_touchMove: function(e) {
+	    var delta, now;
+	    this.touch_scroll.bouncer++;
+	    if (this.touch_scroll.bouncer % 10 === 0) {
+	      now = e.changedTouches[0].pageY;
+	      delta = this.touch_scroll.last - now;
+	      c('delta', delta);
+	      if (delta > 0 && this.state.scroll_state < 15) {
+	        this.setState({
+	          scroll_state: this.state.scroll_state - (delta / 50)
+	        });
+	      } else if (delta < 0 && this.state.scroll_state < 30) {
+	        this.setState({
+	          scroll_state: this.state.scroll_state - (delta / 50)
+	        });
+	      }
+	      return this.touch_scroll.last = e.changed[0].pageY;
+	    }
+	  },
+	  render: function() {
+	    var background_color, height, ref, ref1, text_color, theme_name;
+	    ref = this.props, theme_name = ref.theme_name, height = ref.height;
+	    ref1 = theme_definitions[theme_name], text_color = ref1.text_color, background_color = ref1.background_color;
+	    return svg({
+	      width: '100%',
+	      height: '100%'
+	    }, g({
+	      onTouchStart: this.handle_touchStart,
+	      onTouchMove: this.handle_touchMove,
+	      onTouchEnd: this.handle_touchEnd,
+	      onWheel: this.scroller
+	    }, rect({
+	      x: 0,
+	      y: 0,
+	      width: '100%',
+	      height: "100%",
+	      fill: background_color
+	    }), foreignObject({
+	      x: '30%',
+	      y: this.state.scroll_state + "%",
+	      width: '50%',
+	      height: '100%'
+	    }, div({
+	      style: {
+	        color: text_color
+	      }
+	    }, h6(null, "created: " + (metadata.date_created.toDateString()) + ", updated: " + (metadata.date_updated.toDateString())), h3(null, metadata.title), ul(null, li(null, "WebGL projects"), li(null, "ReactNative projects"), li(null, "multivectored purpose of this website"), li(null, ""))))), table_contents_nav(), top_nav(), bars_nav_001());
+	  }
+	});
+
+
+/***/ },
+/* 163 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var portfolio_index, spacewar, top_nav, yari;
 
 	top_nav = rc_generic(__webpack_require__(156));
 
-	spacewar = rc_generic(__webpack_require__(163));
+	spacewar = rc_generic(__webpack_require__(164));
 
-	yari = rc_generic(__webpack_require__(164));
+	yari = rc_generic(__webpack_require__(165));
 
 	module.exports = portfolio_index = rr({
 	  getInitialState: function() {
@@ -40857,7 +41043,7 @@
 
 
 /***/ },
-/* 163 */
+/* 164 */
 /***/ function(module, exports) {
 
 	module.exports = rr({
@@ -40903,7 +41089,7 @@
 
 
 /***/ },
-/* 164 */
+/* 165 */
 /***/ function(module, exports) {
 
 	module.exports = rr({
@@ -40961,7 +41147,7 @@
 
 
 /***/ },
-/* 165 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var professional_blog, top_nav;
@@ -41099,7 +41285,7 @@
 
 
 /***/ },
-/* 166 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var professional_blog, top_nav;
@@ -41138,7 +41324,7 @@
 
 
 /***/ },
-/* 167 */
+/* 168 */
 /***/ function(module, exports) {
 
 	var terraforming;
@@ -41165,7 +41351,7 @@
 
 
 /***/ },
-/* 168 */
+/* 169 */
 /***/ function(module, exports) {
 
 	var AI_Coltrane;
@@ -41200,11 +41386,12 @@
 
 
 /***/ },
-/* 169 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./my_front_end_paradigm.coffee": 159
+		"./my_front_end_paradigm.coffee": 159,
+		"./things_to_write_about_list.coffee": 162
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -41217,7 +41404,7 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 169;
+	webpackContext.id = 170;
 
 
 /***/ }

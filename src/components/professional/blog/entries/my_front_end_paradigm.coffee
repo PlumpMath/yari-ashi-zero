@@ -1,4 +1,4 @@
-\
+
 exports.metadata = metadata =
     date_created: new Date(2016, 6 - 1, 27)
     date_updated: new Date(2016, 6 - 1, 27)
@@ -25,7 +25,6 @@ exports.component = entry = rr
             @setState
                 scroll_state: @state.scroll_state - (e.deltaY / 10 )
         else if e.deltaY < 0 and @state.scroll_state < @scroll_limits.top
-
             @setState
                 scroll_state: @state.scroll_state - (e.deltaY / 10 )
 
@@ -33,29 +32,16 @@ exports.component = entry = rr
         scroll_state: 10
 
 
-    componentWillUnmount: ->
-        removeWheelListener window, @scroller
-
-
-
-    componentDidMount: ->
-        # window.addEventListener "scroll", (e) ->
-        #     # c 'have scroll', e
-        #     c document.scrollTop
-        #     c window.scrollTop
-        #     c document.documentElement.scrollTop
-        addWheelListener window,  @scroller
-            # c ' have wheel event ', e
-            # c e.deltaY
-        # el = document.getElementsByTagName("canvas")[0]
-        # c 'el', el
-        # el.addEventListener "touchStart", (e) =>
-        #     c 'have a touchstart', e
-
-        # window.addEventListener "touchStart", (e) =>
-        #     c 'have touchstart'
+    # componentWillUnmount: ->
+    #     removeWheelListener window, @scroller
+    #
+    #
+    #
+    # componentDidMount: ->
+    #     addWheelListener window,  @scroller
 
     touch_scroll:
+        bouncer: 0
         start: null
         last: null
 
@@ -63,15 +49,25 @@ exports.component = entry = rr
         @touch_scroll =
             start: null
             last: null
+            bouncer: 0
+
     handle_touchStart: (e) ->
         @touch_scroll.start = e.changedTouches[0].pageY
         @touch_scroll.last = e.changedTouches[0].pageY
 
     handle_touchMove: (e) ->
-        now = e.changedTouches[0].pageY
-        delta = @touch_scroll.last - now
-        @setState
-            scroll_state: @state.scroll_state - (delta / 150)
+        @touch_scroll.bouncer++
+        if @touch_scroll.bouncer % 5 is 0
+            now = e.changedTouches[0].pageY
+            delta = @touch_scroll.last - now
+            if delta < 0 and @state.scroll_state < 30
+                @setState
+                    scroll_state: @state.scroll_state - (delta * .3)
+            else if delta > 0 and @state.scroll_state > -100
+                @setState
+                    scroll_state: @state.scroll_state - (delta * .3)
+            @touch_scroll.last = e.changedTouches[0].pageY
+
 
     render: ->
         {theme_name, height } = @props
@@ -96,6 +92,7 @@ exports.component = entry = rr
                     fill: background_color
 
                 foreignObject
+                    onWheel: @scroller
                     x: '30%'
                     y: "#{@state.scroll_state}%"
                     width: '50%'
