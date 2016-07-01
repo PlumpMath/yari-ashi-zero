@@ -2,12 +2,24 @@
 # tooltip = require './tooltip_000_.coffee'
 
 sun_svg = require('../../glyphs/sun.coffee')
+full_svg = require('../../glyphs/square-o.coffee')
 
 module.exports = bars_nav = rr
 
     vindaloos: {}
-
-
+    full: false
+    full_screen: ->
+        if @full is false
+            @full = true
+            el = document.getElementsByTagName("body")[0]
+            # c el
+            # el.requestFullScreen()
+            el.webkitRequestFullScreen()
+            # document.webkitRequestFullScreen()
+        else
+            @full = false
+            # el = document.getElementsByTagName("body")[0]
+            document.webkitExitFullscreen()
     toggle_nav: ->
         @setState
             my_opacity: 1
@@ -159,6 +171,11 @@ module.exports = bars_nav = rr
                 fill_color: theme.sun_color or 'chartreuse'
                 transform: "translate(#{.93 * @props.width}, #{.07 * @props.height}), scale(#{@props.height * .000019})"
 
+            full_svg
+                on_click: @full_screen
+                rect_attr: {x: .93 * @props.width, y: .17 * @props.height, width: .019 * @props.width, height: .019 * @props.width, fill: 'red', opacity: 0}
+                fill_color: theme.sun_color or 'chartreuse'
+                transform: "translate(#{.93 * @props.width}, #{.17 * @props.height}), scale(#{@props.height * .000019})"
 
                 # onMouseOver: => @onset_vindaloo_001 name: "tooltip_lights"
                 # onMouseOut: => @fader_vindaloo_001 name: "tooltip_lights"

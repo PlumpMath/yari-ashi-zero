@@ -63,14 +63,11 @@ module.exports = home = rr
             height: '100%'
             defs
                 theme.defs @state
-
             rect {x: -5, y: -5, width: '250%', height: '250%', fill: background_color}
-
-
             g
                 onMouseOver: => @onset_vindaloo_000({name: "professional"})
                 onMouseOut: => @fader_vindaloo_000({name: "professional"})
-                onClick:-> browserHistory.push '/professional/about'
+                onClick:-> browserHistory.push '/professional'
                 ,
                 rect
                     x: "13%"

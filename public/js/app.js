@@ -32630,12 +32630,26 @@
 /* 121 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var bars_nav, sun_svg;
+	var bars_nav, full_svg, sun_svg;
 
 	sun_svg = __webpack_require__(122);
 
+	full_svg = __webpack_require__(171);
+
 	module.exports = bars_nav = rr({
 	  vindaloos: {},
+	  full: false,
+	  full_screen: function() {
+	    var el;
+	    if (this.full === false) {
+	      this.full = true;
+	      el = document.getElementsByTagName("body")[0];
+	      return el.webkitRequestFullScreen();
+	    } else {
+	      this.full = false;
+	      return document.webkitExitFullscreen();
+	    }
+	  },
 	  toggle_nav: function() {
 	    return this.setState({
 	      my_opacity: 1,
@@ -32784,6 +32798,18 @@
 	      },
 	      fill_color: theme.sun_color || 'chartreuse',
 	      transform: "translate(" + (.93 * this.props.width) + ", " + (.07 * this.props.height) + "), scale(" + (this.props.height * .000019) + ")"
+	    }), full_svg({
+	      on_click: this.full_screen,
+	      rect_attr: {
+	        x: .93 * this.props.width,
+	        y: .17 * this.props.height,
+	        width: .019 * this.props.width,
+	        height: .019 * this.props.width,
+	        fill: 'red',
+	        opacity: 0
+	      },
+	      fill_color: theme.sun_color || 'chartreuse',
+	      transform: "translate(" + (.93 * this.props.width) + ", " + (.17 * this.props.height) + "), scale(" + (this.props.height * .000019) + ")"
 	    }));
 	  }
 	});
@@ -39890,19 +39916,19 @@
 
 	professional = rc_generic(__webpack_require__(154));
 
-	professional_blog = rc_generic(__webpack_require__(157));
+	professional_blog = rc_generic(__webpack_require__(156));
 
-	professional_portfolio = rc_generic(__webpack_require__(164));
+	professional_portfolio = rc_generic(__webpack_require__(163));
 
-	professional_about = rc_generic(__webpack_require__(167));
+	professional_about = rc_generic(__webpack_require__(166));
 
-	professional_articles = rc_generic(__webpack_require__(168));
+	professional_articles = rc_generic(__webpack_require__(167));
 
-	terraforming = rc_generic(__webpack_require__(169));
+	terraforming = rc_generic(__webpack_require__(168));
 
-	ai_coltrane = rc_generic(__webpack_require__(170));
+	ai_coltrane = rc_generic(__webpack_require__(169));
 
-	articles_list_000 = __webpack_require__(171);
+	articles_list_000 = __webpack_require__(170);
 
 	entries = (function() {
 	  var i, len, ref1, results;
@@ -40056,7 +40082,7 @@
 	        };
 	      })(this),
 	      onClick: function() {
-	        return browserHistory.push('/professional/about');
+	        return browserHistory.push('/professional');
 	      }
 	    }, rect({
 	      x: "13%",
@@ -40124,7 +40150,7 @@
 
 	var professional, top_nav;
 
-	top_nav = rc_generic(__webpack_require__(156));
+	top_nav = rc_generic(__webpack_require__(155));
 
 	module.exports = professional = rr({
 	  getInitialState: function() {
@@ -40138,8 +40164,57 @@
 	    });
 	  },
 	  render: function() {
-	    var filter_000, grad_000, main1, theme;
+	    var background_color, filter_000, grad_000, height, main1, ref, st0, st1, stc, str, text_color, theme, width;
+	    st0 = function() {
+	      return {
+	        style: {
+	          fontFamily: "Times",
+	          textAlign: 'left',
+	          color: text_color,
+	          margin: .01 * height,
+	          lineHeight: .0016 * height,
+	          letterSpacing: .002 * width,
+	          fontSize: .017 * height
+	        }
+	      };
+	    };
+	    str = function() {
+	      return {
+	        style: {
+	          fontFamily: "Times",
+	          textAlign: 'right',
+	          color: text_color,
+	          margin: .006 * height,
+	          lineHeight: .0016 * height,
+	          letterSpacing: .002 * width,
+	          fontSize: .017 * height
+	        }
+	      };
+	    };
+	    stc = function() {
+	      return {
+	        style: {
+	          fontFamily: "Times",
+	          textAlign: 'center',
+	          color: text_color,
+	          margin: .006 * height,
+	          lineHeight: .0016 * height,
+	          letterSpacing: .002 * width,
+	          fontSize: .017 * height
+	        }
+	      };
+	    };
+	    st1 = function() {
+	      return {
+	        fontFamily: "Times",
+	        color: text_color,
+	        letterSpacing: .004 * width,
+	        fontSize: .017 * height
+	      };
+	    };
+	    ref = this.props, height = ref.height, width = ref.width;
 	    theme = theme_definitions[this.props.theme_name];
+	    text_color = theme.text_color, background_color = theme.background_color;
 	    grad_000 = shortid();
 	    filter_000 = shortid();
 	    main1 = {
@@ -40154,14 +40229,33 @@
 	      width: '100%',
 	      height: '100%',
 	      fill: theme.background_color
-	    }), top_nav(), bars_nav_001());
+	    }), foreignObject({
+	      width: '60%',
+	      height: '30%',
+	      x: '16%',
+	      y: '14%'
+	    }, div(null, p({
+	      style: (function() {
+	        return _.assign(st1(), {
+	          textAlign: 'center'
+	        });
+	      })()
+	    }, "Hello,"), p(st0(), "I'm a fullstack developer with 20+ years of programming experience,"), p(str(), "a rich maths and technical background,"), p(stc(), "and 4+ years of professional development experience."), div({
+	      style: {
+	        margin: .05 * height
+	      }
+	    }), p(stc(), "My focus is JavaScript, used across the stack and on multiple platforms."))), foreignObject({
+	      width: '60%',
+	      height: '38%',
+	      x: '22%',
+	      y: '38%'
+	    }, div(null, p(stc(), "Stack:")), p(stc(), "NodeJS server, browser via HTML5 API (incl. SVG, WebGL, WebRTC, WebWorkers, WebSockets), desktop native via NW.js and Electron, mobile native via ReactNative."), p(stc(), "Npm ecosystem: I've been working intensely with it these past 4 years; an asset on every aforementioned platform. "), p(stc(), "CoffeeScript my preference; ES6/7 competency also."), p(stc(), "I can design and build full systems from the ground up."), p(stc(), "Typical design: NodeJS server, Redis/Lua data-layer, Primus websocket-layer, multiple-clients including React web-app, Electron desktop-app, ReactNative mobile-native for both iOS & Android. Sensible distributed system with CDNs for static asset delivery, clustered redundant websocket servers, clustered redundant Redis nodes. Scalable, decoupled, resilient."), p(stc(), "Additional ideal features: WebRTC for P2P network topology as well as audio IO, WebGL enhancements, programmatic SVG-based GUI-development paradigm."), p(stc(), "While I'm capable of owning design and build of substantial systems, I am also capable of and happy to contribute in a supporting and learning role on your project."), p(stc(), "Give me a scope, a spec, and I will deliver!  I love programming, solving abstract problems, and am especially pleased when I can contribute to a team effort without the responsibility of everything on my shoulders !"), p(stc(), "To get started I look to move quickly; I propose fixed-price, fixed-scope/deliverableSpec contract work to be used as an assessment/trial for both client and contractor."), p(stc(), "Of course I am happy to spend a bit of time with you in an interview context as well."), p(stc(), "My preferred and recommended medium of communication is the written word -- but I am available for voice calls as well, such as indicated."), p(stc(), "I look forward to delivering good work to you !"), p(st0(), "-- Wylie Кулик")), top_nav(), bars_nav_001());
 	  }
 	});
 
 
 /***/ },
-/* 155 */,
-/* 156 */
+/* 155 */
 /***/ function(module, exports) {
 
 	var nav_bar_top;
@@ -40265,14 +40359,14 @@
 
 
 /***/ },
-/* 157 */
+/* 156 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var blog_entries, keychain, professional_blog, top_nav;
 
-	top_nav = rc_generic(__webpack_require__(156));
+	top_nav = rc_generic(__webpack_require__(155));
 
-	blog_entries = __webpack_require__(158);
+	blog_entries = __webpack_require__(157);
 
 	keychain = blog_entries.keys();
 
@@ -40387,13 +40481,13 @@
 
 
 /***/ },
-/* 158 */
+/* 157 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./my_front_end_paradigm.coffee": 159,
-		"./things_to_do_devving_this_site.coffee": 162,
-		"./things_to_write_about_list.coffee": 163
+		"./my_front_end_paradigm.coffee": 158,
+		"./things_to_do_devving_this_site.coffee": 161,
+		"./things_to_write_about_list.coffee": 162
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -40406,11 +40500,11 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 158;
+	webpackContext.id = 157;
 
 
 /***/ },
-/* 159 */
+/* 158 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var addWheelListener, entry, metadata, removeWheelListener, table_contents_nav, top_nav;
@@ -40423,13 +40517,13 @@
 	  tags: ["nonsense", "dynamic routing", "other stuff"]
 	};
 
-	top_nav = rc_generic(__webpack_require__(156));
+	top_nav = rc_generic(__webpack_require__(155));
 
-	table_contents_nav = rc_generic(__webpack_require__(160));
+	table_contents_nav = rc_generic(__webpack_require__(159));
 
-	addWheelListener = __webpack_require__(161).addWheelListener;
+	addWheelListener = __webpack_require__(160).addWheelListener;
 
-	removeWheelListener = __webpack_require__(161).removeWheelListener;
+	removeWheelListener = __webpack_require__(160).removeWheelListener;
 
 	exports.component = entry = rr({
 	  counter: 0,
@@ -40527,12 +40621,12 @@
 
 
 /***/ },
-/* 160 */
+/* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var blog_entries, chain2, keychain, professional_blog;
 
-	blog_entries = __webpack_require__(158);
+	blog_entries = __webpack_require__(157);
 
 	keychain = blog_entries.keys();
 
@@ -40678,7 +40772,7 @@
 
 
 /***/ },
-/* 161 */
+/* 160 */
 /***/ function(module, exports) {
 
 	/**
@@ -40801,7 +40895,7 @@
 
 
 /***/ },
-/* 162 */
+/* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var addWheelListener, entry, metadata, removeWheelListener, table_contents_nav, top_nav;
@@ -40814,13 +40908,13 @@
 	  tags: ["nonsense", "dynamic routing", "other stuff"]
 	};
 
-	top_nav = rc_generic(__webpack_require__(156));
+	top_nav = rc_generic(__webpack_require__(155));
 
-	table_contents_nav = rc_generic(__webpack_require__(160));
+	table_contents_nav = rc_generic(__webpack_require__(159));
 
-	addWheelListener = __webpack_require__(161).addWheelListener;
+	addWheelListener = __webpack_require__(160).addWheelListener;
 
-	removeWheelListener = __webpack_require__(161).removeWheelListener;
+	removeWheelListener = __webpack_require__(160).removeWheelListener;
 
 	exports.component = entry = rr({
 	  counter: 0,
@@ -40925,7 +41019,7 @@
 
 
 /***/ },
-/* 163 */
+/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var addWheelListener, entry, metadata, removeWheelListener, table_contents_nav, top_nav;
@@ -40938,13 +41032,13 @@
 	  tags: ["nonsense", "dynamic routing", "other stuff"]
 	};
 
-	top_nav = rc_generic(__webpack_require__(156));
+	top_nav = rc_generic(__webpack_require__(155));
 
-	table_contents_nav = rc_generic(__webpack_require__(160));
+	table_contents_nav = rc_generic(__webpack_require__(159));
 
-	addWheelListener = __webpack_require__(161).addWheelListener;
+	addWheelListener = __webpack_require__(160).addWheelListener;
 
-	removeWheelListener = __webpack_require__(161).removeWheelListener;
+	removeWheelListener = __webpack_require__(160).removeWheelListener;
 
 	exports.component = entry = rr({
 	  counter: 0,
@@ -41044,16 +41138,16 @@
 
 
 /***/ },
-/* 164 */
+/* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var portfolio_index, spacewar, top_nav, yari;
 
-	top_nav = rc_generic(__webpack_require__(156));
+	top_nav = rc_generic(__webpack_require__(155));
 
-	spacewar = rc_generic(__webpack_require__(165));
+	spacewar = rc_generic(__webpack_require__(164));
 
-	yari = rc_generic(__webpack_require__(166));
+	yari = rc_generic(__webpack_require__(165));
 
 	module.exports = portfolio_index = rr({
 	  getInitialState: function() {
@@ -41168,7 +41262,7 @@
 
 
 /***/ },
-/* 165 */
+/* 164 */
 /***/ function(module, exports) {
 
 	module.exports = rr({
@@ -41214,7 +41308,7 @@
 
 
 /***/ },
-/* 166 */
+/* 165 */
 /***/ function(module, exports) {
 
 	module.exports = rr({
@@ -41272,12 +41366,12 @@
 
 
 /***/ },
-/* 167 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var professional_blog, top_nav;
 
-	top_nav = rc_generic(__webpack_require__(156));
+	top_nav = rc_generic(__webpack_require__(155));
 
 	module.exports = professional_blog = rr({
 	  full_screen: function() {
@@ -41418,12 +41512,12 @@
 
 
 /***/ },
-/* 168 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var professional_blog, top_nav;
 
-	top_nav = rc_generic(__webpack_require__(156));
+	top_nav = rc_generic(__webpack_require__(155));
 
 	module.exports = professional_blog = rr({
 	  getInitialState: function() {
@@ -41457,7 +41551,7 @@
 
 
 /***/ },
-/* 169 */
+/* 168 */
 /***/ function(module, exports) {
 
 	var terraforming;
@@ -41484,7 +41578,7 @@
 
 
 /***/ },
-/* 170 */
+/* 169 */
 /***/ function(module, exports) {
 
 	var AI_Coltrane;
@@ -41519,13 +41613,13 @@
 
 
 /***/ },
-/* 171 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./my_front_end_paradigm.coffee": 159,
-		"./things_to_do_devving_this_site.coffee": 162,
-		"./things_to_write_about_list.coffee": 163
+		"./my_front_end_paradigm.coffee": 158,
+		"./things_to_do_devving_this_site.coffee": 161,
+		"./things_to_write_about_list.coffee": 162
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -41538,7 +41632,32 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 171;
+	webpackContext.id = 170;
+
+
+/***/ },
+/* 171 */
+/***/ function(module, exports) {
+
+	module.exports = function(arg) {
+	  var fill_color, on_click, rect_attr, transform;
+	  fill_color = arg.fill_color, transform = arg.transform, rect_attr = arg.rect_attr, on_click = arg.on_click;
+	  return svg({
+	    fill: fill_color,
+	    width: "1792",
+	    height: "1792",
+	    viewBox: "0 0 1792 1792",
+	    xmlns: "http://www.w3.org/2000/svg"
+	  }, g({
+	    style: {
+	      cursor: 'pointer'
+	    },
+	    onClick: on_click
+	  }, rect(rect_attr), path({
+	    transform: transform,
+	    d: "M1312 256h-832q-66 0-113 47t-47 113v832q0 66 47 113t113 47h832q66 0 113-47t47-113v-832q0-66-47-113t-113-47zm288 160v832q0 119-84.5 203.5t-203.5 84.5h-832q-119 0-203.5-84.5t-84.5-203.5v-832q0-119 84.5-203.5t203.5-84.5h832q119 0 203.5 84.5t84.5 203.5z"
+	  })));
+	};
 
 
 /***/ }
