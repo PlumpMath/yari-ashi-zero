@@ -57,13 +57,13 @@
 
 	root = document.getElementById('root');
 
-	Immutable = __webpack_require__(125);
+	Immutable = __webpack_require__(126);
 
-	syncHistoryWithStore = __webpack_require__(126).syncHistoryWithStore;
+	syncHistoryWithStore = __webpack_require__(127).syncHistoryWithStore;
 
 	ref = __webpack_require__(115), DEFAULT_THEME = ref.DEFAULT_THEME, THEME_ZERO = ref.THEME_ZERO, THEME_ONE = ref.THEME_ONE;
 
-	set_bounding_rect = __webpack_require__(131).set_bounding_rect;
+	set_bounding_rect = __webpack_require__(132).set_bounding_rect;
 
 	window.onload = (function(_this) {
 	  return function() {
@@ -108,13 +108,13 @@
 	      return store.dispatch(set_bounding_rect(arq));
 	    };
 	    window.onresize = debounce(set_boundingRect, 200, false);
-	    store = __webpack_require__(133)(initial_state);
+	    store = __webpack_require__(134)(initial_state);
 	    history = syncHistoryWithStore(browserHistory, store, {
 	      selectLocationState: function(state) {
 	        return state.get('routing');
 	      }
 	    });
-	    routes = __webpack_require__(152)({
+	    routes = __webpack_require__(153)({
 	      store: store,
 	      history: history
 	    });
@@ -231,7 +231,7 @@
 
 	window.tooltip_000 = rc_generic(__webpack_require__(120));
 
-	window.theme_chooser_000 = rc_generic(__webpack_require__(123));
+	window.theme_chooser_000 = rc_generic(__webpack_require__(124));
 
 	theme_constants = __webpack_require__(115);
 
@@ -240,7 +240,7 @@
 	  window[k] = v;
 	}
 
-	window.theme_definitions = __webpack_require__(124);
+	window.theme_definitions = __webpack_require__(125);
 
 
 /***/ },
@@ -32634,7 +32634,7 @@
 
 	sun_svg = __webpack_require__(122);
 
-	full_svg = __webpack_require__(171);
+	full_svg = __webpack_require__(123);
 
 	module.exports = bars_nav = rr({
 	  vindaloos: {},
@@ -32845,6 +32845,31 @@
 /* 123 */
 /***/ function(module, exports) {
 
+	module.exports = function(arg) {
+	  var fill_color, on_click, rect_attr, transform;
+	  fill_color = arg.fill_color, transform = arg.transform, rect_attr = arg.rect_attr, on_click = arg.on_click;
+	  return svg({
+	    fill: fill_color,
+	    width: "1792",
+	    height: "1792",
+	    viewBox: "0 0 1792 1792",
+	    xmlns: "http://www.w3.org/2000/svg"
+	  }, g({
+	    style: {
+	      cursor: 'pointer'
+	    },
+	    onClick: on_click
+	  }, rect(rect_attr), path({
+	    transform: transform,
+	    d: "M1312 256h-832q-66 0-113 47t-47 113v832q0 66 47 113t113 47h832q66 0 113-47t47-113v-832q0-66-47-113t-113-47zm288 160v832q0 119-84.5 203.5t-203.5 84.5h-832q-119 0-203.5-84.5t-84.5-203.5v-832q0-119 84.5-203.5t203.5-84.5h832q119 0 203.5 84.5t84.5 203.5z"
+	  })));
+	};
+
+
+/***/ },
+/* 124 */
+/***/ function(module, exports) {
+
 	var theme_chooser;
 
 	module.exports = theme_chooser = rr({
@@ -32896,7 +32921,7 @@
 
 
 /***/ },
-/* 124 */
+/* 125 */
 /***/ function(module, exports) {
 
 	var DEFAULT_THEME, LIGHT_THEME, THEME_ONE, THEME_TWO, THEME_ZERO, ref, ref1, theme_one, theme_two, theme_zero, themes_definitions;
@@ -33106,7 +33131,7 @@
 
 
 /***/ },
-/* 125 */
+/* 126 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -38090,7 +38115,7 @@
 	}));
 
 /***/ },
-/* 126 */
+/* 127 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38100,7 +38125,7 @@
 	});
 	exports.routerMiddleware = exports.routerActions = exports.goForward = exports.goBack = exports.go = exports.replace = exports.push = exports.CALL_HISTORY_METHOD = exports.routerReducer = exports.LOCATION_CHANGE = exports.syncHistoryWithStore = undefined;
 
-	var _reducer = __webpack_require__(127);
+	var _reducer = __webpack_require__(128);
 
 	Object.defineProperty(exports, 'LOCATION_CHANGE', {
 	  enumerable: true,
@@ -38115,7 +38140,7 @@
 	  }
 	});
 
-	var _actions = __webpack_require__(128);
+	var _actions = __webpack_require__(129);
 
 	Object.defineProperty(exports, 'CALL_HISTORY_METHOD', {
 	  enumerable: true,
@@ -38160,11 +38185,11 @@
 	  }
 	});
 
-	var _sync = __webpack_require__(129);
+	var _sync = __webpack_require__(130);
 
 	var _sync2 = _interopRequireDefault(_sync);
 
-	var _middleware = __webpack_require__(130);
+	var _middleware = __webpack_require__(131);
 
 	var _middleware2 = _interopRequireDefault(_middleware);
 
@@ -38174,7 +38199,7 @@
 	exports.routerMiddleware = _middleware2.default;
 
 /***/ },
-/* 127 */
+/* 128 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -38216,7 +38241,7 @@
 	}
 
 /***/ },
-/* 128 */
+/* 129 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -38258,7 +38283,7 @@
 	var routerActions = exports.routerActions = { push: push, replace: replace, go: go, goBack: goBack, goForward: goForward };
 
 /***/ },
-/* 129 */
+/* 130 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38271,7 +38296,7 @@
 
 	exports.default = syncHistoryWithStore;
 
-	var _reducer = __webpack_require__(127);
+	var _reducer = __webpack_require__(128);
 
 	var defaultSelectLocationState = function defaultSelectLocationState(state) {
 	  return state.routing;
@@ -38410,7 +38435,7 @@
 	}
 
 /***/ },
-/* 130 */
+/* 131 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38420,7 +38445,7 @@
 	});
 	exports.default = routerMiddleware;
 
-	var _actions = __webpack_require__(128);
+	var _actions = __webpack_require__(129);
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -38448,12 +38473,12 @@
 	}
 
 /***/ },
-/* 131 */
+/* 132 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var SET_BOUNDING_RECT, set_bounding_rect;
 
-	SET_BOUNDING_RECT = __webpack_require__(132).SET_BOUNDING_RECT;
+	SET_BOUNDING_RECT = __webpack_require__(133).SET_BOUNDING_RECT;
 
 	set_bounding_rect = function(arg) {
 	  var viewport_height, viewport_width;
@@ -38471,7 +38496,7 @@
 
 
 /***/ },
-/* 132 */
+/* 133 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var action_types, keymirror;
@@ -38484,30 +38509,30 @@
 
 
 /***/ },
-/* 133 */
+/* 134 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var applyMiddleware, configure_store, createLogger, createStore, logger, promise, ref, thunk;
 
 	ref = __webpack_require__(39), createStore = ref.createStore, applyMiddleware = ref.applyMiddleware;
 
-	thunk = __webpack_require__(134)["default"];
+	thunk = __webpack_require__(135)["default"];
 
-	promise = __webpack_require__(135);
+	promise = __webpack_require__(136);
 
-	createLogger = __webpack_require__(142);
+	createLogger = __webpack_require__(143);
 
 	logger = createLogger();
 
 	configure_store = module.exports = function(initial_state) {
 	  var root_reducer;
-	  root_reducer = __webpack_require__(143)(initial_state);
+	  root_reducer = __webpack_require__(144)(initial_state);
 	  return createStore(root_reducer, initial_state, applyMiddleware(thunk));
 	};
 
 
 /***/ },
-/* 134 */
+/* 135 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -38535,7 +38560,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 135 */
+/* 136 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38546,7 +38571,7 @@
 
 	exports['default'] = promiseMiddleware;
 
-	var _fluxStandardAction = __webpack_require__(136);
+	var _fluxStandardAction = __webpack_require__(137);
 
 	function isPromise(val) {
 	  return val && typeof val.then === 'function';
@@ -38573,7 +38598,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 136 */
+/* 137 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38584,7 +38609,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _lodashIsplainobject = __webpack_require__(137);
+	var _lodashIsplainobject = __webpack_require__(138);
 
 	var _lodashIsplainobject2 = _interopRequireDefault(_lodashIsplainobject);
 
@@ -38603,7 +38628,7 @@
 	}
 
 /***/ },
-/* 137 */
+/* 138 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -38614,9 +38639,9 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var baseFor = __webpack_require__(138),
-	    isArguments = __webpack_require__(139),
-	    keysIn = __webpack_require__(140);
+	var baseFor = __webpack_require__(139),
+	    isArguments = __webpack_require__(140),
+	    keysIn = __webpack_require__(141);
 
 	/** `Object#toString` result references. */
 	var objectTag = '[object Object]';
@@ -38712,7 +38737,7 @@
 
 
 /***/ },
-/* 138 */
+/* 139 */
 /***/ function(module, exports) {
 
 	/**
@@ -38766,7 +38791,7 @@
 
 
 /***/ },
-/* 139 */
+/* 140 */
 /***/ function(module, exports) {
 
 	/**
@@ -39015,7 +39040,7 @@
 
 
 /***/ },
-/* 140 */
+/* 141 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -39026,8 +39051,8 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var isArguments = __webpack_require__(139),
-	    isArray = __webpack_require__(141);
+	var isArguments = __webpack_require__(140),
+	    isArray = __webpack_require__(142);
 
 	/** Used to detect unsigned integer values. */
 	var reIsUint = /^\d+$/;
@@ -39153,7 +39178,7 @@
 
 
 /***/ },
-/* 141 */
+/* 142 */
 /***/ function(module, exports) {
 
 	/**
@@ -39339,7 +39364,7 @@
 
 
 /***/ },
-/* 142 */
+/* 143 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -39572,17 +39597,17 @@
 	module.exports = createLogger;
 
 /***/ },
-/* 143 */
+/* 144 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var combineReducers;
 
-	combineReducers = __webpack_require__(144).combineReducers;
+	combineReducers = __webpack_require__(145).combineReducers;
 
 	module.exports = function(initial_state) {
 	  var ref, routeReducer, theme_name, viewport_height, viewport_width, viewport_x, viewport_y;
-	  routeReducer = __webpack_require__(150);
-	  ref = __webpack_require__(151), viewport_x = ref.viewport_x, viewport_y = ref.viewport_y, viewport_height = ref.viewport_height, viewport_width = ref.viewport_width;
+	  routeReducer = __webpack_require__(151);
+	  ref = __webpack_require__(152), viewport_x = ref.viewport_x, viewport_y = ref.viewport_y, viewport_height = ref.viewport_height, viewport_width = ref.viewport_width;
 	  theme_name = function(prev_state, action) {
 	    if (prev_state == null) {
 	      prev_state = initial_state;
@@ -39608,7 +39633,7 @@
 
 
 /***/ },
-/* 144 */
+/* 145 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39618,7 +39643,7 @@
 	});
 	exports.combineReducers = undefined;
 
-	var _combineReducers = __webpack_require__(145);
+	var _combineReducers = __webpack_require__(146);
 
 	var _combineReducers2 = _interopRequireDefault(_combineReducers);
 
@@ -39628,7 +39653,7 @@
 
 
 /***/ },
-/* 145 */
+/* 146 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39637,9 +39662,9 @@
 	    value: true
 	});
 
-	var _utilities = __webpack_require__(146);
+	var _utilities = __webpack_require__(147);
 
-	var _immutable = __webpack_require__(125);
+	var _immutable = __webpack_require__(126);
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
@@ -39695,7 +39720,7 @@
 
 
 /***/ },
-/* 146 */
+/* 147 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39706,15 +39731,15 @@
 	});
 	exports.validateNextState = exports.getUnexpectedInvocationParameterMessage = exports.getStateName = undefined;
 
-	var _getStateName2 = __webpack_require__(147);
+	var _getStateName2 = __webpack_require__(148);
 
 	var _getStateName3 = _interopRequireDefault(_getStateName2);
 
-	var _getUnexpectedInvocationParameterMessage2 = __webpack_require__(148);
+	var _getUnexpectedInvocationParameterMessage2 = __webpack_require__(149);
 
 	var _getUnexpectedInvocationParameterMessage3 = _interopRequireDefault(_getUnexpectedInvocationParameterMessage2);
 
-	var _validateNextState2 = __webpack_require__(149);
+	var _validateNextState2 = __webpack_require__(150);
 
 	var _validateNextState3 = _interopRequireDefault(_validateNextState2);
 
@@ -39726,7 +39751,7 @@
 
 
 /***/ },
-/* 147 */
+/* 148 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -39743,7 +39768,7 @@
 
 
 /***/ },
-/* 148 */
+/* 149 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39752,11 +39777,11 @@
 	    value: true
 	});
 
-	var _immutable = __webpack_require__(125);
+	var _immutable = __webpack_require__(126);
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
-	var _getStateName = __webpack_require__(147);
+	var _getStateName = __webpack_require__(148);
 
 	var _getStateName2 = _interopRequireDefault(_getStateName);
 
@@ -39792,7 +39817,7 @@
 
 
 /***/ },
-/* 149 */
+/* 150 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -39813,12 +39838,12 @@
 
 
 /***/ },
-/* 150 */
+/* 151 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var LOCATION_CHANGE, c, routeReducer;
 
-	LOCATION_CHANGE = __webpack_require__(126).LOCATION_CHANGE;
+	LOCATION_CHANGE = __webpack_require__(127).LOCATION_CHANGE;
 
 	c = function() {
 	  return console.log.apply(console, arguments);
@@ -39841,7 +39866,7 @@
 
 
 /***/ },
-/* 151 */
+/* 152 */
 /***/ function(module, exports) {
 
 	var viewport_height, viewport_width, viewport_x, viewport_y;
@@ -39899,7 +39924,7 @@
 
 
 /***/ },
-/* 152 */
+/* 153 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Provider, Route, Router, _IndexRoute, _Route, _Router, ai_coltrane, articles_list_000, browserHistory, entries, home, index, key, professional, professional_about, professional_articles, professional_blog, professional_portfolio, ref, routes, terraforming;
@@ -39912,23 +39937,23 @@
 
 	Route = React.createFactory(_Route);
 
-	home = rc_generic(__webpack_require__(153));
+	home = rc_generic(__webpack_require__(154));
 
-	professional = rc_generic(__webpack_require__(154));
+	professional = rc_generic(__webpack_require__(155));
 
-	professional_blog = rc_generic(__webpack_require__(156));
+	professional_blog = rc_generic(__webpack_require__(157));
 
-	professional_portfolio = rc_generic(__webpack_require__(163));
+	professional_portfolio = rc_generic(__webpack_require__(164));
 
-	professional_about = rc_generic(__webpack_require__(166));
+	professional_about = rc_generic(__webpack_require__(167));
 
-	professional_articles = rc_generic(__webpack_require__(167));
+	professional_articles = rc_generic(__webpack_require__(168));
 
-	terraforming = rc_generic(__webpack_require__(168));
+	terraforming = rc_generic(__webpack_require__(169));
 
-	ai_coltrane = rc_generic(__webpack_require__(169));
+	ai_coltrane = rc_generic(__webpack_require__(170));
 
-	articles_list_000 = __webpack_require__(170);
+	articles_list_000 = __webpack_require__(171);
 
 	entries = (function() {
 	  var i, len, ref1, results;
@@ -39987,7 +40012,7 @@
 
 
 /***/ },
-/* 153 */
+/* 154 */
 /***/ function(module, exports) {
 
 	var home;
@@ -40145,12 +40170,12 @@
 
 
 /***/ },
-/* 154 */
+/* 155 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var professional, top_nav;
 
-	top_nav = rc_generic(__webpack_require__(155));
+	top_nav = rc_generic(__webpack_require__(156));
 
 	module.exports = professional = rr({
 	  getInitialState: function() {
@@ -40255,7 +40280,7 @@
 
 
 /***/ },
-/* 155 */
+/* 156 */
 /***/ function(module, exports) {
 
 	var nav_bar_top;
@@ -40359,14 +40384,14 @@
 
 
 /***/ },
-/* 156 */
+/* 157 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var blog_entries, keychain, professional_blog, top_nav;
 
-	top_nav = rc_generic(__webpack_require__(155));
+	top_nav = rc_generic(__webpack_require__(156));
 
-	blog_entries = __webpack_require__(157);
+	blog_entries = __webpack_require__(158);
 
 	keychain = blog_entries.keys();
 
@@ -40481,13 +40506,14 @@
 
 
 /***/ },
-/* 157 */
+/* 158 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./my_front_end_paradigm.coffee": 158,
-		"./things_to_do_devving_this_site.coffee": 161,
-		"./things_to_write_about_list.coffee": 162
+		"./backend_paradigm.coffee": 178,
+		"./my_front_end_paradigm.coffee": 159,
+		"./things_to_do_devving_this_site.coffee": 162,
+		"./things_to_write_about_list.coffee": 163
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -40500,11 +40526,11 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 157;
+	webpackContext.id = 158;
 
 
 /***/ },
-/* 158 */
+/* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var addWheelListener, entry, metadata, removeWheelListener, table_contents_nav, top_nav;
@@ -40517,13 +40543,13 @@
 	  tags: ["nonsense", "dynamic routing", "other stuff"]
 	};
 
-	top_nav = rc_generic(__webpack_require__(155));
+	top_nav = rc_generic(__webpack_require__(156));
 
-	table_contents_nav = rc_generic(__webpack_require__(159));
+	table_contents_nav = rc_generic(__webpack_require__(160));
 
-	addWheelListener = __webpack_require__(160).addWheelListener;
+	addWheelListener = __webpack_require__(161).addWheelListener;
 
-	removeWheelListener = __webpack_require__(160).removeWheelListener;
+	removeWheelListener = __webpack_require__(161).removeWheelListener;
 
 	exports.component = entry = rr({
 	  counter: 0,
@@ -40621,12 +40647,12 @@
 
 
 /***/ },
-/* 159 */
+/* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var blog_entries, chain2, keychain, professional_blog;
 
-	blog_entries = __webpack_require__(157);
+	blog_entries = __webpack_require__(158);
 
 	keychain = blog_entries.keys();
 
@@ -40772,7 +40798,7 @@
 
 
 /***/ },
-/* 160 */
+/* 161 */
 /***/ function(module, exports) {
 
 	/**
@@ -40895,7 +40921,7 @@
 
 
 /***/ },
-/* 161 */
+/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var addWheelListener, entry, metadata, removeWheelListener, table_contents_nav, top_nav;
@@ -40908,13 +40934,13 @@
 	  tags: ["nonsense", "dynamic routing", "other stuff"]
 	};
 
-	top_nav = rc_generic(__webpack_require__(155));
+	top_nav = rc_generic(__webpack_require__(156));
 
-	table_contents_nav = rc_generic(__webpack_require__(159));
+	table_contents_nav = rc_generic(__webpack_require__(160));
 
-	addWheelListener = __webpack_require__(160).addWheelListener;
+	addWheelListener = __webpack_require__(161).addWheelListener;
 
-	removeWheelListener = __webpack_require__(160).removeWheelListener;
+	removeWheelListener = __webpack_require__(161).removeWheelListener;
 
 	exports.component = entry = rr({
 	  counter: 0,
@@ -41019,7 +41045,7 @@
 
 
 /***/ },
-/* 162 */
+/* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var addWheelListener, entry, metadata, removeWheelListener, table_contents_nav, top_nav;
@@ -41032,13 +41058,13 @@
 	  tags: ["nonsense", "dynamic routing", "other stuff"]
 	};
 
-	top_nav = rc_generic(__webpack_require__(155));
+	top_nav = rc_generic(__webpack_require__(156));
 
-	table_contents_nav = rc_generic(__webpack_require__(159));
+	table_contents_nav = rc_generic(__webpack_require__(160));
 
-	addWheelListener = __webpack_require__(160).addWheelListener;
+	addWheelListener = __webpack_require__(161).addWheelListener;
 
-	removeWheelListener = __webpack_require__(160).removeWheelListener;
+	removeWheelListener = __webpack_require__(161).removeWheelListener;
 
 	exports.component = entry = rr({
 	  counter: 0,
@@ -41138,16 +41164,16 @@
 
 
 /***/ },
-/* 163 */
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var portfolio_index, spacewar, top_nav, yari;
 
-	top_nav = rc_generic(__webpack_require__(155));
+	top_nav = rc_generic(__webpack_require__(156));
 
-	spacewar = rc_generic(__webpack_require__(164));
+	spacewar = rc_generic(__webpack_require__(165));
 
-	yari = rc_generic(__webpack_require__(165));
+	yari = rc_generic(__webpack_require__(166));
 
 	module.exports = portfolio_index = rr({
 	  getInitialState: function() {
@@ -41262,7 +41288,7 @@
 
 
 /***/ },
-/* 164 */
+/* 165 */
 /***/ function(module, exports) {
 
 	module.exports = rr({
@@ -41308,7 +41334,7 @@
 
 
 /***/ },
-/* 165 */
+/* 166 */
 /***/ function(module, exports) {
 
 	module.exports = rr({
@@ -41366,12 +41392,12 @@
 
 
 /***/ },
-/* 166 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var professional_blog, top_nav;
 
-	top_nav = rc_generic(__webpack_require__(155));
+	top_nav = rc_generic(__webpack_require__(156));
 
 	module.exports = professional_blog = rr({
 	  full_screen: function() {
@@ -41512,12 +41538,12 @@
 
 
 /***/ },
-/* 167 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var professional_blog, top_nav;
 
-	top_nav = rc_generic(__webpack_require__(155));
+	top_nav = rc_generic(__webpack_require__(156));
 
 	module.exports = professional_blog = rr({
 	  getInitialState: function() {
@@ -41551,7 +41577,7 @@
 
 
 /***/ },
-/* 168 */
+/* 169 */
 /***/ function(module, exports) {
 
 	var terraforming;
@@ -41578,7 +41604,7 @@
 
 
 /***/ },
-/* 169 */
+/* 170 */
 /***/ function(module, exports) {
 
 	var AI_Coltrane;
@@ -41613,13 +41639,14 @@
 
 
 /***/ },
-/* 170 */
+/* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./my_front_end_paradigm.coffee": 158,
-		"./things_to_do_devving_this_site.coffee": 161,
-		"./things_to_write_about_list.coffee": 162
+		"./backend_paradigm.coffee": 178,
+		"./my_front_end_paradigm.coffee": 159,
+		"./things_to_do_devving_this_site.coffee": 162,
+		"./things_to_write_about_list.coffee": 163
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -41632,32 +41659,173 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 170;
+	webpackContext.id = 171;
 
 
 /***/ },
-/* 171 */
-/***/ function(module, exports) {
+/* 172 */,
+/* 173 */,
+/* 174 */,
+/* 175 */,
+/* 176 */,
+/* 177 */
+/***/ function(module, exports, __webpack_require__) {
 
-	module.exports = function(arg) {
-	  var fill_color, on_click, rect_attr, transform;
-	  fill_color = arg.fill_color, transform = arg.transform, rect_attr = arg.rect_attr, on_click = arg.on_click;
-	  return svg({
-	    fill: fill_color,
-	    width: "1792",
-	    height: "1792",
-	    viewBox: "0 0 1792 1792",
-	    xmlns: "http://www.w3.org/2000/svg"
-	  }, g({
-	    style: {
-	      cursor: 'pointer'
+	var addWheelListener, entry, removeWheelListener, table_contents_nav, top_nav;
+
+	top_nav = rc_generic(__webpack_require__(156));
+
+	table_contents_nav = rc_generic(__webpack_require__(160));
+
+	addWheelListener = __webpack_require__(161).addWheelListener;
+
+	removeWheelListener = __webpack_require__(161).removeWheelListener;
+
+	module.exports = entry = function(injectable) {
+	  return rr({
+	    counter: 0,
+	    scroll_limits: {
+	      top: 20,
+	      bottom: -120
 	    },
-	    onClick: on_click
-	  }, rect(rect_attr), path({
-	    transform: transform,
-	    d: "M1312 256h-832q-66 0-113 47t-47 113v832q0 66 47 113t113 47h832q66 0 113-47t47-113v-832q0-66-47-113t-113-47zm288 160v832q0 119-84.5 203.5t-203.5 84.5h-832q-119 0-203.5-84.5t-84.5-203.5v-832q0-119 84.5-203.5t203.5-84.5h832q119 0 203.5 84.5t84.5 203.5z"
-	  })));
+	    scroller: function(e) {
+	      if (e.deltaY > 0 && this.state.scroll_state > this.scroll_limits.bottom) {
+	        return this.setState({
+	          scroll_state: this.state.scroll_state - (e.deltaY / 10)
+	        });
+	      } else if (e.deltaY < 0 && this.state.scroll_state < this.scroll_limits.top) {
+	        return this.setState({
+	          scroll_state: this.state.scroll_state - (e.deltaY / 10)
+	        });
+	      }
+	    },
+	    getInitialState: function() {
+	      return {
+	        scroll_state: 10
+	      };
+	    },
+	    touch_scroll: {
+	      bouncer: 0,
+	      start: null,
+	      last: null
+	    },
+	    handle_touchEnd: function(e) {
+	      return this.touch_scroll = {
+	        start: null,
+	        last: null,
+	        bouncer: 0
+	      };
+	    },
+	    handle_touchStart: function(e) {
+	      this.touch_scroll.start = e.changedTouches[0].pageY;
+	      return this.touch_scroll.last = e.changedTouches[0].pageY;
+	    },
+	    handle_touchMove: function(e) {
+	      var delta, now;
+	      this.touch_scroll.bouncer++;
+	      if (this.touch_scroll.bouncer % 5 === 0) {
+	        now = e.changedTouches[0].pageY;
+	        delta = this.touch_scroll.last - now;
+	        if (delta < 0 && this.state.scroll_state < 30) {
+	          this.setState({
+	            scroll_state: this.state.scroll_state - (delta * .3)
+	          });
+	        } else if (delta > 0 && this.state.scroll_state > -100) {
+	          this.setState({
+	            scroll_state: this.state.scroll_state - (delta * .3)
+	          });
+	        }
+	        return this.touch_scroll.last = e.changedTouches[0].pageY;
+	      }
+	    },
+	    render: function() {
+	      var background_color, height, p_st, ref, ref1, text_color, theme_name;
+	      height = this.props.height;
+	      p_st = {
+	        style: {
+	          margin: .01 * height,
+	          fontSize: .016 * height
+	        }
+	      };
+	      ref = this.props, theme_name = ref.theme_name, height = ref.height;
+	      ref1 = theme_definitions[theme_name], text_color = ref1.text_color, background_color = ref1.background_color;
+	      return svg({
+	        width: '100%',
+	        height: '100%'
+	      }, rect({
+	        x: 0,
+	        y: 0,
+	        width: '100%',
+	        height: "100%",
+	        fill: background_color
+	      }), g({
+	        onTouchStart: this.handle_touchStart,
+	        onTouchMove: this.handle_touchMove,
+	        onTouchEnd: this.handle_touchEnd,
+	        onWheel: this.scroller
+	      }, rect({
+	        x: "23%",
+	        y: "10%",
+	        width: '70%',
+	        height: "90%",
+	        fill: 'blue',
+	        opacity: 0
+	      }), foreignObject({
+	        x: '30%',
+	        y: this.state.scroll_state + "%",
+	        width: '50%',
+	        height: '100%'
+	      }, injectable(this))), table_contents_nav(), top_nav(), bars_nav_001());
+	    }
+	  });
 	};
+
+
+/***/ },
+/* 178 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var injectable, metadata;
+
+	exports.metadata = metadata = {
+	  date_created: new Date(2016, 7 - 2, 30),
+	  date_updated: new Date(2016, 7 - 2, 30),
+	  title: "My backend /serverside paradigm",
+	  preview_text: "time to get back to some backend work, discussion",
+	  tags: ["nonsense", "dynamic routing", "other stuff"]
+	};
+
+	injectable = function(that) {
+	  var background_color, height, p_st, ref, ref1, st0, text_color, theme_name, width;
+	  ref = that.props, theme_name = ref.theme_name, height = ref.height, width = ref.width;
+	  p_st = {
+	    style: {
+	      margin: .01 * height,
+	      fontSize: .016 * height
+	    }
+	  };
+	  st0 = function() {
+	    return {
+	      style: {
+	        fontFamily: "Times",
+	        textAlign: 'left',
+	        color: text_color,
+	        margin: .01 * height,
+	        lineHeight: .0016 * height,
+	        letterSpacing: .002 * width,
+	        fontSize: .017 * height
+	      }
+	    };
+	  };
+	  ref1 = theme_definitions[theme_name], text_color = ref1.text_color, background_color = ref1.background_color;
+	  return div({
+	    style: {
+	      color: text_color
+	    }
+	  }, h6(null, "created: " + (metadata.date_created.toDateString()) + ", updated: " + (metadata.date_updated.toDateString())), h4(null, "This is a testt for templating and moving common setup code to boilerplate file"), div(null, p(st0(), "under construction:  things to discuss:"), p(st0(), "I'd love to get a nice contract to be responsible for design and build of a large scalable fullstack system.  Ideally I'd be able to hire another person within the first three months and another few more after that. "), p(st0(), "I'm under no illusions that I have the absolute best practices for over the entire stack for such a system -- large corporate systems like Facebook, Twitter etc are combined efforts of hundreds of specialists, and I'm just one generalist."), p(st0(), "But that's no cause for defeatism. Startups make gamechanging solutions and disrupt technology culture in good ways because people are willing to put new solutions on the table."), p(st0(), "Startups are built by optimistic realists who have a generalist orientation and want to build working systems. As an outsider and passionate neophyte a few years ago, I built a working realtime fullstack system for Bartr in Tel Aviv. We failed for funding reasons but my accomplishment was real, and still brings me confidence and joy.  A few years on, I'm still impassioned to build new crazy systems, I'm sure I could do muchMUCHMUCH much better now.  The web and social/work-media remains an exciting frontier ripe for groundbreaking and society altering/improving innovations.  Small (real) startups are the place to make this happen because these are the units willing to see the future differently and take risks to manifest that, to set themselves apart."), p(st0(), "So while I might not solve every technical problem in as optimised a way as the large composite team efforts of the majors around town, and maybe I haven't grokked all the latest best practices in every nook and cranny of the technical domain (who can?), it's extremely likely that working in the context of a (real, not a 'startup' offshoot of a major) startup I/we will hit upon elegant solutions in the process of experimentation, R&D, prototyping, that the consensus process hasn't yet located; this is something happening *all the time*."), p(st0(), "So, we (even a small team of a few dedicated developers working in concert) can build a great, competitive, resilient, scalable fullstack system. Maybe not optimised in every way as good as the majors, but also maybe having some features and optimisations they haven't considered or risked implementation of.  The best practices of yesteryear may become todays liabilities, which larger organisations continue implementing because of inertia, ... etc etc. I say it's exciting to be part of small & agile companies solving common problems from scratch in new and exciting ways. We can do it!!! ...Okay, enough preamble, let's get to it!")), div(null, h4(null, "what we are trying to build :: problem description."), p(st0(), "Maybe we are trying to build an alternative economy social-media social-economy application.  We want to connect people in a given geographical space and allow them to interact economically."), h4(null, "solution outline, feature approximation and toolset ideas"), ul(st0(), li(null, "Realtime obviously.  The system must interact with users by the second.  Hence websockets, but not only websockets, we want WebRTC to enable a P2P topology to augment our network in various ways."), li(null, "Trusted transactions:  Blockchain audited transactions so that fraud is eliminated in a resilient P2P way without relying solely on integrity of central server."), li(null, "Lots of data analytics on backend and data visualisation interface on frontend for users :: Heavy use of Redis clusters for data, pushing data back to clients for D3 or WebGL based visualisations.  Not strictly speaking necessary for this application, but this is a app featureset I'm advocating for the future across many domains."), li(null, "Progressive webapp.  Lightweight loading, highly configurable for a minimal feel for those who want it.  Heavier features available on demand.  Webpack assets on demand for dynamic asset loading flexibility."), li(null, "multi platform :: the same system on browser with distinct browser versions for different devices, react-native versions for iOS and Android, and possibly desktop native version with Electron. "), li(null, "security, scalability, resiliency.  :: node clusters, redis clusters,  immutable data stores for perfect historical reconstruction on demand.  utilisation of hash history (blockchain tech) for secured transaction integrity.")), p(st0(), "Great so basically:  NodeJS server(s), CDN delivery for statics, Primus for WebSockets, WebRTC for audio interface and P2P connectivity, Webpack for dynamic/progressive code requires. D3 and WebGL components for user interface enhancements, Geolocation and maps for facilitating meetups, React for webapp, ReactNative for mobile app, Electron for desktop native app.  Redis Redis and Redis for data layer.  For starters.  Later may add PostgreSQL/Cassandra/ApacheKafka stuff to mix, but not necessary to get started. Just Redis clustering fine."), p(st0(), "Okay so that's the whole stack, now about the backend in particular:  Again, NodeJS, Primus, Redis/Lua.  Most of what used to be called model logic (MVC paradigm) will be implemented in Lua under the Redis servers."), p(st0(), "The model layer will be implemented as a lambda architecture, meaning there are no destructive transactions.  The data layer is a giant heap upon which you can add messages. Determining state is a matter of running reducer functions over this heap, (with shortcut reductions over prev_states where appropriate).  Determining history is a simple matter of digging a little deeper and running same reducers over that deeper layer."), p(st0(), "Stream paradigm :: has really come of age.  RxJS on the server side ?  Probably yes.  Lodash FP on the server side ?  probably yes."), p(st0(), "CoffeeScript and Lua.  CoffeeScript is the best thing since wheatgrass juice, and Lua is what runs inside Redis.  With these two sceptres ye shall rule the realm."), p(st0(), " that is all for now. ;)")));
+	};
+
+	exports.component = __webpack_require__(177)(injectable);
 
 
 /***/ }

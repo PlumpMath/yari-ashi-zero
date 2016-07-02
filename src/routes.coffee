@@ -25,6 +25,8 @@ ai_coltrane = rc_generic(require('./components/amateur/articles/AI_Coltrane_.cof
 
 articles_list_000 = require.context('./components/professional/blog/entries/', false, /.*/)
 
+# articles_list_001 = require.context('./components/professional/blog/entries_001', false, /.*/)
+
 entries = for key in articles_list_000.keys()
     path: "/professional/blog/entries/#{key.split('/')[1].split('.')[0]}"
     component: rc_generic(articles_list_000(key).component)
