@@ -39943,17 +39943,17 @@
 
 	professional_blog = rc_generic(__webpack_require__(157));
 
-	professional_portfolio = rc_generic(__webpack_require__(164));
+	professional_portfolio = rc_generic(__webpack_require__(166));
 
-	professional_about = rc_generic(__webpack_require__(167));
+	professional_about = rc_generic(__webpack_require__(169));
 
-	professional_articles = rc_generic(__webpack_require__(168));
+	professional_articles = rc_generic(__webpack_require__(170));
 
-	terraforming = rc_generic(__webpack_require__(169));
+	terraforming = rc_generic(__webpack_require__(171));
 
-	ai_coltrane = rc_generic(__webpack_require__(170));
+	ai_coltrane = rc_generic(__webpack_require__(172));
 
-	articles_list_000 = __webpack_require__(171);
+	articles_list_000 = __webpack_require__(173);
 
 	entries = (function() {
 	  var i, len, ref1, results;
@@ -40510,10 +40510,10 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./backend_paradigm.coffee": 178,
-		"./my_front_end_paradigm.coffee": 159,
-		"./things_to_do_devving_this_site.coffee": 162,
-		"./things_to_write_about_list.coffee": 163
+		"./backend_paradigm.coffee": 159,
+		"./my_front_end_paradigm.coffee": 163,
+		"./things_to_do_devving_this_site.coffee": 164,
+		"./things_to_write_about_list.coffee": 165
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -40533,121 +40533,165 @@
 /* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var addWheelListener, entry, metadata, removeWheelListener, table_contents_nav, top_nav;
+	var injectable, metadata;
 
 	exports.metadata = metadata = {
-	  date_created: new Date(2016, 6 - 1, 27),
-	  date_updated: new Date(2016, 6 - 1, 27),
-	  title: "My frontend paradigm",
-	  preview_text: "I've been building SPAs for four years now; what have I learned and what do I look forward to ?",
+	  date_created: new Date(2016, 7 - 2, 30),
+	  date_updated: new Date(2016, 7 - 2, 30),
+	  title: "My backend /serverside paradigm",
+	  preview_text: "time to get back to some backend work, discussion",
 	  tags: ["nonsense", "dynamic routing", "other stuff"]
 	};
 
-	top_nav = rc_generic(__webpack_require__(156));
-
-	table_contents_nav = rc_generic(__webpack_require__(160));
-
-	addWheelListener = __webpack_require__(161).addWheelListener;
-
-	removeWheelListener = __webpack_require__(161).removeWheelListener;
-
-	exports.component = entry = rr({
-	  counter: 0,
-	  scroll_limits: {
-	    top: 20,
-	    bottom: -120
-	  },
-	  scroller: function(e) {
-	    if (e.deltaY > 0 && this.state.scroll_state > this.scroll_limits.bottom) {
-	      return this.setState({
-	        scroll_state: this.state.scroll_state - (e.deltaY / 10)
-	      });
-	    } else if (e.deltaY < 0 && this.state.scroll_state < this.scroll_limits.top) {
-	      return this.setState({
-	        scroll_state: this.state.scroll_state - (e.deltaY / 10)
-	      });
+	injectable = function(that) {
+	  var background_color, height, p_st, ref, ref1, st0, text_color, theme_name, width;
+	  ref = that.props, theme_name = ref.theme_name, height = ref.height, width = ref.width;
+	  p_st = {
+	    style: {
+	      margin: .01 * height,
+	      fontSize: .016 * height
 	    }
-	  },
-	  getInitialState: function() {
+	  };
+	  st0 = function() {
 	    return {
-	      scroll_state: 10
-	    };
-	  },
-	  touch_scroll: {
-	    bouncer: 0,
-	    start: null,
-	    last: null
-	  },
-	  handle_touchEnd: function(e) {
-	    return this.touch_scroll = {
-	      start: null,
-	      last: null,
-	      bouncer: 0
-	    };
-	  },
-	  handle_touchStart: function(e) {
-	    this.touch_scroll.start = e.changedTouches[0].pageY;
-	    return this.touch_scroll.last = e.changedTouches[0].pageY;
-	  },
-	  handle_touchMove: function(e) {
-	    var delta, now;
-	    this.touch_scroll.bouncer++;
-	    if (this.touch_scroll.bouncer % 5 === 0) {
-	      now = e.changedTouches[0].pageY;
-	      delta = this.touch_scroll.last - now;
-	      if (delta < 0 && this.state.scroll_state < 30) {
-	        this.setState({
-	          scroll_state: this.state.scroll_state - (delta * .3)
-	        });
-	      } else if (delta > 0 && this.state.scroll_state > -100) {
-	        this.setState({
-	          scroll_state: this.state.scroll_state - (delta * .3)
-	        });
-	      }
-	      return this.touch_scroll.last = e.changedTouches[0].pageY;
-	    }
-	  },
-	  render: function() {
-	    var background_color, height, ref, ref1, text_color, theme_name;
-	    ref = this.props, theme_name = ref.theme_name, height = ref.height;
-	    ref1 = theme_definitions[theme_name], text_color = ref1.text_color, background_color = ref1.background_color;
-	    return svg({
-	      width: '100%',
-	      height: '100%'
-	    }, rect({
-	      x: 0,
-	      y: 0,
-	      width: '100%',
-	      height: "100%",
-	      fill: background_color
-	    }), g({
-	      onTouchStart: this.handle_touchStart,
-	      onTouchMove: this.handle_touchMove,
-	      onTouchEnd: this.handle_touchEnd,
-	      onWheel: this.scroller
-	    }, rect({
-	      x: "23%",
-	      y: "10%",
-	      width: '70%',
-	      height: "90%",
-	      fill: 'blue',
-	      opacity: 0
-	    }), foreignObject({
-	      x: '30%',
-	      y: this.state.scroll_state + "%",
-	      width: '50%',
-	      height: '100%'
-	    }, div({
 	      style: {
-	        color: text_color
+	        fontFamily: "Times",
+	        textAlign: 'left',
+	        color: text_color,
+	        margin: .01 * height,
+	        lineHeight: .0016 * height,
+	        letterSpacing: .002 * width,
+	        fontSize: .017 * height
 	      }
-	    }, h6(null, "created: " + (metadata.date_created.toDateString()) + ", updated: " + (metadata.date_updated.toDateString())), h1(null, "My Frontend Paradigm"), p(null, "I've been developing single page applications (SPAs) for some years now."), p(null, "It was only a few years ago that surfing the web -- for me primarily a reading activity involving extensive inter-site navigation -- entailed perpetual annoyance at the few-second waiting times for intra-site navigation to render, as every navigation action --within a site-- demanded a new server request, could take 5 seconds could take 30... ; to add insult to injury, depending on caching even a page I'd just been reading could require a fresh request.  It was clear to me at least (I remember when I thought I had a relatively original idea here!) that it would be easy to preload what was mostly just text, and make the navigation simply a client side calculation.  Later on I learned that other people had the same idea, and they called it the singe-page-app (SPA). Today I've been programming SPAs for 3+ years, first with Jade templates and JQuery, then Angular-1 for a year, and then two years now of React, this is a reality.  There are many options for frameworks; I recommend React as best all around."), h3(null, "Reflections on lessons learned, comments on how I put together my 'apps'"), ul(null, li(null, "React:  There may be some similarly good options out there, but they are probably for obscure langs like Erlang without much support for the whole Npm ecosystem.  React does the one thing right that needed to be done right: declarative views, enabling pure functional coding of view over parametric state.  Redux takes care of state, and that's all you need.  Angular-1 was a nightmare, poorly conceived.  The greatest strength of Angular-2 is that it can be used in a stripped down way as a React clone, with the VDOM and none of the nonsense toys they add in to confuse aspiring architects, like arbitrary 2-way binding, watching, observables.  Related sidenote: I'm interested in RxJS, but haven't had much chance to use it."), li(null, "SVG over HTML/CSS. HTML/CSS are tools for typesetting, they are not all purspose tools for building graphical components or a graphical environment.  HTML/CSS are typesetting tools.  Typesetting tools deal with type, meaning the written word. If you want to make a progress bar, program an SVG; you want a button, or a tooltip window animation, best be working with SVG.  Sure, an experienced HTML/CSS hacker can make these things happen with their **typesetting** tool, but that's an observation equivalent to noticing that we can implement a pretty good MonaLisa with ASCII art. Sure, doesn't make it the best tool.  If you want to make a graphical user interface (GUI) with a rectangular lightboard, you need to think more generally and isometrically in terms of planar space, geometry, etc.  Cartesian coordinates, transforms, shapes, polygons, paths, these kinds of things.  For this in the web-browser there is a most awesome toolset, the SVG API.  It's really awesome and flexible.  I organise my app so that the root element and most of the main components be SVG components.  Any substantial text content within the app can be rendered as HTML/CSS by using the SVG API's `foreignObject` function."), li(null, "Pure functions over templates, pure functions over JSX.  My markup is mercilessly free from JSX, I implement the React render function using pure functions.  Just CoffeeScript.  Rendering a `div` is just a function called `div`.  Just pure CoffeeScript, and you can do the same thing in JS vanilla.  I don't have anything against JSX, but it's a messy protocol that is not optimal in spite of being widely adopted."), li(null, "CoffeeScript over ES6/ES7.  Mosnt all the features found in ES6/7 were in CoffeeScript already years ago, the few that weren't like generators have found speedy implementation.  When ES20 adopts a terse Python/Ruby style syntax, then it will be `==` CoffeeScript, and the great internecine war will come to a bizarre conclusion.  Until then, I'll just stay ahead of the game by using ES20 (CoffeeScript) now.  Unless I'm contributing to OS project written in ES6 or doing professional duties; in such situations no complaints and no problem, I am fine with it. Just a preference and best practice, imho.  TypeScript: Carries ES6's pointless syntactic verbosity baggage, but facilitates solidifying type/parameter/function-signature protocol across an application stack.  This is attractive feature to those building large systems, but I think similar function can be hand-rolled by carefull application of development protocol. I'm against systematizing it in a language; you can test for it as a separated concern, thus avoiding overburdening the language and primary coding activity."), li(null, "React, Redux, ImmutableJS, Webpack.  I don't use the DevTools; I think if I need something like that I'll add it in adhoc-- it's not so difficult to do.  I don't use HotModuleReload, prefer to manually reload as I save files a bunch of times a minute and don't need so much background stuff going on everytime I do that.")), h3(null, "Things that I haven't mastered yet, are still goals "), ul(null, li(null, "WebRTC :: Make P2P happen, for gaming, for business communications topologies, distributed systems generally."), li(null, "WebWorkers / concurrency :: I've gotten some primitive WebWorkers tasks started, but I've never implemented hardcore concurrency solution on a computationally demanding webapp, and I think this is a gold standard to strive towards.  There are so many processors in modern devices, we need to leverage them or we are not providing full value."), li(null, "Progressive and responsive:  I'm very happy with what my SVG methodology can provide in terms of responsive visual presentation algorithms.  Computational SVG is incredibly flexible, and together with homogeneous coordinate driven composed matrix transforms offer tremendous options and workflow arrangement.  But I haven't actually had a chance to implement much of this.  I know the potential is there, next need a project which demands it. Similarly with progressive webapps, I know how to implement Webpack assets on demand, but haven't had a project yet requiring an app of suffcient size to demand it.  Exciting stuff, look forward to working with it."), li(null, "WebRTC again:  Did you know WebRTC has the API for audio in the browser , not to mention the microphone ?  While it's true that misplaced audio can be annoying in a website, when we're talking about more immersive apps (think Slack) there is a lot of room for creative features that take advantage of audio inputs and outputs."), li(null, "WebGL:  I'm just getting started with WebGL.  It's tremendous and beautiful.  I hope to implement a flight simulator in the browser before years end."))))), table_contents_nav(), top_nav(), bars_nav_001());
-	  }
-	});
+	    };
+	  };
+	  ref1 = theme_definitions[theme_name], text_color = ref1.text_color, background_color = ref1.background_color;
+	  return div({
+	    style: {
+	      color: text_color
+	    }
+	  }, h6(null, "created: " + (metadata.date_created.toDateString()) + ", updated: " + (metadata.date_updated.toDateString())), h4(null, "This is a testt for templating and moving common setup code to boilerplate file"), div(null, p(st0(), "under construction:  things to discuss:"), p(st0(), "I'd love to get a nice contract to be responsible for design and build of a large scalable fullstack system.  Ideally I'd be able to hire another person within the first three months and another few more after that. "), p(st0(), "I'm under no illusions that I have the absolute best practices for over the entire stack for such a system -- large corporate systems like Facebook, Twitter etc are combined efforts of hundreds of specialists, and I'm just one generalist."), p(st0(), "But that's no cause for defeatism. Startups make gamechanging solutions and disrupt technology culture in good ways because people are willing to put new solutions on the table."), p(st0(), "Startups are built by optimistic realists who have a generalist orientation and want to build working systems. As an outsider and passionate neophyte a few years ago, I built a working realtime fullstack system for Bartr in Tel Aviv. We failed for funding reasons but my accomplishment was real, and still brings me confidence and joy.  A few years on, I'm still impassioned to build new crazy systems, I'm sure I could do muchMUCHMUCH much better now.  The web and social/work-media remains an exciting frontier ripe for groundbreaking and society altering/improving innovations.  Small (real) startups are the place to make this happen because these are the units willing to see the future differently and take risks to manifest that, to set themselves apart."), p(st0(), "So while I might not solve every technical problem in as optimised a way as the large composite team efforts of the majors around town, and maybe I haven't grokked all the latest best practices in every nook and cranny of the technical domain (who can?), it's extremely likely that working in the context of a (real, not a 'startup' offshoot of a major) startup I/we will hit upon elegant solutions in the process of experimentation, R&D, prototyping, that the consensus process hasn't yet located; this is something happening *all the time*."), p(st0(), "So, we (even a small team of a few dedicated developers working in concert) can build a great, competitive, resilient, scalable fullstack system. Maybe not optimised in every way as good as the majors, but also maybe having some features and optimisations they haven't considered or risked implementation of.  The best practices of yesteryear may become todays liabilities, which larger organisations continue implementing because of inertia, ... etc etc. I say it's exciting to be part of small & agile companies solving common problems from scratch in new and exciting ways. We can do it!!! ...Okay, enough preamble, let's get to it!")), div(null, h4(null, "what we are trying to build :: problem description."), p(st0(), "Maybe we are trying to build an alternative economy social-media social-economy application.  We want to connect people in a given geographical space and allow them to interact economically."), h4(null, "solution outline, feature approximation and toolset ideas"), ul(st0(), li(null, "Realtime obviously.  The system must interact with users by the second.  Hence websockets, but not only websockets, we want WebRTC to enable a P2P topology to augment our network in various ways."), li(null, "Trusted transactions:  Blockchain audited transactions so that fraud is eliminated in a resilient P2P way without relying solely on integrity of central server."), li(null, "Lots of data analytics on backend and data visualisation interface on frontend for users :: Heavy use of Redis clusters for data, pushing data back to clients for D3 or WebGL based visualisations.  Not strictly speaking necessary for this application, but this is a app featureset I'm advocating for the future across many domains."), li(null, "Progressive webapp.  Lightweight loading, highly configurable for a minimal feel for those who want it.  Heavier features available on demand.  Webpack assets on demand for dynamic asset loading flexibility."), li(null, "multi platform :: the same system on browser with distinct browser versions for different devices, react-native versions for iOS and Android, and possibly desktop native version with Electron. "), li(null, "security, scalability, resiliency.  :: node clusters, redis clusters,  immutable data stores for perfect historical reconstruction on demand.  utilisation of hash history (blockchain tech) for secured transaction integrity.")), p(st0(), "Great so basically:  NodeJS server(s), CDN delivery for statics, Primus for WebSockets, WebRTC for audio interface and P2P connectivity, Webpack for dynamic/progressive code requires. D3 and WebGL components for user interface enhancements, Geolocation and maps for facilitating meetups, React for webapp, ReactNative for mobile app, Electron for desktop native app.  Redis Redis and Redis for data layer.  For starters.  Later may add PostgreSQL/Cassandra/ApacheKafka stuff to mix, but not necessary to get started. Just Redis clustering fine."), p(st0(), "Okay so that's the whole stack, now about the backend in particular:  Again, NodeJS, Primus, Redis/Lua.  Most of what used to be called model logic (MVC paradigm) will be implemented in Lua under the Redis servers."), p(st0(), "The model layer will be implemented as a lambda architecture, meaning there are no destructive transactions.  The data layer is a giant heap upon which you can add messages. Determining state is a matter of running reducer functions over this heap, (with shortcut reductions over prev_states where appropriate).  Determining history is a simple matter of digging a little deeper and running same reducers over that deeper layer."), p(st0(), "Stream paradigm :: has really come of age.  RxJS on the server side ?  Probably yes.  Lodash FP on the server side ?  probably yes."), p(st0(), "CoffeeScript and Lua.  CoffeeScript is the best thing since wheatgrass juice, and Lua is what runs inside Redis.  With these two sceptres ye shall rule the realm."), p(st0(), " that is all for now. ;)")));
+	};
+
+	exports.component = __webpack_require__(160)(injectable);
 
 
 /***/ },
 /* 160 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var addWheelListener, entry, removeWheelListener, table_contents_nav, top_nav;
+
+	top_nav = rc_generic(__webpack_require__(156));
+
+	table_contents_nav = rc_generic(__webpack_require__(161));
+
+	addWheelListener = __webpack_require__(162).addWheelListener;
+
+	removeWheelListener = __webpack_require__(162).removeWheelListener;
+
+	module.exports = entry = function(injectable) {
+	  return rr({
+	    counter: 0,
+	    scroll_limits: {
+	      top: 20,
+	      bottom: -120
+	    },
+	    scroller: function(e) {
+	      if (e.deltaY > 0 && this.state.scroll_state > this.scroll_limits.bottom) {
+	        return this.setState({
+	          scroll_state: this.state.scroll_state - (e.deltaY / 10)
+	        });
+	      } else if (e.deltaY < 0 && this.state.scroll_state < this.scroll_limits.top) {
+	        return this.setState({
+	          scroll_state: this.state.scroll_state - (e.deltaY / 10)
+	        });
+	      }
+	    },
+	    getInitialState: function() {
+	      return {
+	        scroll_state: 10
+	      };
+	    },
+	    touch_scroll: {
+	      bouncer: 0,
+	      start: null,
+	      last: null
+	    },
+	    handle_touchEnd: function(e) {
+	      return this.touch_scroll = {
+	        start: null,
+	        last: null,
+	        bouncer: 0
+	      };
+	    },
+	    handle_touchStart: function(e) {
+	      this.touch_scroll.start = e.changedTouches[0].pageY;
+	      return this.touch_scroll.last = e.changedTouches[0].pageY;
+	    },
+	    handle_touchMove: function(e) {
+	      var delta, now;
+	      this.touch_scroll.bouncer++;
+	      if (this.touch_scroll.bouncer % 5 === 0) {
+	        now = e.changedTouches[0].pageY;
+	        delta = this.touch_scroll.last - now;
+	        if (delta < 0 && this.state.scroll_state < 30) {
+	          this.setState({
+	            scroll_state: this.state.scroll_state - (delta * .3)
+	          });
+	        } else if (delta > 0 && this.state.scroll_state > -100) {
+	          this.setState({
+	            scroll_state: this.state.scroll_state - (delta * .3)
+	          });
+	        }
+	        return this.touch_scroll.last = e.changedTouches[0].pageY;
+	      }
+	    },
+	    render: function() {
+	      var background_color, height, p_st, ref, ref1, text_color, theme_name;
+	      height = this.props.height;
+	      p_st = {
+	        style: {
+	          margin: .01 * height,
+	          fontSize: .016 * height
+	        }
+	      };
+	      ref = this.props, theme_name = ref.theme_name, height = ref.height;
+	      ref1 = theme_definitions[theme_name], text_color = ref1.text_color, background_color = ref1.background_color;
+	      return svg({
+	        width: '100%',
+	        height: '100%'
+	      }, rect({
+	        x: 0,
+	        y: 0,
+	        width: '100%',
+	        height: "100%",
+	        fill: background_color
+	      }), g({
+	        onTouchStart: this.handle_touchStart,
+	        onTouchMove: this.handle_touchMove,
+	        onTouchEnd: this.handle_touchEnd,
+	        onWheel: this.scroller
+	      }, rect({
+	        x: "23%",
+	        y: "10%",
+	        width: '70%',
+	        height: "90%",
+	        fill: 'blue',
+	        opacity: 0
+	      }), foreignObject({
+	        x: '30%',
+	        y: this.state.scroll_state + "%",
+	        width: '50%',
+	        height: '100%'
+	      }, injectable(this))), table_contents_nav(), top_nav(), bars_nav_001());
+	    }
+	  });
+	};
+
+
+/***/ },
+/* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var blog_entries, chain2, keychain, professional_blog;
@@ -40798,7 +40842,7 @@
 
 
 /***/ },
-/* 161 */
+/* 162 */
 /***/ function(module, exports) {
 
 	/**
@@ -40921,7 +40965,124 @@
 
 
 /***/ },
-/* 162 */
+/* 163 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var addWheelListener, entry, metadata, removeWheelListener, table_contents_nav, top_nav;
+
+	exports.metadata = metadata = {
+	  date_created: new Date(2016, 6 - 1, 27),
+	  date_updated: new Date(2016, 6 - 1, 27),
+	  title: "My frontend paradigm",
+	  preview_text: "I've been building SPAs for four years now; what have I learned and what do I look forward to ?",
+	  tags: ["nonsense", "dynamic routing", "other stuff"]
+	};
+
+	top_nav = rc_generic(__webpack_require__(156));
+
+	table_contents_nav = rc_generic(__webpack_require__(161));
+
+	addWheelListener = __webpack_require__(162).addWheelListener;
+
+	removeWheelListener = __webpack_require__(162).removeWheelListener;
+
+	exports.component = entry = rr({
+	  counter: 0,
+	  scroll_limits: {
+	    top: 20,
+	    bottom: -120
+	  },
+	  scroller: function(e) {
+	    if (e.deltaY > 0 && this.state.scroll_state > this.scroll_limits.bottom) {
+	      return this.setState({
+	        scroll_state: this.state.scroll_state - (e.deltaY / 10)
+	      });
+	    } else if (e.deltaY < 0 && this.state.scroll_state < this.scroll_limits.top) {
+	      return this.setState({
+	        scroll_state: this.state.scroll_state - (e.deltaY / 10)
+	      });
+	    }
+	  },
+	  getInitialState: function() {
+	    return {
+	      scroll_state: 10
+	    };
+	  },
+	  touch_scroll: {
+	    bouncer: 0,
+	    start: null,
+	    last: null
+	  },
+	  handle_touchEnd: function(e) {
+	    return this.touch_scroll = {
+	      start: null,
+	      last: null,
+	      bouncer: 0
+	    };
+	  },
+	  handle_touchStart: function(e) {
+	    this.touch_scroll.start = e.changedTouches[0].pageY;
+	    return this.touch_scroll.last = e.changedTouches[0].pageY;
+	  },
+	  handle_touchMove: function(e) {
+	    var delta, now;
+	    this.touch_scroll.bouncer++;
+	    if (this.touch_scroll.bouncer % 5 === 0) {
+	      now = e.changedTouches[0].pageY;
+	      delta = this.touch_scroll.last - now;
+	      if (delta < 0 && this.state.scroll_state < 30) {
+	        this.setState({
+	          scroll_state: this.state.scroll_state - (delta * .3)
+	        });
+	      } else if (delta > 0 && this.state.scroll_state > -100) {
+	        this.setState({
+	          scroll_state: this.state.scroll_state - (delta * .3)
+	        });
+	      }
+	      return this.touch_scroll.last = e.changedTouches[0].pageY;
+	    }
+	  },
+	  render: function() {
+	    var background_color, height, ref, ref1, text_color, theme_name;
+	    ref = this.props, theme_name = ref.theme_name, height = ref.height;
+	    ref1 = theme_definitions[theme_name], text_color = ref1.text_color, background_color = ref1.background_color;
+	    return svg({
+	      width: '100%',
+	      height: '100%'
+	    }, rect({
+	      x: 0,
+	      y: 0,
+	      width: '100%',
+	      height: "100%",
+	      fill: background_color
+	    }), g({
+	      onTouchStart: this.handle_touchStart,
+	      onTouchMove: this.handle_touchMove,
+	      onTouchEnd: this.handle_touchEnd,
+	      onWheel: this.scroller
+	    }, rect({
+	      x: "23%",
+	      y: "10%",
+	      width: '70%',
+	      height: "90%",
+	      fill: 'blue',
+	      opacity: 0
+	    }), foreignObject({
+	      x: '30%',
+	      y: this.state.scroll_state + "%",
+	      width: '50%',
+	      height: '100%'
+	    }, div({
+	      style: {
+	        color: text_color
+	      }
+	    }, h6(null, "created: " + (metadata.date_created.toDateString()) + ", updated: " + (metadata.date_updated.toDateString())), h1(null, "My Frontend Paradigm"), p(null, "I've been developing single page applications (SPAs) for some years now."), p(null, "It was only a few years ago that surfing the web -- for me primarily a reading activity involving extensive inter-site navigation -- entailed perpetual annoyance at the few-second waiting times for intra-site navigation to render, as every navigation action --within a site-- demanded a new server request, could take 5 seconds could take 30... ; to add insult to injury, depending on caching even a page I'd just been reading could require a fresh request.  It was clear to me at least (I remember when I thought I had a relatively original idea here!) that it would be easy to preload what was mostly just text, and make the navigation simply a client side calculation.  Later on I learned that other people had the same idea, and they called it the singe-page-app (SPA). Today I've been programming SPAs for 3+ years, first with Jade templates and JQuery, then Angular-1 for a year, and then two years now of React, this is a reality.  There are many options for frameworks; I recommend React as best all around."), h3(null, "Reflections on lessons learned, comments on how I put together my 'apps'"), ul(null, li(null, "React:  There may be some similarly good options out there, but they are probably for obscure langs like Erlang without much support for the whole Npm ecosystem.  React does the one thing right that needed to be done right: declarative views, enabling pure functional coding of view over parametric state.  Redux takes care of state, and that's all you need.  Angular-1 was a nightmare, poorly conceived.  The greatest strength of Angular-2 is that it can be used in a stripped down way as a React clone, with the VDOM and none of the nonsense toys they add in to confuse aspiring architects, like arbitrary 2-way binding, watching, observables.  Related sidenote: I'm interested in RxJS, but haven't had much chance to use it."), li(null, "SVG over HTML/CSS. HTML/CSS are tools for typesetting, they are not all purspose tools for building graphical components or a graphical environment.  HTML/CSS are typesetting tools.  Typesetting tools deal with type, meaning the written word. If you want to make a progress bar, program an SVG; you want a button, or a tooltip window animation, best be working with SVG.  Sure, an experienced HTML/CSS hacker can make these things happen with their **typesetting** tool, but that's an observation equivalent to noticing that we can implement a pretty good MonaLisa with ASCII art. Sure, doesn't make it the best tool.  If you want to make a graphical user interface (GUI) with a rectangular lightboard, you need to think more generally and isometrically in terms of planar space, geometry, etc.  Cartesian coordinates, transforms, shapes, polygons, paths, these kinds of things.  For this in the web-browser there is a most awesome toolset, the SVG API.  It's really awesome and flexible.  I organise my app so that the root element and most of the main components be SVG components.  Any substantial text content within the app can be rendered as HTML/CSS by using the SVG API's `foreignObject` function."), li(null, "Pure functions over templates, pure functions over JSX.  My markup is mercilessly free from JSX, I implement the React render function using pure functions.  Just CoffeeScript.  Rendering a `div` is just a function called `div`.  Just pure CoffeeScript, and you can do the same thing in JS vanilla.  I don't have anything against JSX, but it's a messy protocol that is not optimal in spite of being widely adopted."), li(null, "CoffeeScript over ES6/ES7.  Mosnt all the features found in ES6/7 were in CoffeeScript already years ago, the few that weren't like generators have found speedy implementation.  When ES20 adopts a terse Python/Ruby style syntax, then it will be `==` CoffeeScript, and the great internecine war will come to a bizarre conclusion.  Until then, I'll just stay ahead of the game by using ES20 (CoffeeScript) now.  Unless I'm contributing to OS project written in ES6 or doing professional duties; in such situations no complaints and no problem, I am fine with it. Just a preference and best practice, imho.  TypeScript: Carries ES6's pointless syntactic verbosity baggage, but facilitates solidifying type/parameter/function-signature protocol across an application stack.  This is attractive feature to those building large systems, but I think similar function can be hand-rolled by carefull application of development protocol. I'm against systematizing it in a language; you can test for it as a separated concern, thus avoiding overburdening the language and primary coding activity."), li(null, "React, Redux, ImmutableJS, Webpack.  I don't use the DevTools; I think if I need something like that I'll add it in adhoc-- it's not so difficult to do.  I don't use HotModuleReload, prefer to manually reload as I save files a bunch of times a minute and don't need so much background stuff going on everytime I do that.")), h3(null, "Things that I haven't mastered yet, are still goals "), ul(null, li(null, "WebRTC :: Make P2P happen, for gaming, for business communications topologies, distributed systems generally."), li(null, "WebWorkers / concurrency :: I've gotten some primitive WebWorkers tasks started, but I've never implemented hardcore concurrency solution on a computationally demanding webapp, and I think this is a gold standard to strive towards.  There are so many processors in modern devices, we need to leverage them or we are not providing full value."), li(null, "Progressive and responsive:  I'm very happy with what my SVG methodology can provide in terms of responsive visual presentation algorithms.  Computational SVG is incredibly flexible, and together with homogeneous coordinate driven composed matrix transforms offer tremendous options and workflow arrangement.  But I haven't actually had a chance to implement much of this.  I know the potential is there, next need a project which demands it. Similarly with progressive webapps, I know how to implement Webpack assets on demand, but haven't had a project yet requiring an app of suffcient size to demand it.  Exciting stuff, look forward to working with it."), li(null, "WebRTC again:  Did you know WebRTC has the API for audio in the browser , not to mention the microphone ?  While it's true that misplaced audio can be annoying in a website, when we're talking about more immersive apps (think Slack) there is a lot of room for creative features that take advantage of audio inputs and outputs."), li(null, "WebGL:  I'm just getting started with WebGL.  It's tremendous and beautiful.  I hope to implement a flight simulator in the browser before years end."))))), table_contents_nav(), top_nav(), bars_nav_001());
+	  }
+	});
+
+
+/***/ },
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var addWheelListener, entry, metadata, removeWheelListener, table_contents_nav, top_nav;
@@ -40936,11 +41097,11 @@
 
 	top_nav = rc_generic(__webpack_require__(156));
 
-	table_contents_nav = rc_generic(__webpack_require__(160));
+	table_contents_nav = rc_generic(__webpack_require__(161));
 
-	addWheelListener = __webpack_require__(161).addWheelListener;
+	addWheelListener = __webpack_require__(162).addWheelListener;
 
-	removeWheelListener = __webpack_require__(161).removeWheelListener;
+	removeWheelListener = __webpack_require__(162).removeWheelListener;
 
 	exports.component = entry = rr({
 	  counter: 0,
@@ -41045,7 +41206,7 @@
 
 
 /***/ },
-/* 163 */
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var addWheelListener, entry, metadata, removeWheelListener, table_contents_nav, top_nav;
@@ -41060,11 +41221,11 @@
 
 	top_nav = rc_generic(__webpack_require__(156));
 
-	table_contents_nav = rc_generic(__webpack_require__(160));
+	table_contents_nav = rc_generic(__webpack_require__(161));
 
-	addWheelListener = __webpack_require__(161).addWheelListener;
+	addWheelListener = __webpack_require__(162).addWheelListener;
 
-	removeWheelListener = __webpack_require__(161).removeWheelListener;
+	removeWheelListener = __webpack_require__(162).removeWheelListener;
 
 	exports.component = entry = rr({
 	  counter: 0,
@@ -41164,16 +41325,16 @@
 
 
 /***/ },
-/* 164 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var portfolio_index, spacewar, top_nav, yari;
 
 	top_nav = rc_generic(__webpack_require__(156));
 
-	spacewar = rc_generic(__webpack_require__(165));
+	spacewar = rc_generic(__webpack_require__(167));
 
-	yari = rc_generic(__webpack_require__(166));
+	yari = rc_generic(__webpack_require__(168));
 
 	module.exports = portfolio_index = rr({
 	  getInitialState: function() {
@@ -41288,7 +41449,7 @@
 
 
 /***/ },
-/* 165 */
+/* 167 */
 /***/ function(module, exports) {
 
 	module.exports = rr({
@@ -41334,7 +41495,7 @@
 
 
 /***/ },
-/* 166 */
+/* 168 */
 /***/ function(module, exports) {
 
 	module.exports = rr({
@@ -41392,7 +41553,7 @@
 
 
 /***/ },
-/* 167 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var professional_blog, top_nav;
@@ -41422,7 +41583,7 @@
 	    ref = this.props, theme_name = ref.theme_name, height = ref.height, width = ref.width;
 	    ref1 = theme_definitions[theme_name], text_color = ref1.text_color, background_color = ref1.background_color;
 	    return a({
-	      xlinkHref: "https://yadi.sk/i/FEUS8l2IsignJ",
+	      xlinkHref: "https://yadi.sk/i/H3Z_AMZitopNJ",
 	      xlinkShow: 'new'
 	    }, text({
 	      x: '80%',
@@ -41538,7 +41699,7 @@
 
 
 /***/ },
-/* 168 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var professional_blog, top_nav;
@@ -41577,7 +41738,7 @@
 
 
 /***/ },
-/* 169 */
+/* 171 */
 /***/ function(module, exports) {
 
 	var terraforming;
@@ -41604,7 +41765,7 @@
 
 
 /***/ },
-/* 170 */
+/* 172 */
 /***/ function(module, exports) {
 
 	var AI_Coltrane;
@@ -41639,14 +41800,14 @@
 
 
 /***/ },
-/* 171 */
+/* 173 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./backend_paradigm.coffee": 178,
-		"./my_front_end_paradigm.coffee": 159,
-		"./things_to_do_devving_this_site.coffee": 162,
-		"./things_to_write_about_list.coffee": 163
+		"./backend_paradigm.coffee": 159,
+		"./my_front_end_paradigm.coffee": 163,
+		"./things_to_do_devving_this_site.coffee": 164,
+		"./things_to_write_about_list.coffee": 165
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -41659,173 +41820,7 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 171;
-
-
-/***/ },
-/* 172 */,
-/* 173 */,
-/* 174 */,
-/* 175 */,
-/* 176 */,
-/* 177 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var addWheelListener, entry, removeWheelListener, table_contents_nav, top_nav;
-
-	top_nav = rc_generic(__webpack_require__(156));
-
-	table_contents_nav = rc_generic(__webpack_require__(160));
-
-	addWheelListener = __webpack_require__(161).addWheelListener;
-
-	removeWheelListener = __webpack_require__(161).removeWheelListener;
-
-	module.exports = entry = function(injectable) {
-	  return rr({
-	    counter: 0,
-	    scroll_limits: {
-	      top: 20,
-	      bottom: -120
-	    },
-	    scroller: function(e) {
-	      if (e.deltaY > 0 && this.state.scroll_state > this.scroll_limits.bottom) {
-	        return this.setState({
-	          scroll_state: this.state.scroll_state - (e.deltaY / 10)
-	        });
-	      } else if (e.deltaY < 0 && this.state.scroll_state < this.scroll_limits.top) {
-	        return this.setState({
-	          scroll_state: this.state.scroll_state - (e.deltaY / 10)
-	        });
-	      }
-	    },
-	    getInitialState: function() {
-	      return {
-	        scroll_state: 10
-	      };
-	    },
-	    touch_scroll: {
-	      bouncer: 0,
-	      start: null,
-	      last: null
-	    },
-	    handle_touchEnd: function(e) {
-	      return this.touch_scroll = {
-	        start: null,
-	        last: null,
-	        bouncer: 0
-	      };
-	    },
-	    handle_touchStart: function(e) {
-	      this.touch_scroll.start = e.changedTouches[0].pageY;
-	      return this.touch_scroll.last = e.changedTouches[0].pageY;
-	    },
-	    handle_touchMove: function(e) {
-	      var delta, now;
-	      this.touch_scroll.bouncer++;
-	      if (this.touch_scroll.bouncer % 5 === 0) {
-	        now = e.changedTouches[0].pageY;
-	        delta = this.touch_scroll.last - now;
-	        if (delta < 0 && this.state.scroll_state < 30) {
-	          this.setState({
-	            scroll_state: this.state.scroll_state - (delta * .3)
-	          });
-	        } else if (delta > 0 && this.state.scroll_state > -100) {
-	          this.setState({
-	            scroll_state: this.state.scroll_state - (delta * .3)
-	          });
-	        }
-	        return this.touch_scroll.last = e.changedTouches[0].pageY;
-	      }
-	    },
-	    render: function() {
-	      var background_color, height, p_st, ref, ref1, text_color, theme_name;
-	      height = this.props.height;
-	      p_st = {
-	        style: {
-	          margin: .01 * height,
-	          fontSize: .016 * height
-	        }
-	      };
-	      ref = this.props, theme_name = ref.theme_name, height = ref.height;
-	      ref1 = theme_definitions[theme_name], text_color = ref1.text_color, background_color = ref1.background_color;
-	      return svg({
-	        width: '100%',
-	        height: '100%'
-	      }, rect({
-	        x: 0,
-	        y: 0,
-	        width: '100%',
-	        height: "100%",
-	        fill: background_color
-	      }), g({
-	        onTouchStart: this.handle_touchStart,
-	        onTouchMove: this.handle_touchMove,
-	        onTouchEnd: this.handle_touchEnd,
-	        onWheel: this.scroller
-	      }, rect({
-	        x: "23%",
-	        y: "10%",
-	        width: '70%',
-	        height: "90%",
-	        fill: 'blue',
-	        opacity: 0
-	      }), foreignObject({
-	        x: '30%',
-	        y: this.state.scroll_state + "%",
-	        width: '50%',
-	        height: '100%'
-	      }, injectable(this))), table_contents_nav(), top_nav(), bars_nav_001());
-	    }
-	  });
-	};
-
-
-/***/ },
-/* 178 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var injectable, metadata;
-
-	exports.metadata = metadata = {
-	  date_created: new Date(2016, 7 - 2, 30),
-	  date_updated: new Date(2016, 7 - 2, 30),
-	  title: "My backend /serverside paradigm",
-	  preview_text: "time to get back to some backend work, discussion",
-	  tags: ["nonsense", "dynamic routing", "other stuff"]
-	};
-
-	injectable = function(that) {
-	  var background_color, height, p_st, ref, ref1, st0, text_color, theme_name, width;
-	  ref = that.props, theme_name = ref.theme_name, height = ref.height, width = ref.width;
-	  p_st = {
-	    style: {
-	      margin: .01 * height,
-	      fontSize: .016 * height
-	    }
-	  };
-	  st0 = function() {
-	    return {
-	      style: {
-	        fontFamily: "Times",
-	        textAlign: 'left',
-	        color: text_color,
-	        margin: .01 * height,
-	        lineHeight: .0016 * height,
-	        letterSpacing: .002 * width,
-	        fontSize: .017 * height
-	      }
-	    };
-	  };
-	  ref1 = theme_definitions[theme_name], text_color = ref1.text_color, background_color = ref1.background_color;
-	  return div({
-	    style: {
-	      color: text_color
-	    }
-	  }, h6(null, "created: " + (metadata.date_created.toDateString()) + ", updated: " + (metadata.date_updated.toDateString())), h4(null, "This is a testt for templating and moving common setup code to boilerplate file"), div(null, p(st0(), "under construction:  things to discuss:"), p(st0(), "I'd love to get a nice contract to be responsible for design and build of a large scalable fullstack system.  Ideally I'd be able to hire another person within the first three months and another few more after that. "), p(st0(), "I'm under no illusions that I have the absolute best practices for over the entire stack for such a system -- large corporate systems like Facebook, Twitter etc are combined efforts of hundreds of specialists, and I'm just one generalist."), p(st0(), "But that's no cause for defeatism. Startups make gamechanging solutions and disrupt technology culture in good ways because people are willing to put new solutions on the table."), p(st0(), "Startups are built by optimistic realists who have a generalist orientation and want to build working systems. As an outsider and passionate neophyte a few years ago, I built a working realtime fullstack system for Bartr in Tel Aviv. We failed for funding reasons but my accomplishment was real, and still brings me confidence and joy.  A few years on, I'm still impassioned to build new crazy systems, I'm sure I could do muchMUCHMUCH much better now.  The web and social/work-media remains an exciting frontier ripe for groundbreaking and society altering/improving innovations.  Small (real) startups are the place to make this happen because these are the units willing to see the future differently and take risks to manifest that, to set themselves apart."), p(st0(), "So while I might not solve every technical problem in as optimised a way as the large composite team efforts of the majors around town, and maybe I haven't grokked all the latest best practices in every nook and cranny of the technical domain (who can?), it's extremely likely that working in the context of a (real, not a 'startup' offshoot of a major) startup I/we will hit upon elegant solutions in the process of experimentation, R&D, prototyping, that the consensus process hasn't yet located; this is something happening *all the time*."), p(st0(), "So, we (even a small team of a few dedicated developers working in concert) can build a great, competitive, resilient, scalable fullstack system. Maybe not optimised in every way as good as the majors, but also maybe having some features and optimisations they haven't considered or risked implementation of.  The best practices of yesteryear may become todays liabilities, which larger organisations continue implementing because of inertia, ... etc etc. I say it's exciting to be part of small & agile companies solving common problems from scratch in new and exciting ways. We can do it!!! ...Okay, enough preamble, let's get to it!")), div(null, h4(null, "what we are trying to build :: problem description."), p(st0(), "Maybe we are trying to build an alternative economy social-media social-economy application.  We want to connect people in a given geographical space and allow them to interact economically."), h4(null, "solution outline, feature approximation and toolset ideas"), ul(st0(), li(null, "Realtime obviously.  The system must interact with users by the second.  Hence websockets, but not only websockets, we want WebRTC to enable a P2P topology to augment our network in various ways."), li(null, "Trusted transactions:  Blockchain audited transactions so that fraud is eliminated in a resilient P2P way without relying solely on integrity of central server."), li(null, "Lots of data analytics on backend and data visualisation interface on frontend for users :: Heavy use of Redis clusters for data, pushing data back to clients for D3 or WebGL based visualisations.  Not strictly speaking necessary for this application, but this is a app featureset I'm advocating for the future across many domains."), li(null, "Progressive webapp.  Lightweight loading, highly configurable for a minimal feel for those who want it.  Heavier features available on demand.  Webpack assets on demand for dynamic asset loading flexibility."), li(null, "multi platform :: the same system on browser with distinct browser versions for different devices, react-native versions for iOS and Android, and possibly desktop native version with Electron. "), li(null, "security, scalability, resiliency.  :: node clusters, redis clusters,  immutable data stores for perfect historical reconstruction on demand.  utilisation of hash history (blockchain tech) for secured transaction integrity.")), p(st0(), "Great so basically:  NodeJS server(s), CDN delivery for statics, Primus for WebSockets, WebRTC for audio interface and P2P connectivity, Webpack for dynamic/progressive code requires. D3 and WebGL components for user interface enhancements, Geolocation and maps for facilitating meetups, React for webapp, ReactNative for mobile app, Electron for desktop native app.  Redis Redis and Redis for data layer.  For starters.  Later may add PostgreSQL/Cassandra/ApacheKafka stuff to mix, but not necessary to get started. Just Redis clustering fine."), p(st0(), "Okay so that's the whole stack, now about the backend in particular:  Again, NodeJS, Primus, Redis/Lua.  Most of what used to be called model logic (MVC paradigm) will be implemented in Lua under the Redis servers."), p(st0(), "The model layer will be implemented as a lambda architecture, meaning there are no destructive transactions.  The data layer is a giant heap upon which you can add messages. Determining state is a matter of running reducer functions over this heap, (with shortcut reductions over prev_states where appropriate).  Determining history is a simple matter of digging a little deeper and running same reducers over that deeper layer."), p(st0(), "Stream paradigm :: has really come of age.  RxJS on the server side ?  Probably yes.  Lodash FP on the server side ?  probably yes."), p(st0(), "CoffeeScript and Lua.  CoffeeScript is the best thing since wheatgrass juice, and Lua is what runs inside Redis.  With these two sceptres ye shall rule the realm."), p(st0(), " that is all for now. ;)")));
-	};
-
-	exports.component = __webpack_require__(177)(injectable);
+	webpackContext.id = 173;
 
 
 /***/ }

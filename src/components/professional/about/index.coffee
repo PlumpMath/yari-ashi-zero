@@ -23,7 +23,8 @@ module.exports = professional_blog = rr
         { text_color, background_color }= theme_definitions[theme_name]
 
         a
-            xlinkHref: "https://yadi.sk/i/FEUS8l2IsignJ"
+            # xlinkHref: "https://yadi.sk/i/FEUS8l2IsignJ"
+            xlinkHref: "https://yadi.sk/i/H3Z_AMZitopNJ"
             xlinkShow: 'new'
             ,
             text
